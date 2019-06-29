@@ -10,7 +10,6 @@ public class AddressableImporter : AssetPostprocessor
 {
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
-        var type = typeof(AddressableImporter);
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         var importSettings = AddressableImportSettings.Instance;
         if (importSettings.rules == null || importSettings.rules.Count == 0)
@@ -22,12 +21,15 @@ public class AddressableImporter : AssetPostprocessor
             {
                 if (rule.Match(path))
                 {
-                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.labels);
-                    entriesAdded.Add(entry);
-                    if (rule.HasLabel)
-                        Debug.LogFormat("[{0}] Entry created for {1} with labels {2}", type, path, string.Join(", ", entry.labels));
-                    else
-                        Debug.LogFormat("[{0}] Entry created for {1}", type, path);
+                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels);
+                    if (entry != null)
+                    {
+                        entriesAdded.Add(entry);
+                        if (rule.HasLabel)
+                            Debug.LogFormat("[AddressableImporter] Entry created for {0} with labels {1}", path, string.Join(", ", entry.labels));
+                        else
+                            Debug.LogFormat("[AddressableImporter] Entry created for {0}", path);
+                    }
                 }
             }
         }
@@ -35,9 +37,14 @@ public class AddressableImporter : AssetPostprocessor
             settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entriesAdded, true);
     }
 
-    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, IEnumerable<string> labels)
+    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels)
     {
-        var group = settings.DefaultGroup;
+        var group = GetGroup(settings, groupName);
+        if (group == null)
+        {
+            Debug.LogErrorFormat("[AddressableImporter] Failed to find group {0} when importing {1}. Please check the group exists, then reimport the asset.", groupName, path);
+            return null;
+        }
         var guid = AssetDatabase.AssetPathToGUID(path);
         var entry = settings.CreateOrMoveEntry(guid, group);
         // Override address if address is a path
@@ -51,5 +58,18 @@ public class AddressableImporter : AssetPostprocessor
         }
         return entry;
     }
+
+    /// <summary>
+    /// Find asset group by given name. Return default group if given name is null.
+    /// </summary>
+    static AddressableAssetGroup GetGroup(AddressableAssetSettings settings, string groupName)
+    {
+        if (groupName != null)
+            groupName.Trim();
+        if (string.IsNullOrEmpty(groupName))
+            return settings.DefaultGroup;
+        return settings.groups.Find(g => g.Name == groupName);
+    }
+
 }
 

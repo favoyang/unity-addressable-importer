@@ -33,6 +33,12 @@ public class AddressableImportRule
     public AddressableImportRuleMatchType matchType;
 
     /// <summary>
+    /// Addressable group name
+    /// </summary>
+    [Tooltip("Leaves blank for the default group.")]
+    public string groupName;
+
+    /// <summary>
     /// Label reference list
     /// </summary>
     public List<AssetLabelReference> labelRefs;
