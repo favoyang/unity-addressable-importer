@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using System;
+using System.IO;
 
 public class AddressableImporter : AssetPostprocessor
 {
@@ -21,7 +22,7 @@ public class AddressableImporter : AssetPostprocessor
             {
                 if (rule.Match(path))
                 {
-                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels);
+                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels, rule.simplified);
                     if (entry != null)
                     {
                         entriesAdded.Add(entry);
@@ -40,7 +41,7 @@ public class AddressableImporter : AssetPostprocessor
         }
     }
 
-    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels)
+    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels, bool simplified)
     {
         var group = GetGroup(settings, groupName);
         if (group == null)
@@ -52,7 +53,11 @@ public class AddressableImporter : AssetPostprocessor
         var entry = settings.CreateOrMoveEntry(guid, group);
         // Override address if address is a path
         if (string.IsNullOrEmpty(entry.address) || entry.address.StartsWith("Assets/"))
+        {
+            if (simplified)
+                path = Path.GetFileNameWithoutExtension(path);
             entry.address = path;
+        }
         // Add labels
         foreach (var label in labels)
         {

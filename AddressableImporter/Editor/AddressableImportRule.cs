@@ -43,7 +43,11 @@ public class AddressableImportRule
     /// </summary>
     public List<AssetLabelReference> labelRefs;
 
-    // public bool simplified;
+    /// <summary>
+    /// Simplify address
+    /// </summary>
+    [Tooltip("Simplify address to filename without extension")]
+    public bool simplified;
 
     public bool HasLabel
     {

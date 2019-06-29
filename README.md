@@ -20,6 +20,7 @@ Create a rule
   - Regex
 - Group name, leaves blank for the default group
 - Labels, the labels to add
+- Simplified, simplify address to filename without extension
 
 Rule Examples
 
@@ -31,4 +32,4 @@ Rule Examples
 
 Notices for moved or re-imported assets
 - The importer will not override existing labels.
-- The importer will only override address if it looks like a path (starts with `Assets/`). In another word, if you changed the address, then reimport or move it, the address remains no change.
+- The importer will only override address if it looks like a path (starts with `Assets/`). In another word, if you changed or simplified the address, then reimport or move it, the address remains no change.
