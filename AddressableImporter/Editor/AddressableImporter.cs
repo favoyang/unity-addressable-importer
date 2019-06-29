@@ -34,7 +34,10 @@ public class AddressableImporter : AssetPostprocessor
             }
         }
         if (entriesAdded.Count > 0)
+        {
             settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entriesAdded, true);
+            AssetDatabase.SaveAssets();
+        }
     }
 
     static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels)
