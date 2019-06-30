@@ -1,0 +1,10 @@
+{
+  "name": "com.littlebigfun.addressable-importer",
+  "displayName": "Unity Addressable Importer",
+  "version": "0.1.0-preview",
+  "unity": "2018.3",
+  "description": "A simple rule based addressable asset importer.",
+  "dependencies": {
+    "com.unity.addressables": "1.1.4"
+  }
+}

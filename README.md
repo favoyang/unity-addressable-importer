@@ -3,33 +3,26 @@ A simple rule based addressable asset importer.
 
 The importer marks assets as addressable, by applying to files having a path matching the rule pattern.
 
-## Usage
+## Install package
 
-You should create a single AddressableImportSettings file located at `Assets/AddressableAssetsData/AddressableImportSettings.asset`. To create it, go to `Assets/AddressableAssetsData` folder, right click in your project window and choose `Create > Addressable Assets > Import Settings`.
+### Install as a git package
 
-If no settings file exists, an empty one will be created when importing any new asset.
+This is the recommended way to track update. Open Packages/manifest.json with your favorite text editor. Add the following line to the dependencies block.
 
-Once the settings file selected, you can edit rules in the inspector window. Then click `File > Save Project` to apply the changes.
+    {
+        "dependencies": {
+            "com.littlebigfun.addressable-importer": "https://github.com/favoyang/unity-addressable-importer.git"
+        }
+    }
 
-![AddressableImportSettings Insepctor](./Documentation~/AddressableImportSettings-Insepctor.png)
+### Install as an embbed package via submodule
 
-Create a rule
-- Path, the path pattern
-- Match type
-  - Wildcard, `*` matches any number of characters, `?` matches a single character
-  - Regex
-- Group name, leaves blank for the default group
-- Labels, the labels to add
-- Simplified, simplify address to filename without extension
+This way gives you more control if you want to modify the package based on your purpose. Fork the repo, and checkout to your Packages folder as submodule.
 
-Rule Examples
+    git submodule add https://github.com/[YOURNAME]/unity-addressable-importer.git Packages/unity-addressable-importer
+    git add -A
+    git ci -m "Imported unity-addressable-importer as embbed package"
 
-| Type     | Example             |
-|----------|---------------------|
-| Wildcard | Asset/Sprites/Icons |
-| Wildcard | Asset/Sprites/Level??/*.asset |
-| Regex    | ^Assets/Models/.*\\.fbx |
+## How to use
 
-Notices for moved or re-imported assets
-- The importer will not override existing labels.
-- The importer will only override address if it looks like a path (starts with `Assets/`). In another word, if you changed or simplified the address, then reimport or move it, the address remains no change.
+See [usage](./Documentation~/AddressableImporter.md)
