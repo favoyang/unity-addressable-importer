@@ -13,7 +13,7 @@ public class AddressableImporter : AssetPostprocessor
     {
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         var importSettings = AddressableImportSettings.Instance;
-        if (importSettings.rules == null || importSettings.rules.Count == 0)
+        if (importSettings == null || importSettings.rules == null || importSettings.rules.Count == 0)
             return;
         var entriesAdded = new List<AddressableAssetEntry>();
         foreach (string path in importedAssets)

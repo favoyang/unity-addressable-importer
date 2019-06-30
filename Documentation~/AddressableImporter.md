@@ -2,8 +2,6 @@
 
 You should create a single AddressableImportSettings file located at `Assets/AddressableAssetsData/AddressableImportSettings.asset`. To create it, go to `Assets/AddressableAssetsData` folder, right click in your project window and choose `Create > Addressable Assets > Import Settings`.
 
-If no settings file exists, an empty one will be created when importing any new asset.
-
 Once the settings file selected, you can edit rules in the inspector window. Then click `File > Save Project` to apply the changes.
 
 ![AddressableImportSettings Inspector](AddressableImportSettings-Insepctor.png)
