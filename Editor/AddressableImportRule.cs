@@ -11,11 +11,13 @@ public enum AddressableImportRuleMatchType
     /// *, matches any number of characters
     /// ?, matches a single character
     /// </summary>
+    [Tooltip("Simple wildcard.\n\"*\" matches any number of characters.\n\"?\" matches a single character.")]
     Wildcard = 0,
 
     /// <summary>
     /// Regex pattern
     /// </summary>
+    [Tooltip("A regular Expression pattern.")]
     Regex
 }
 
@@ -23,28 +25,31 @@ public enum AddressableImportRuleMatchType
 public class AddressableImportRule
 {
     /// <summary>
-    /// Path pattern
+    /// Path pattern.
     /// </summary>
+    [Tooltip("The assets in this path will be processed.")]
     public string path;
 
     /// <summary>
-    /// Path match type
+    /// Method used to parse the Path.
     /// </summary>
+    [Tooltip("The Path parsing method.")]
     public AddressableImportRuleMatchType matchType;
 
     /// <summary>
-    /// Addressable group name
+    /// The group the asset will be added.
     /// </summary>
-    [Tooltip("Leaves blank for the default group.")]
+    [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
     public string groupName;
 
     /// <summary>
-    /// Label reference list
+    /// Label reference list.
     /// </summary>
+    [Tooltip("The list of labels to be added to the Addressable Asset")]
     public List<AssetLabelReference> labelRefs;
 
     /// <summary>
-    /// Simplify address
+    /// Simplify address.
     /// </summary>
     [Tooltip("Simplify address to filename without extension")]
     public bool simplified;
