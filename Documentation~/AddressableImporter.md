@@ -6,7 +6,7 @@ Once the settings file selected, you can edit rules in the inspector window. The
 
 ![AddressableImportSettings Inspector](AddressableImportSettings-Insepctor.png)
 
-Create a rule
+## Create a rule
 - Path, the path pattern
 - Match type
   - Wildcard, `*` matches any number of characters, `?` matches a single character
@@ -17,21 +17,20 @@ Create a rule
 - Address Replacement
   - When using Regex, this can be used to build the address based on information captured from the path.
 
-Rule Examples
+## Rule Examples
 
 | Type     | Example             |
 |----------|---------------------|
 | Wildcard | Asset/Sprites/Icons |
 | Wildcard | Asset/Sprites/Level??/*.asset |
 | Regex    | ^Assets/Models/.*\\.fbx |
-| Regex    | Assets/Weapons/(?<prefix>(?<category>[^/]+)/(.*/)*)(?<asset>.*_Data.*\\.asset) |
+| Regex    | Assets/Weapons/(?\<prefix\>(?\<category\>[^/]+)/(.*/)*)(?\<asset\>.*_Data.*\\.asset) |
 
-Address Replacement Example
-
+## Address Replacement Example
 ![AddressableImportSettings Inspector Regex](AddressableImportSettings-Insepctor2.png)
 
 Using this mode allows extraction of arbitrary information from the path, via the use of capture groups. Named capture groups can be referred to in `Address Replacement` via `${group}`. If groups are not named, they can be referred to numerically, via `$1`, `$2` and so on. For more information, refer to [Microsoft Docs - Substitutions in Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/substitutions-in-regular-expressions).
 
-Notice for moved or re-imported assets
+## Notice for moved or re-imported assets
 - The importer will not override existing labels.
 - The importer will only override address if it looks like a path (starts with `Assets/`). In another word, if you changed or simplified the address, then reimport or move it, the address remains no change.
