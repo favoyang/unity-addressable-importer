@@ -78,6 +78,8 @@ public class AddressableImporter : AssetPostprocessor
             entry.address = path;
         }
         // Add labels
+        if (rule.LabelMode == LabelWriteMode.Replace)
+            entry.labels.Clear();
         foreach (var label in rule.labels)
         {
             if (!entry.labels.Contains(label))

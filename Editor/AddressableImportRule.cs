@@ -21,6 +21,12 @@ public enum AddressableImportRuleMatchType
     Regex
 }
 
+public enum LabelWriteMode
+{
+    Add,
+    Replace
+}
+
 [System.Serializable]
 public class AddressableImportRule
 {
@@ -41,6 +47,11 @@ public class AddressableImportRule
     /// </summary>
     [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
     public string groupName;
+
+    /// <summary>
+    /// Defines if labels will be added or replaced.
+    /// </summary>
+    public LabelWriteMode LabelMode;
 
     /// <summary>
     /// Label reference list.
