@@ -83,8 +83,7 @@ public class AddressableImporter : AssetPostprocessor
         // Add labels
         foreach (var label in labels)
         {
-            if (!entry.labels.Contains(label))
-                entry.labels.Add(label);
+            entry.labels.Add(label);
         }
         return entry;
     }
