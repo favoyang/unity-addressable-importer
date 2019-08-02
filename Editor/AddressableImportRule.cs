@@ -71,7 +71,8 @@ public class AddressableImportRule
             }
             else
                 return assetPath.StartsWith(path);
-        } else if (matchType == AddressableImportRuleMatchType.Regex)
+        }
+        else if (matchType == AddressableImportRuleMatchType.Regex)
             return Regex.IsMatch(assetPath, path);
         return false;
     }
@@ -89,6 +90,72 @@ public class AddressableImportRule
                     yield return labelRef.labelString;
                 }
             }
+        }
+    }
+
+    public string ParseRegexPath(string assetPath, string customPath = null)
+    {
+        return AddressableImportRegex.ParsePath(assetPath, groupName, customPath);
+    }
+
+    static class AddressableImportRegex
+    {
+        const string pathregex = @"\%PATH\%\[\-{0,1}\d{1,3}\]"; // ie: $PATH$[0]
+
+        static public string[] GetPathArray(string path)
+        {
+            return path.Split('/');
+        }
+
+        static public string GetPathAtArray(string path, int idx)
+        {
+            return GetPathArray(path)[idx];
+        }
+
+        static public string ParsePath(string rawPath, string targetGroupName, string customPath = null)
+        {
+            var _path = rawPath;
+            if (!string.IsNullOrWhiteSpace(customPath))
+            {
+                _path = customPath;
+            }
+
+            int i = 0;
+            var slashSplit = _path.Split('/');
+            var len = slashSplit.Length - 1;
+            var matches = Regex.Matches(targetGroupName, pathregex);
+            string[] parsedMatches = new string[matches.Count];
+            foreach (var match in matches)
+            {
+                string v = match.ToString();
+                var sidx = v.IndexOf('[') + 1;
+                var eidx = v.IndexOf(']');
+                int idx = int.Parse(v.Substring(sidx, eidx - sidx));
+                while (idx > len)
+                {
+                    idx -= len;
+                }
+                while (idx < 0)
+                {
+                    idx += len;
+                }
+                //idx = Mathf.Clamp(idx, 0, slashSplit.Length - 1);
+                parsedMatches[i++] = GetPathAtArray(_path, idx);
+            }
+
+            i = 0;
+            var splitpath = Regex.Split(targetGroupName, pathregex);
+            string finalPath = string.Empty;
+            foreach (var split in splitpath)
+            {
+                finalPath += splitpath[i];
+                if (i < parsedMatches.Length)
+                {
+                    finalPath += parsedMatches[i];
+                }
+                i++;
+            }
+            return finalPath;
         }
     }
 }

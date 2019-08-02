@@ -23,7 +23,7 @@ public class AddressableImporter : AssetPostprocessor
             {
                 if (rule.Match(path))
                 {
-                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels, rule.simplified, importSettings);
+                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule, importSettings);
                     if (entry != null)
                     {
                         entriesAdded.Add(entry);
@@ -51,19 +51,20 @@ public class AddressableImporter : AssetPostprocessor
         return settings.CreateGroup(groupName, false, false, false, new List<AddressableAssetGroupSchema> { settings.DefaultGroup.Schemas[0] }, typeof(SchemaType));
     }
 
-    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels, bool simplified, AddressableImportSettings importSettings)
+    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, AddressableImportRule rule, AddressableImportSettings importSettings)
     {
-        var group = GetGroup(settings, groupName);
-        if (group == null)
+        AddressableAssetGroup group;
+        var groupName = rule.ParseRegexPath(path);
+        if (!TryGetGroup(settings, groupName, out group))
         {
             if (importSettings.allowGroupCreation)
             {
-                //TODO Specify on editor which Schema to create.
+                //TODO Specify on editor which type to create.
                 group = CreateAssetGroup<BundledAssetGroupSchema>(settings, groupName);
             }
             else
             {
-                Debug.LogErrorFormat("[AddressableImporter] Failed to find group {0} when importing {1}. Please check the group exists, then reimport the asset.", groupName, path);
+                Debug.LogErrorFormat("[AddressableImporter] Failed to find group {0} when importing {1}. Please check the group exists, then reimport the asset.", rule.groupName, path);
                 return null;
             }
         }
@@ -72,12 +73,12 @@ public class AddressableImporter : AssetPostprocessor
         // Override address if address is a path
         if (string.IsNullOrEmpty(entry.address) || entry.address.StartsWith("Assets/"))
         {
-            if (simplified)
+            if (rule.simplified)
                 path = Path.GetFileNameWithoutExtension(path);
             entry.address = path;
         }
         // Add labels
-        foreach (var label in labels)
+        foreach (var label in rule.labels)
         {
             if (!entry.labels.Contains(label))
                 entry.labels.Add(label);
