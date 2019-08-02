@@ -46,8 +46,14 @@ public class AddressableImportRule
     /// <summary>
     /// Simplify address
     /// </summary>
-    [Tooltip("Simplify address to filename without extension")]
+    [Tooltip("Simplify address to filename without extension.")]
     public bool simplified;
+    
+    /// <summary>
+    /// Replacement string for the asset address. This is only useful with regex capture groups.
+    /// </summary>
+    [Tooltip("Replacement address string for regex matches.")]
+    public string addressReplacement;
 
     public bool HasLabel
     {

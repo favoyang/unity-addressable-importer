@@ -6,6 +6,7 @@ using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 public class AddressableImporter : AssetPostprocessor
 {
@@ -22,14 +23,33 @@ public class AddressableImporter : AssetPostprocessor
             {
                 if (rule.Match(path))
                 {
-                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels, rule.simplified);
+                    // The regex to apply to the path. If Simplified is ticked, it a pattern that matches any path, capturing the path, filename and extension.
+                    // If the mode is Wildcard, the pattern will match and capture the entire path string.
+                    string pathRegex =
+                        rule.simplified
+                        ? @"(?<path>.*[/\\])+(?<filename>.+?)(?<extension>\.[^.]*$|$)"
+                        :  (rule.matchType == AddressableImportRuleMatchType.Wildcard
+                            ? @"(.*)"
+                            : rule.path);
+
+                    // The replacement string passed into Regex.Replace. If Simplified is ticked, it's the filename, without the extension.
+                    // If the mode is Wildcard, it's the entire path, i.e. the first capture group.
+                    string addressReplacement =
+                        rule.simplified
+                        ? @"${filename}"
+                        :  (rule.matchType == AddressableImportRuleMatchType.Wildcard
+                            ? @"$1"
+                            : rule.addressReplacement);
+
+                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels, pathRegex, addressReplacement);
+
                     if (entry != null)
                     {
                         entriesAdded.Add(entry);
                         if (rule.HasLabel)
-                            Debug.LogFormat("[AddressableImporter] Entry created for {0} with labels {1}", path, string.Join(", ", entry.labels));
+                            Debug.LogFormat("[AddressableImporter] Entry created for {0} with address {1} and labels {2}", path, entry.address, string.Join(", ", entry.labels));
                         else
-                            Debug.LogFormat("[AddressableImporter] Entry created for {0}", path);
+                            Debug.LogFormat("[AddressableImporter] Entry created for {0} with address {1}", path, entry.address);
                     }
                 }
             }
@@ -41,7 +61,7 @@ public class AddressableImporter : AssetPostprocessor
         }
     }
 
-    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels, bool simplified)
+    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels, string pathRegex, string addressReplacement)
     {
         var group = GetGroup(settings, groupName);
         if (group == null)
@@ -54,10 +74,12 @@ public class AddressableImporter : AssetPostprocessor
         // Override address if address is a path
         if (string.IsNullOrEmpty(entry.address) || entry.address.StartsWith("Assets/"))
         {
-            if (simplified)
-                path = Path.GetFileNameWithoutExtension(path);
-            entry.address = path;
+            if (!string.IsNullOrEmpty(pathRegex) && !string.IsNullOrEmpty(addressReplacement))
+                entry.address = Regex.Replace(path, pathRegex, addressReplacement);
+            else
+                entry.address = path;
         }
+
         // Add labels
         foreach (var label in labels)
         {
