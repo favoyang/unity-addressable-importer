@@ -8,6 +8,9 @@ public class AddressableImportSettings : ScriptableObject
     public const string kDefaultConfigObjectName = "addressableimportsettings";
     public const string kDefaultPath = "Assets/AddressableAssetsData/AddressableImportSettings.asset";
 
+    [Tooltip("Creates a group if the specified group doesn't exist.")]
+    public bool allowGroupCreation = true;
+
     [Tooltip("Removes Groups without addressables")]
     public bool removeEmtpyGroups = false;
 

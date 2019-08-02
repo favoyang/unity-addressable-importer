@@ -6,6 +6,7 @@ using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using System;
 using System.IO;
+using UnityEditor.AddressableAssets.Settings.GroupSchemas;
 
 public class AddressableImporter : AssetPostprocessor
 {
@@ -22,7 +23,7 @@ public class AddressableImporter : AssetPostprocessor
             {
                 if (rule.Match(path))
                 {
-                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels, rule.simplified);
+                    var entry = CreateOrUpdateAddressableAssetEntry(settings, path, rule.groupName, rule.labels, rule.simplified, importSettings);
                     if (entry != null)
                     {
                         entriesAdded.Add(entry);
@@ -45,13 +46,26 @@ public class AddressableImporter : AssetPostprocessor
         }
     }
 
-    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels, bool simplified)
+    static AddressableAssetGroup CreateAssetGroup<SchemaType>(AddressableAssetSettings settings, string groupName)
+    {
+        return settings.CreateGroup(groupName, false, false, false, new List<AddressableAssetGroupSchema> { settings.DefaultGroup.Schemas[0] }, typeof(SchemaType));
+    }
+
+    static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(AddressableAssetSettings settings, string path, string groupName, IEnumerable<string> labels, bool simplified, AddressableImportSettings importSettings)
     {
         var group = GetGroup(settings, groupName);
         if (group == null)
         {
-            Debug.LogErrorFormat("[AddressableImporter] Failed to find group {0} when importing {1}. Please check the group exists, then reimport the asset.", groupName, path);
-            return null;
+            if (importSettings.allowGroupCreation)
+            {
+                //TODO Specify on editor which Schema to create.
+                group = CreateAssetGroup<BundledAssetGroupSchema>(settings, groupName);
+            }
+            else
+            {
+                Debug.LogErrorFormat("[AddressableImporter] Failed to find group {0} when importing {1}. Please check the group exists, then reimport the asset.", groupName, path);
+                return null;
+            }
         }
         var guid = AssetDatabase.AssetPathToGUID(path);
         var entry = settings.CreateOrMoveEntry(guid, group);
@@ -81,6 +95,23 @@ public class AddressableImporter : AssetPostprocessor
         if (string.IsNullOrEmpty(groupName))
             return settings.DefaultGroup;
         return settings.groups.Find(g => g.Name == groupName);
+    }
+
+    /// <summary>
+    /// Attempts to get the group using the provided <paramref name="groupName"/>.
+    /// </summary>
+    /// <param name="settings">Reference to the <see cref="AddressableAssetSettings"/></param>
+    /// <param name="groupName">The name of the group for the search.</param>
+    /// <param name="group">The <see cref="AddressableAssetGroup"/> if found. Set to <see cref="null"/> if not found.</param>
+    /// <returns>True if a group is found.</returns>
+    static bool TryGetGroup(AddressableAssetSettings settings, string groupName, out AddressableAssetGroup group)
+    {
+        if (string.IsNullOrWhiteSpace(groupName))
+        {
+            group = settings.DefaultGroup;
+            return true;
+        }
+        return ((group = settings.groups.Find(g => string.Equals(g.Name, groupName.Trim()))) == null) ? false : true;
     }
 
 }
