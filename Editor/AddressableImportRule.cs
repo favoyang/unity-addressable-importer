@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UnityAddressableImporter.Helper;
 
 public enum AddressableImportRuleMatchType
 {
@@ -46,8 +47,15 @@ public class AddressableImportRule
     /// <summary>
     /// Simplify address
     /// </summary>
-    [Tooltip("Simplify address to filename without extension")]
+    [Tooltip("Simplify address to filename without extension.")]
     public bool simplified;
+
+    /// <summary>
+    /// Replacement string for the asset address. This is only useful with regex capture groups.
+    /// </summary>
+    [Tooltip("Replacement address string for regex matches.")]
+    [ConditionalField("matchType", AddressableImportRuleMatchType.Regex, "simplified", false)]
+    public string addressReplacement;
 
     public bool HasLabel
     {
@@ -71,7 +79,8 @@ public class AddressableImportRule
             }
             else
                 return assetPath.StartsWith(path);
-        } else if (matchType == AddressableImportRuleMatchType.Regex)
+        }
+        else if (matchType == AddressableImportRuleMatchType.Regex)
             return Regex.IsMatch(assetPath, path);
         return false;
     }

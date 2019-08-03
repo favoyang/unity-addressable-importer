@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
+
 [CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressable Assets/Import Settings", order = 50)]
 public class AddressableImportSettings : ScriptableObject
 {
