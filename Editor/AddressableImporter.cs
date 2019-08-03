@@ -28,7 +28,7 @@ public class AddressableImporter : AssetPostprocessor
                     string pathRegex =
                         rule.simplified
                         ? @"(?<path>.*[/\\])+(?<filename>.+?)(?<extension>\.[^.]*$|$)"
-                        :  (rule.matchType == AddressableImportRuleMatchType.Wildcard
+                        : (rule.matchType == AddressableImportRuleMatchType.Wildcard
                             ? @"(.*)"
                             : rule.path);
 
@@ -37,7 +37,7 @@ public class AddressableImporter : AssetPostprocessor
                     string addressReplacement =
                         rule.simplified
                         ? @"${filename}"
-                        :  (rule.matchType == AddressableImportRuleMatchType.Wildcard
+                        : (rule.matchType == AddressableImportRuleMatchType.Wildcard
                             ? @"$1"
                             : rule.addressReplacement);
 
@@ -101,4 +101,3 @@ public class AddressableImporter : AssetPostprocessor
     }
 
 }
-

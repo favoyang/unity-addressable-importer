@@ -14,17 +14,17 @@ Once the settings file selected, you can edit rules in the inspector window. The
 - Group name, leaves blank for the default group
 - Labels, the labels to add
 - Simplified, simplify address to filename without extension
-- Address Replacement
+- Address replacement
   - When using Regex, this can be used to build the address based on information captured from the path.
 
 ## Rule Examples
 
-| Type     | Example             |
-|----------|---------------------|
-| Wildcard | Asset/Sprites/Icons |
-| Wildcard | Asset/Sprites/Level??/*.asset |
-| Regex    | ^Assets/Models/.*\\.fbx |
-| Regex    | Assets/Weapons/(?\<prefix\>(?\<category\>[^/]+)/(.*/)*)(?\<asset\>.*_Data.*\\.asset) |
+| Type     | Example                                                                         |
+|----------|---------------------------------------------------------------------------------|
+| Wildcard | `Asset/Sprites/Icons`                                                           |
+| Wildcard | `Asset/Sprites/Level??/*.asset`                                                 |
+| Regex    | `^Assets/Models/.*\.fbx`                                                        |
+| Regex    | `Assets/Weapons/(?<prefix>(?<category>[^/]+)/(.*/)*)(?<asset>.*_Data.*\.asset)` |
 
 ## Address Replacement Example
 ![AddressableImportSettings Inspector Regex](AddressableImportSettings-Insepctor2.png)
