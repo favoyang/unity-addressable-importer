@@ -18,20 +18,20 @@ public class AddressableImporter : AssetPostprocessor
         if (importSettings == null || importSettings.rules == null || importSettings.rules.Count == 0)
             return;
         var entriesAdded = new List<AddressableAssetEntry>();
-        foreach (string path in importedAssets)
+        foreach (string assetPath in importedAssets)
         {
             foreach (var rule in importSettings.rules)
             {
-                if (rule.Match(path))
+                if (rule.Match(assetPath))
                 {
-                    var entry = CreateOrUpdateAddressableAssetEntry(settings, importSettings, rule, path);
+                    var entry = CreateOrUpdateAddressableAssetEntry(settings, importSettings, rule, assetPath);
                     if (entry != null)
                     {
                         entriesAdded.Add(entry);
                         if (rule.HasLabel)
-                            Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1} and labels {2}", path, entry.address, string.Join(", ", entry.labels));
+                            Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1} and labels {2}", assetPath, entry.address, string.Join(", ", entry.labels));
                         else
-                            Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1}", path, entry.address);
+                            Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1}", assetPath, entry.address);
                     }
                 }
             }
@@ -56,20 +56,11 @@ public class AddressableImporter : AssetPostprocessor
         AddressableAssetSettings settings,
         AddressableImportSettings importSettings,
         AddressableImportRule rule,
-        string path)
+        string assetPath)
     {
-        // The regex to apply to the path. If Simplified is ticked, it a pattern that matches any path, capturing the path, filename and extension.
-        // If the mode is Wildcard, the pattern will match and capture the entire path string.
-        string pathRegex =
-            rule.simplified
-            ? @"(?<path>.*[/\\])+(?<filename>.+?)(?<extension>\.[^.]*$|$)"
-            : (rule.matchType == AddressableImportRuleMatchType.Wildcard
-                ? @"(.*)"
-                : rule.path);
-
         // Set group
         AddressableAssetGroup group;
-        var groupName = rule.ParseRegexPath(path, rule.groupName);
+        var groupName = rule.ParseGroupReplacement(assetPath);
         if (!TryGetGroup(settings, groupName, out group))
         {
             if (importSettings.allowGroupCreation)
@@ -79,29 +70,17 @@ public class AddressableImporter : AssetPostprocessor
             }
             else
             {
-                Debug.LogErrorFormat("[AddressableImporter] Failed to find group {0} when importing {1}. Please check if the group exists, then reimport the asset.", rule.groupName, path);
+                Debug.LogErrorFormat("[AddressableImporter] Failed to find group {0} when importing {1}. Please check if the group exists, then reimport the asset.", rule.groupName, assetPath);
                 return null;
             }
         }
-        var guid = AssetDatabase.AssetPathToGUID(path);
+        var guid = AssetDatabase.AssetPathToGUID(assetPath);
         var entry = settings.CreateOrMoveEntry(guid, group);
 
-        // Address replacement.
-        // The replacement string passed into Regex.Replace. If Simplified is ticked, it's the filename, without the extension.
-        // If the mode is Wildcard, it's the entire path, i.e. the first capture group.
-        string addressReplacement =
-            rule.simplified
-            ? @"${filename}"
-            : (rule.matchType == AddressableImportRuleMatchType.Wildcard
-                ? @"$1"
-                : rule.addressReplacement);
         // Apply address replacement if address is empty or path.
         if (string.IsNullOrEmpty(entry.address) || entry.address.StartsWith("Assets/"))
         {
-            if (!string.IsNullOrEmpty(pathRegex) && !string.IsNullOrEmpty(addressReplacement))
-                entry.address = Regex.Replace(path, pathRegex, addressReplacement);
-            else
-                entry.address = path;
+            entry.address = rule.ParseAddressReplacement(assetPath);
         }
 
         // Add labels

@@ -105,6 +105,55 @@ public class AddressableImportRule
         return false;
     }
 
+    /// <summary>
+    /// Parse assetPath and replace all elements that match this.path regex
+    /// with the groupName string.
+    /// Returns null if this.path or groupName is empty.
+    /// </summary>
+    public string ParseGroupReplacement(string assetPath)
+    {
+        if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(groupName))
+            return null;
+        // Parse path elements.
+        var replacement = AddressableImportRegex.ParsePath(assetPath, groupName);
+        // Parse this.path regex.
+        if (matchType == AddressableImportRuleMatchType.Regex) {
+            string pathRegex = path;
+            replacement = Regex.Replace(assetPath, pathRegex, replacement);
+        }
+        return replacement;
+    }
+
+    /// <summary>
+    /// Parse assetPath and replace all elements that match this.path regex
+    /// with the addressReplacement string.
+    /// Returns assetPath if this.path or addressReplacement is empty.
+    /// </summary>
+    public string ParseAddressReplacement(string assetPath)
+    {
+        if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(addressReplacement))
+            return assetPath;
+        // Parse path elements.
+        var replacement = AddressableImportRegex.ParsePath(assetPath, addressReplacement);
+        // Parse this.path regex.
+        // If Simplified is ticked, it's a pattern that matches any path, capturing the path, filename and extension.
+        // If the match type is Wildcard, the pattern will match and capture the entire path string.
+        string pathRegex =
+            simplified
+            ? @"(?<path>.*[/\\])+(?<filename>.+?)(?<extension>\.[^.]*$|$)"
+            : (matchType == AddressableImportRuleMatchType.Wildcard
+                ? @"(.*)"
+                : path);
+        replacement =
+            simplified
+            ? @"${filename}"
+            : (matchType == AddressableImportRuleMatchType.Wildcard
+                ? @"$1"
+                : replacement);
+        replacement = Regex.Replace(assetPath, pathRegex, replacement);
+        return replacement;
+    }
+
     public IEnumerable<string> labels
     {
         get
@@ -121,14 +170,12 @@ public class AddressableImportRule
         }
     }
 
-    public string ParseRegexPath(string assetPath, string replacement)
-    {
-        return AddressableImportRegex.ParsePath(assetPath, replacement);
-    }
-
+    /// <summary>
+    /// Helper class for regex replacement.
+    /// </summary>
     static class AddressableImportRegex
     {
-        const string pathregex = @"\%PATH\%\[\-{0,1}\d{1,3}\]"; // ie: $PATH$[0]
+        const string pathregex = @"\$\{PATH\[\-{0,1}\d{1,3}\]\}"; // ie: ${PATH[0]} ${PATH[-1]}
 
         static public string[] GetPathArray(string path)
         {
@@ -140,13 +187,17 @@ public class AddressableImportRule
             return GetPathArray(path)[idx];
         }
 
-        static public string ParsePath(string assetPath, string targetGroupName)
+        /// <summary>
+        /// Parse assetPath and replace all matched path elements (i.e. `${PATH[0]}`)
+        /// with a specified replacement string.
+        /// </summary>
+        static public string ParsePath(string assetPath, string replacement)
         {
             var _path = assetPath;
             int i = 0;
             var slashSplit = _path.Split('/');
             var len = slashSplit.Length - 1;
-            var matches = Regex.Matches(targetGroupName, pathregex);
+            var matches = Regex.Matches(replacement, pathregex);
             string[] parsedMatches = new string[matches.Count];
             foreach (var match in matches)
             {
@@ -167,7 +218,7 @@ public class AddressableImportRule
             }
 
             i = 0;
-            var splitpath = Regex.Split(targetGroupName, pathregex);
+            var splitpath = Regex.Split(replacement, pathregex);
             string finalPath = string.Empty;
             foreach (var split in splitpath)
             {
