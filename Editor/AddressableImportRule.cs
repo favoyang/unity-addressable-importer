@@ -87,6 +87,9 @@ public class AddressableImportRule
     /// </summary>
     public bool Match(string assetPath)
     {
+        path = path.Trim();
+        if (string.IsNullOrEmpty(path))
+            return false;
         if (matchType == AddressableImportRuleMatchType.Wildcard)
         {
             if (path.Contains("*") || path.Contains("?"))
