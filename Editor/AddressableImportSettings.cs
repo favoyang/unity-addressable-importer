@@ -11,7 +11,7 @@ public class AddressableImportSettings : ScriptableObject
     public const string kDefaultPath = "Assets/AddressableAssetsData/AddressableImportSettings.asset";
 
     [Tooltip("Creates a group if the specified group doesn't exist.")]
-    public bool allowGroupCreation = true;
+    public bool allowGroupCreation = false;
 
     [Tooltip("Removes groups without addressables except the default group.")]
     public bool removeEmtpyGroups = false;
