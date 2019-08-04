@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using UnityAddressableImporter.Helper;
 
 
 [CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressable Assets/Import Settings", order = 50)]
@@ -17,6 +18,12 @@ public class AddressableImportSettings : ScriptableObject
 
     [Tooltip("Rules for managing imported assets.")]
     public List<AddressableImportRule> rules;
+
+    [ButtonMethod]
+    private void Save()
+    {
+        AssetDatabase.SaveAssets();
+    }
 
     public static AddressableImportSettings Instance
     {
