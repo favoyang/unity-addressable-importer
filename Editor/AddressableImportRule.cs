@@ -64,6 +64,7 @@ public class AddressableImportRule
     /// Simplify address.
     /// </summary>
     [Tooltip("Simplify address to filename without extension.")]
+    [Label("Address Simplified")]
     public bool simplified;
 
     /// <summary>
