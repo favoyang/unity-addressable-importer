@@ -131,9 +131,13 @@ public class AddressableImportRule
     /// </summary>
     public string ParseAddressReplacement(string assetPath)
     {
-        if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(addressReplacement))
+        if (string.IsNullOrWhiteSpace(path))
+            return assetPath;
+        if (!simplified && string.IsNullOrWhiteSpace(addressReplacement))
             return assetPath;
         // Parse path elements.
+        if (addressReplacement == null)
+            addressReplacement = "";
         var replacement = AddressableImportRegex.ParsePath(assetPath, addressReplacement);
         // Parse this.path regex.
         // If Simplified is ticked, it's a pattern that matches any path, capturing the path, filename and extension.

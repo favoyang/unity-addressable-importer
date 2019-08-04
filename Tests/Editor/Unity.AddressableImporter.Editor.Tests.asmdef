@@ -1,0 +1,21 @@
+{
+    "name": "Unity.AddressableImporter.Editor.Tests",
+    "references": [
+        "Unity.Addressables.Editor",
+        "Unity.Addressables",
+        "Unity.AddressableImporter.Editor"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
