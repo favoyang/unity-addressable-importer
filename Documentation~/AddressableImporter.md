@@ -8,15 +8,15 @@ Once the settings file selected, you can edit rules in the inspector window. The
 
 ## Define Rules
 
-- Path, the path pattern.
-- Match Type
+- `Path`, the path pattern.
+- `Match Type`
   - Wildcard, `*` matches any number of characters, `?` matches a single character.
   - Regex.
-- Group Name, leaves blank for the default group. For dynamic group see [Group Replacement](#group-replacement).
-- Label Mode, defines if labels will be added or replaced.
-- Label Refs, the labels to add.
-- Address Simplified, simplify address to filename without extension.
-- Address Replacement, leaves blank to use asset path as address. For dynamic address see [Address Replacement](#address-replacement).
+- `Group Name`, leaves blank for the default group. For dynamic group see [Group Replacement](#group-replacement).
+- `Label Mode`, defines if labels will be added or replaced.
+- `Label Refs`, the labels to add.
+- `Address Simplified`, simplify address to filename without extension.
+- `Address Replacement`, leaves blank to use asset path as address. For dynamic address see [Address Replacement](#address-replacement).
 
 ## Rule Examples
 
@@ -52,5 +52,9 @@ Similar to [Group Replacement](#group-replacement), address replacement is also 
 | `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(?<asset>.*)\.png` | `${PATH[0]}:${category}-${asset}` | Assets:cat-cat01 |
 
 ## Notice for moved or re-imported assets
-- The importer will not override existing labels.
-- The importer will only override address if it looks like a path (starts with `Assets/`). In another word, if you changed or simplified the address, then reimport or move it, the address remains no change.
+- The importer always overrides existing labels if `LabelMode = Replace`.
+- The importer always overrides existing address if
+  - The address looks like a path (starts with `Assets/`).
+  - `Address Simplified` is ticked.
+  - `Address Replacement` is in use.
+  - In another word, if you intent to manually change the address later, leave `Address Simplified` unticked, `Address Replacement` blank, and do not use `Assets/` prefix for the customized address name.

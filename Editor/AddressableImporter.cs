@@ -78,7 +78,10 @@ public class AddressableImporter : AssetPostprocessor
         var entry = settings.CreateOrMoveEntry(guid, group);
 
         // Apply address replacement if address is empty or path.
-        if (string.IsNullOrEmpty(entry.address) || entry.address.StartsWith("Assets/"))
+        if (string.IsNullOrEmpty(entry.address) ||
+            entry.address.StartsWith("Assets/") ||
+            rule.simplified ||
+            !string.IsNullOrWhiteSpace(rule.addressReplacement))
         {
             entry.address = rule.ParseAddressReplacement(assetPath);
         }
