@@ -43,7 +43,7 @@ public class AddressableImporter : AssetPostprocessor
         }
         if (importSettings.removeEmtpyGroups)
         {
-            settings.groups.RemoveAll(_ => _.entries.Count == 0);
+            settings.groups.RemoveAll(_ => _.entries.Count == 0 && !_.IsDefaultGroup());
         }
     }
 

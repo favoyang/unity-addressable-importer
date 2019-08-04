@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  - Added address replacement, working with regex rule to build the address based on information captured from the path.
  - Added group replacement (dynamic named group i.e `%PATH%[0]`).
  - Added option to automatically create groups if not exist.
- - Added option to remove empty Asset Groups.
+ - Added option to remove empty Asset Groups except the default group.
  - Added option to define if labels from ruleset are added or replace the current ones.
  - Improved documentation.
 
