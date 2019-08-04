@@ -25,6 +25,12 @@ public class AddressableImportSettings : ScriptableObject
         AssetDatabase.SaveAssets();
     }
 
+    [ButtonMethod]
+    private void Documentation()
+    {
+        Application.OpenURL("https://github.com/favoyang/unity-addressable-importer/blob/master/Documentation~/AddressableImporter.md");
+    }
+
     public static AddressableImportSettings Instance
     {
         get
