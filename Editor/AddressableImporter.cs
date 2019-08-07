@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using System;
+using System.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
@@ -124,5 +125,60 @@ public class AddressableImporter : AssetPostprocessor
         }
         return ((group = settings.groups.Find(g => string.Equals(g.Name, groupName.Trim()))) == null) ? false : true;
     }
+
+    /// <summary>
+    /// Allows assets within the selected folder to be checked agains the Addressable Importer rules.
+    /// </summary>
+    public class FolderImporter
+    {
+        [MenuItem("Assets/AddressablesImporter: Check sub folders")]
+        private static void DoSomethingWithVariable()
+        {
+            HashSet<string> filesToImport = new HashSet<string>();
+            // Folders comes up as Object.
+            foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
+            {
+                var assetPath = AssetDatabase.GetAssetPath(obj);
+                // Other assets may appear as Object, so a Directory Check filters directories from folders.
+                if (Directory.Exists(assetPath))
+                {
+                    var filesToAdd = Directory.GetFiles(assetPath, "*", SearchOption.AllDirectories);
+                    foreach (var file in filesToAdd)
+                    {
+                        // If Directory.GetFiles accepted Regular Expressions, we could filter the metas before iterating.
+                        if (!file.EndsWith(".meta"))
+                        {
+                            filesToImport.Add(file.Replace('\\', '/'));
+                        }
+                    }
+                }
+            }
+
+            if (filesToImport.Count > 0)
+            {
+                Debug.Log($"AddressablesImporter: Found {filesToImport.Count} assets...");
+                OnPostprocessAllAssets(filesToImport.ToArray(), null, null, null);
+            }
+            else
+            {
+                Debug.Log($"AddressablesImporter: No files to reimport");
+            }
+        }
+
+        // Note that we pass the same path, and also pass "true" to the second argument.
+        [MenuItem("Assets/AddressablesImporter: Check sub folders", true)]
+        private static bool NewMenuOptionValidation()
+        {
+            foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
+            {
+                if (Directory.Exists(AssetDatabase.GetAssetPath(obj)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
 
 }
