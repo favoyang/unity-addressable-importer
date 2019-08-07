@@ -131,8 +131,8 @@ public class AddressableImporter : AssetPostprocessor
     /// </summary>
     public class FolderImporter
     {
-        [MenuItem("Assets/AddressablesImporter: Check sub folders")]
-        private static void DoSomethingWithVariable()
+        [MenuItem("Assets/AddressablesImporter: Check Folder(s)")]
+        private static void CheckFolders()
         {
             HashSet<string> filesToImport = new HashSet<string>();
             // Folders comes up as Object.
@@ -166,8 +166,8 @@ public class AddressableImporter : AssetPostprocessor
         }
 
         // Note that we pass the same path, and also pass "true" to the second argument.
-        [MenuItem("Assets/AddressablesImporter: Check sub folders", true)]
-        private static bool NewMenuOptionValidation()
+        [MenuItem("Assets/AddressablesImporter: Check Folder(s)", true)]
+        private static bool ValidateCheckFolders()
         {
             foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
             {

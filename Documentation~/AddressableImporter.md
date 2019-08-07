@@ -2,6 +2,8 @@
 
 You should create a single AddressableImportSettings file located at `Assets/AddressableAssetsData/AddressableImportSettings.asset`. To create it, go to `Assets/AddressableAssetsData` folder, right click in your project window and choose `Create > Addressable Assets > Import Settings`.
 
+![AddressableImportSettings Create](AddressableImportSettings-Create.png)
+
 Once the settings file selected, you can edit rules in the inspector window. Then click `File > Save Project` to apply the changes.
 
 ![AddressableImportSettings Inspector](AddressableImportSettings-Insepctor.png)
@@ -58,3 +60,9 @@ Similar to [Group Replacement](#group-replacement), address replacement is also 
   - `Address Simplified` is ticked.
   - `Address Replacement` is in use.
   - In another word, if you intent to manually change the address later, leave `Address Simplified` unticked, `Address Replacement` blank, and do not use `Assets/` prefix for the customized address name.
+
+## Quick assets import
+
+You may have lots existing assets before using the importer. To quickly apply importer rules, right click the target folders and click context menu `AddressablesImporter: Check Folder(s)`. This is more efficient than reimport asset.
+
+![AddressableImport Context Menu](AddressableImportSettings-ContextMenu.png)
