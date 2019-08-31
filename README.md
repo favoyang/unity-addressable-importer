@@ -1,3 +1,5 @@
+![Icon](Media/icon.png)
+
 # Unity Addressable Importer
 A simple rule based addressable asset importer.
 
