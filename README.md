@@ -1,4 +1,4 @@
-![Icon](Media/icon.png)
+ ![Icon](Media/icon-128.png)
 
 # Unity Addressable Importer
 A simple rule based addressable asset importer.
@@ -28,3 +28,7 @@ This way gives you more control if you want to modify the package based on your 
 ## How to use
 
 See [usage](./Documentation~/AddressableImporter.md)
+
+## Media
+
+Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from [flaticon.com](http://www.flaticon.com)
