@@ -22,31 +22,31 @@ namespace UnityAddressableImporter.Helper.Internal
 	using System.Reflection;
 	using UnityEditor;
 
-	[CustomEditor(typeof(MonoBehaviour), true), CanEditMultipleObjects]
-	public class ButtonMethodMonoBehaviourEditor : Editor
-	{
-		private List<MethodInfo> _methods;
-		private MonoBehaviour _target;
+	// [CustomEditor(typeof(MonoBehaviour), true), CanEditMultipleObjects]
+	// public class ButtonMethodMonoBehaviourEditor : Editor
+	// {
+	// 	private List<MethodInfo> _methods;
+	// 	private MonoBehaviour _target;
 
-		private void OnEnable()
-		{
-			_target = target as MonoBehaviour;
-			if (_target == null) return;
+	// 	private void OnEnable()
+	// 	{
+	// 		_target = target as MonoBehaviour;
+	// 		if (_target == null) return;
 
-			_methods = ButtonMethodHandler.CollectValidMembers(_target.GetType());
-		}
+	// 		_methods = ButtonMethodHandler.CollectValidMembers(_target.GetType());
+	// 	}
 
-		public override void OnInspectorGUI()
-		{
-			base.OnInspectorGUI();
-			if (_methods == null) return;
+	// 	public override void OnInspectorGUI()
+	// 	{
+	// 		base.OnInspectorGUI();
+	// 		if (_methods == null) return;
 
-			ButtonMethodHandler.OnInspectorGUI(_target, _methods);
-		}
-	}
+	// 		ButtonMethodHandler.OnInspectorGUI(_target, _methods);
+	// 	}
+	// }
 
 
-	[CustomEditor(typeof(ScriptableObject), true), CanEditMultipleObjects]
+	[CustomEditor(typeof(AddressableImportSettings), true), CanEditMultipleObjects]
 	public class ButtonMethodScriptableObjectEditor : Editor
 	{
 		private List<MethodInfo> _methods;
