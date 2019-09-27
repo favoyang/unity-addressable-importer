@@ -75,6 +75,13 @@ public class AddressableImporter : AssetPostprocessor
                 return null;
             }
         }
+
+        // Set group settings from template if necessary
+        if (rule.groupTemplate != null)
+        {
+            rule.groupTemplate.ApplyToAddressableAssetGroup(group);
+        }
+
         var guid = AssetDatabase.AssetPathToGUID(assetPath);
         var entry = settings.CreateOrMoveEntry(guid, group);
 
