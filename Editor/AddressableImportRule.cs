@@ -29,6 +29,12 @@ public enum LabelWriteMode
     Replace
 }
 
+public enum GroupTemplateApplicationMode
+{
+    ApplyOnGroupCreationOnly,
+    AlwaysOverwriteGroupSettings
+}
+
 [System.Serializable]
 public class AddressableImportRule
 {
@@ -66,6 +72,12 @@ public class AddressableImportRule
     /// </summary>
     [Tooltip("Group template that will be applied to the Addressable Group. Leave none to use the Default Group's settings.")]
     public AddressableAssetGroupTemplate groupTemplate = null;
+
+    /// <summary>
+    /// Controls wether group template will be applied only on group creation, or also to already created groups.
+    /// </summary>
+    [Tooltip("Defines if the group template will only be applied to new groups, or will also overwrite existing groups settings.")]
+    public GroupTemplateApplicationMode groupTemplateApplicationMode = GroupTemplateApplicationMode.ApplyOnGroupCreationOnly;
 
     /// <summary>
     /// Simplify address.

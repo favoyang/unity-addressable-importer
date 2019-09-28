@@ -62,12 +62,14 @@ public class AddressableImporter : AssetPostprocessor
         // Set group
         AddressableAssetGroup group;
         var groupName = rule.ParseGroupReplacement(assetPath);
+        bool newGroup = false;
         if (!TryGetGroup(settings, groupName, out group))
         {
             if (importSettings.allowGroupCreation)
             {
                 //TODO Specify on editor which type to create.
                 group = CreateAssetGroup<BundledAssetGroupSchema>(settings, groupName);
+                newGroup = true;
             }
             else
             {
@@ -77,7 +79,7 @@ public class AddressableImporter : AssetPostprocessor
         }
 
         // Set group settings from template if necessary
-        if (rule.groupTemplate != null)
+        if (rule.groupTemplate != null && (newGroup || rule.groupTemplateApplicationMode == GroupTemplateApplicationMode.AlwaysOverwriteGroupSettings))
         {
             rule.groupTemplate.ApplyToAddressableAssetGroup(group);
         }
