@@ -1,7 +1,9 @@
- ![Icon](Media/icon-128.png)
+# Unity Addressable Importer
+
+![Icon](Media/icon-128.png)
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
-# Unity Addressable Importer
 A simple rule based addressable asset importer.
 
 The importer marks assets as addressable, by applying to files having a path matching the rule pattern.
@@ -30,9 +32,6 @@ This way gives you more control if you want to modify the package based on your 
 
 See [usage](./Documentation~/AddressableImporter.md)
 
-## Media
-
-Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from [flaticon.com](http://www.flaticon.com)
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -48,3 +47,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Media
+
+Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from [flaticon.com](http://www.flaticon.com)
