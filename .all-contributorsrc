@@ -1,0 +1,23 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "favoyang",
+      "name": "Favo Yang",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/125390?v=4",
+      "profile": "http://littlebigfun.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "unity-addressable-importer",
+  "projectOwner": "favoyang",
+  "repoType": "github",
+  "repoHost": "https://github.com"
+}
