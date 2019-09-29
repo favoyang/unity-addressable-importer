@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEditor.AddressableAssets.Settings;
 using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -26,6 +27,12 @@ public enum LabelWriteMode
 {
     Add,
     Replace
+}
+
+public enum GroupTemplateApplicationMode
+{
+    ApplyOnGroupCreationOnly,
+    AlwaysOverwriteGroupSettings
 }
 
 [System.Serializable]
@@ -59,6 +66,18 @@ public class AddressableImportRule
     /// </summary>
     [Tooltip("The list of labels to be added to the Addressable Asset")]
     public List<AssetLabelReference> labelRefs;
+
+    /// <summary>
+    /// Group template to use. Default Group settings will be used if empty.
+    /// </summary>
+    [Tooltip("Group template that will be applied to the Addressable Group. Leave none to use the Default Group's settings.")]
+    public AddressableAssetGroupTemplate groupTemplate = null;
+
+    /// <summary>
+    /// Controls wether group template will be applied only on group creation, or also to already created groups.
+    /// </summary>
+    [Tooltip("Defines if the group template will only be applied to new groups, or will also overwrite existing groups settings.")]
+    public GroupTemplateApplicationMode groupTemplateApplicationMode = GroupTemplateApplicationMode.ApplyOnGroupCreationOnly;
 
     /// <summary>
     /// Simplify address.
