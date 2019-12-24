@@ -1,4 +1,15 @@
-# Addressable Importer Usage
+<h1 align="center">Addressable Importer Usage</h1>
+
+Table of Contents
+- [Setup the Importer](#setup-the-importer)
+- [Define Rules](#define-rules)
+- [Rule Examples](#rule-examples)
+- [Group Replacement](#group-replacement)
+- [Address Replacement](#address-replacement)
+- [Notice for moved or re-imported assets](#notice-for-moved-or-re-imported-assets)
+- [Quick assets import](#quick-assets-import)
+
+## Setup the Importer
 
 You should create a single AddressableImportSettings file located at `Assets/AddressableAssetsData/AddressableImportSettings.asset`. To create it, go to `Assets/AddressableAssetsData` folder, right click in your project window and choose `Create > Addressable Assets > Import Settings`.
 

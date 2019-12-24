@@ -11,13 +11,21 @@
   </a>
 </p>
 
-A simple rule based addressable asset importer.
+A simple rule based addressable asset importer. The importer marks assets as addressable, by applying to files having a path matching the rule pattern.
 
-The importer marks assets as addressable, by applying to files having a path matching the rule pattern.
+Table of Contents
 
-## Install package
+- [Install Package](#install-package)
+  - [Install via Openupm](#install-via-openupm)
+  - [Install via Git Url](#install-via-git-url)
+  - [Install via Git Submodule](#install-via-git-submodule)
+- [How to Use](#how-to-use)
+- [Contributors ✨](#contributors-)
+- [Media](#media)
 
-### Install via openupm
+## Install Package
+
+### Install via Openupm
 
 The package is available on the [openupm registry](https://openupm.com). It's recommended to install it via [openupm-cli](https://github.com/openupm/openupm-cli).
 
@@ -25,7 +33,7 @@ The package is available on the [openupm registry](https://openupm.com). It's re
 openupm add com.littlebigfun.addressable-importer
 ```
 
-### Install via git url
+### Install via Git Url
 
 Open Packages/manifest.json with your favorite text editor. Add the following line to the dependencies block.
 
@@ -37,15 +45,15 @@ Open Packages/manifest.json with your favorite text editor. Add the following li
 
 Notice that as of December 2019, unity package manager won't keep sync git repository to the latest version. [UPM Git Extension](https://github.com/mob-sakai/UpmGitExtension) is a tool to manage package with git url.
 
-### Install as an embed package via submodule
+### Install via Git Submodule
 
-This way gives you more control if you want to modify the package based on your purpose. Fork the repo, and checkout to your Packages folder as submodule.
+Install as an embed package via submodule, gives you more control to modify the package based on your purpose. Fork the repo, and checkout to your *Packages* folder as git submodule.
 
     git submodule add https://github.com/[YOURNAME]/unity-addressable-importer.git Packages/unity-addressable-importer
     git add -A
     git ci -m "Imported unity-addressable-importer"
 
-## How to use
+## How to Use
 
 See [usage](./Documentation~/AddressableImporter.md)
 
