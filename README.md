@@ -1,8 +1,15 @@
-# Unity Addressable Importer
-
-![Icon](Media/icon-128.png)
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
+<p align="center">
+  <img width="180" src="https://raw.githubusercontent.com/favoyang/unity-addressable-importer/master/Media/icon-512.png" alt="logo">
+</p>
+<h1 align="center">Unity Addressable Importer</h1>
+<p align="center">
+  <a href="https://openupm.com/packages/com.littlebigfun.addressable-importer/">
+    <img src="https://img.shields.io/npm/v/com.littlebigfun.addressable-importer?label=openupm&amp;registry_uri=https://package.openupm.com" />
+  </a>
+  <a href="#contributors">
+    <img src="https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square"/>
+  </a>
+</p>
 
 A simple rule based addressable asset importer.
 
@@ -10,9 +17,17 @@ The importer marks assets as addressable, by applying to files having a path mat
 
 ## Install package
 
-### Install as a git package
+### Install via openupm
 
-This is the recommended way to track update. Open Packages/manifest.json with your favorite text editor. Add the following line to the dependencies block.
+The package is available on the [openupm registry](https://openupm.com). It's recommended to install it via [openupm-cli](https://github.com/openupm/openupm-cli).
+
+```
+openupm add com.littlebigfun.addressable-importer
+```
+
+### Install via git url
+
+Open Packages/manifest.json with your favorite text editor. Add the following line to the dependencies block.
 
     {
         "dependencies": {
@@ -20,13 +35,15 @@ This is the recommended way to track update. Open Packages/manifest.json with yo
         }
     }
 
-### Install as an embbed package via submodule
+Notice that as of December 2019, unity package manager won't keep sync git repository to the latest version. [UPM Git Extension](https://github.com/mob-sakai/UpmGitExtension) is a tool to manage package with git url.
+
+### Install as an embed package via submodule
 
 This way gives you more control if you want to modify the package based on your purpose. Fork the repo, and checkout to your Packages folder as submodule.
 
     git submodule add https://github.com/[YOURNAME]/unity-addressable-importer.git Packages/unity-addressable-importer
     git add -A
-    git ci -m "Imported unity-addressable-importer as embbed package"
+    git ci -m "Imported unity-addressable-importer"
 
 ## How to use
 
