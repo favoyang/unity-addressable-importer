@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityAddressableImporter.Helper;
 
 
-[CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressable Assets/Import Settings", order = 50)]
+[CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressables/Import Settings", order = 50)]
 public class AddressableImportSettings : ScriptableObject
 {
     public const string kDefaultConfigObjectName = "addressableimportsettings";
