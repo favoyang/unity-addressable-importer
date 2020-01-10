@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.4.2...v0.5.0) (2020-01-10)
+
+
+### Features
+
+* deploy semantic-release ([d1c4c1b](https://github.com/favoyang/unity-addressable-importer/commit/d1c4c1b79117b4eab55021d2485c606a2d9f4974))
+
 # Changelog
 All notable changes to this package will be documented in this file.
 
