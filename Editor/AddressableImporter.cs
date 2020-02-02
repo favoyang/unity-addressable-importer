@@ -16,7 +16,11 @@ public class AddressableImporter : AssetPostprocessor
     {
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         var importSettings = AddressableImportSettings.Instance;
-        if (importSettings == null || importSettings.rules == null || importSettings.rules.Count == 0)
+        if (importSettings == null) {
+            Debug.LogFormat("[AddressableImporter] import settings file not found\nPlease go to Assets/AddressableAssetsData folder, right click in the project window and choose 'Create > Addressable Assets > Import Settings'.");
+            return;
+        }
+        else if (importSettings.rules == null || importSettings.rules.Count == 0)
             return;
         var entriesAdded = new List<AddressableAssetEntry>();
         foreach (string assetPath in importedAssets)
