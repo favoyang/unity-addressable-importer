@@ -16,16 +16,15 @@ A simple rule based addressable asset importer. The importer marks assets as add
 Table of Contents
 
 - [Install Package](#install-package)
-  - [Install via Openupm](#install-via-openupm)
-  - [Install via Git Url](#install-via-git-url)
-  - [Install via Git Submodule](#install-via-git-submodule)
+  - [Install via OpenUPM](#install-via-openupm)
+  - [Install via Git URL](#install-via-git-url)
 - [How to Use](#how-to-use)
 - [Contributors ✨](#contributors-)
 - [Media](#media)
 
 ## Install Package
 
-### Install via Openupm
+### Install via OpenUPM
 
 The package is available on the [openupm registry](https://openupm.com). It's recommended to install it via [openupm-cli](https://github.com/openupm/openupm-cli).
 
@@ -33,9 +32,9 @@ The package is available on the [openupm registry](https://openupm.com). It's re
 openupm add com.littlebigfun.addressable-importer
 ```
 
-### Install via Git Url
+### Install via Git URL
 
-Open Packages/manifest.json with your favorite text editor. Add the following line to the dependencies block.
+Open *Packages/manifest.json* with your favorite text editor. Add the following line to the dependencies block.
 
     {
         "dependencies": {
@@ -43,15 +42,14 @@ Open Packages/manifest.json with your favorite text editor. Add the following li
         }
     }
 
-Notice that as of December 2019, unity package manager won't keep sync git repository to the latest version. [UPM Git Extension](https://github.com/mob-sakai/UpmGitExtension) is a tool to manage package with git url.
+Notice: Unity Package Manager records the current commit to a lock entry of the *manifest.json*. To update to the latest version, change the hash value manually or remove the lock entry to resolve the package.
 
-### Install via Git Submodule
-
-Install as an embed package via submodule, gives you more control to modify the package based on your purpose. Fork the repo, and checkout to your *Packages* folder as git submodule.
-
-    git submodule add https://github.com/[YOURNAME]/unity-addressable-importer.git Packages/unity-addressable-importer
-    git add -A
-    git ci -m "Imported unity-addressable-importer"
+    "lock": {
+      "com.littlebigfun.addressable-importer": {
+        "revision": "master",
+        "hash": "..."
+      }
+    }
 
 ## How to Use
 
