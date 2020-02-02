@@ -12,13 +12,5 @@
     "url": "https://github.com/favoyang"
   },
   "repository": "https://github.com/favoyang/unity-addressable-importer.git",
-  "license": "MIT",
-  "scripts": {
-    "semantic-release": "semantic-release"
-  },
-  "devDependencies": {
-    "@semantic-release/changelog": "^3.0.6",
-    "@semantic-release/git": "^7.0.18",
-    "semantic-release": "^15.14.0"
-  }
+  "license": "MIT"
 }
