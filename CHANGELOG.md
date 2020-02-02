@@ -1,3 +1,11 @@
+## [0.5.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.0...v0.5.1) (2020-02-02)
+
+
+### Bug Fixes
+
+* bump semantic-release to v2.1.3 to solve dependencies issue ([c59b986](https://github.com/favoyang/unity-addressable-importer/commit/c59b9865c744b01cec73e7bc1013301c67c630ed))
+* no warnings for missing AddressableImportSettings [#15](https://github.com/favoyang/unity-addressable-importer/issues/15) ([30dd56a](https://github.com/favoyang/unity-addressable-importer/commit/30dd56a0823e0f370d775acbce06736a92c0dafb))
+
 # [0.5.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.4.2...v0.5.0) (2020-01-10)
 
 
