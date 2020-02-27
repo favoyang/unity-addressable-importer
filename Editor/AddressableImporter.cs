@@ -91,21 +91,24 @@ public class AddressableImporter : AssetPostprocessor
         var guid = AssetDatabase.AssetPathToGUID(assetPath);
         var entry = settings.CreateOrMoveEntry(guid, group);
 
-        // Apply address replacement if address is empty or path.
-        if (string.IsNullOrEmpty(entry.address) ||
-            entry.address.StartsWith("Assets/") ||
-            rule.simplified ||
-            !string.IsNullOrWhiteSpace(rule.addressReplacement))
+        if (entry != null)
         {
-            entry.address = rule.ParseAddressReplacement(assetPath);
-        }
+            // Apply address replacement if address is empty or path.
+            if (string.IsNullOrEmpty(entry.address) ||
+                entry.address.StartsWith("Assets/") ||
+                rule.simplified ||
+                !string.IsNullOrWhiteSpace(rule.addressReplacement))
+            {
+                entry.address = rule.ParseAddressReplacement(assetPath);
+            }
 
-        // Add labels
-        if (rule.LabelMode == LabelWriteMode.Replace)
-            entry.labels.Clear();
-        foreach (var label in rule.labels)
-        {
-            entry.labels.Add(label);
+            // Add labels
+            if (rule.LabelMode == LabelWriteMode.Replace)
+                entry.labels.Clear();
+            foreach (var label in rule.labels)
+            {
+                entry.labels.Add(label);
+            }
         }
         return entry;
     }
@@ -159,7 +162,7 @@ public class AddressableImporter : AssetPostprocessor
                     foreach (var file in filesToAdd)
                     {
                         // If Directory.GetFiles accepted Regular Expressions, we could filter the metas before iterating.
-                        if (!file.EndsWith(".meta"))
+                        if (!file.EndsWith(".meta") && !file.EndsWith(".DS_Store"))
                         {
                             filesToImport.Add(file.Replace('\\', '/'));
                         }
