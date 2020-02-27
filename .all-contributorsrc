@@ -40,11 +40,21 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "caochao",
+      "name": "caochao",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1911170?v=4",
+      "profile": "http://www.cnblogs.com/tudas",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
   "projectName": "unity-addressable-importer",
   "projectOwner": "favoyang",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
