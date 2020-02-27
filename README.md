@@ -60,16 +60,20 @@ See [usage](./Documentation~/AddressableImporter.md)
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://littlebigfun.com"><img src="https://avatars2.githubusercontent.com/u/125390?v=4" width="100px;" alt="Favo Yang"/><br /><sub><b>Favo Yang</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=favoyang" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/AlkisFortuneFish"><img src="https://avatars2.githubusercontent.com/u/43749706?v=4" width="100px;" alt="AlkisFortuneFish"/><br /><sub><b>AlkisFortuneFish</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=AlkisFortuneFish" title="Code">💻</a></td>
-    <td align="center"><a href="http://www.insanegames.com.br"><img src="https://avatars0.githubusercontent.com/u/2972924?v=4" width="100px;" alt="Danilo Nishimura"/><br /><sub><b>Danilo Nishimura</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=danilonishi" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/K-Dark"><img src="https://avatars2.githubusercontent.com/u/44504098?v=4" width="100px;" alt="K-Dark"/><br /><sub><b>K-Dark</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=K-Dark" title="Code">💻</a></td>
+    <td align="center"><a href="http://littlebigfun.com"><img src="https://avatars2.githubusercontent.com/u/125390?v=4" width="100px;" alt=""/><br /><sub><b>Favo Yang</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=favoyang" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/AlkisFortuneFish"><img src="https://avatars2.githubusercontent.com/u/43749706?v=4" width="100px;" alt=""/><br /><sub><b>AlkisFortuneFish</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=AlkisFortuneFish" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.insanegames.com.br"><img src="https://avatars0.githubusercontent.com/u/2972924?v=4" width="100px;" alt=""/><br /><sub><b>Danilo Nishimura</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=danilonishi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/K-Dark"><img src="https://avatars2.githubusercontent.com/u/44504098?v=4" width="100px;" alt=""/><br /><sub><b>K-Dark</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=K-Dark" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.cnblogs.com/tudas"><img src="https://avatars0.githubusercontent.com/u/1911170?v=4" width="100px;" alt=""/><br /><sub><b>caochao</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=caochao" title="Code">💻</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
