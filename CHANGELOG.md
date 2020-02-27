@@ -1,3 +1,13 @@
+## [0.5.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.1...v0.5.2) (2020-02-27)
+
+
+### Bug Fixes
+
+* **ci:** tag already exists error when pushing tag ([5c4373f](https://github.com/favoyang/unity-addressable-importer/commit/5c4373f8713186055cc1898539e0b476e2308a9c))
+* **ci:** trigger github actions ([e7592d6](https://github.com/favoyang/unity-addressable-importer/commit/e7592d6c10cf788cbefc7ded82f677ce435376d4))
+* bump semantic-release to v2.1.3 to solve dependencies issue ([c59b986](https://github.com/favoyang/unity-addressable-importer/commit/c59b9865c744b01cec73e7bc1013301c67c630ed))
+* exclude MacOS .DS_Store file ([332a769](https://github.com/favoyang/unity-addressable-importer/commit/332a769ca88a20c856212167eb48c88ab3f20cee))
+
 ## [0.5.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.0...v0.5.1) (2020-02-02)
 
 
