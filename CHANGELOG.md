@@ -1,3 +1,10 @@
+## [0.5.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.2...v0.5.3) (2020-04-04)
+
+
+### Bug Fixes
+
+* check existence of addressables settings (close: [#18](https://github.com/favoyang/unity-addressable-importer/issues/18)) ([aab0156](https://github.com/favoyang/unity-addressable-importer/commit/aab0156539b580a57011efd41989bad1d2f56a3c))
+
 ## [0.5.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.1...v0.5.2) (2020-02-27)
 
 
