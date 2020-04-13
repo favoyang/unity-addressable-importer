@@ -1,3 +1,10 @@
+## [0.5.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.3...v0.5.4) (2020-04-13)
+
+
+### Bug Fixes
+
+* avoid applying rules to current editing prefab asset (close: [#19](https://github.com/favoyang/unity-addressable-importer/issues/19)) ([9c4df8b](https://github.com/favoyang/unity-addressable-importer/commit/9c4df8b25ddbf36fa78c99bd58bb072d5ef31779))
+
 ## [0.5.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.2...v0.5.3) (2020-04-04)
 
 
