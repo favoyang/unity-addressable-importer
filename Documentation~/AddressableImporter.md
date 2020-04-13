@@ -8,6 +8,7 @@ Table of Contents
 - [Address Replacement](#address-replacement)
 - [Notice for moved or re-imported assets](#notice-for-moved-or-re-imported-assets)
 - [Quick assets import](#quick-assets-import)
+- [About prefab mode](#about-prefab-mode)
 
 ## Setup the Importer
 
@@ -74,6 +75,10 @@ Similar to [Group Replacement](#group-replacement), address replacement is also 
 
 ## Quick assets import
 
-You may have lots existing assets before using the importer. To quickly apply importer rules, right click the target folders and click context menu `AddressablesImporter: Check Folder(s)`. This is more efficient than reimport asset.
+The importer will apply your rules whenever an asset being imported, moved or deleted. However you may want to apply new or modified rules to existing assets. To quickly apply importer rules, select target folder(s) in project view, right click to open the context menu, and click `AddressablesImporter: Check Folder(s)`. The action is more efficient than reimport asset(s).
 
 ![AddressableImport Context Menu](AddressableImportSettings-ContextMenu.png)
+
+## About prefab mode
+
+When both prefab mode (the preview scene for editing a prefab) and the auto save feature are enabled, every modification will cause the asset to be saved and trigger the importer, leads to slow response. For performance reason, the importer will ignore current editing asset.

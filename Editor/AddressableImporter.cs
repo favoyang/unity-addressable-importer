@@ -9,6 +9,7 @@ using System.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
+using UnityEditor.Experimental.SceneManagement;
 
 public class AddressableImporter : AssetPostprocessor
 {
@@ -28,8 +29,12 @@ public class AddressableImporter : AssetPostprocessor
         else if (importSettings.rules == null || importSettings.rules.Count == 0)
             return;
         var entriesAdded = new List<AddressableAssetEntry>();
+        var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
         foreach (string assetPath in importedAssets)
         {
+            // Ignore current editing prefab asset.
+            if (prefabStage != null && prefabStage.prefabAssetPath == assetPath)
+                continue;
             foreach (var rule in importSettings.rules)
             {
                 if (rule.Match(assetPath))
