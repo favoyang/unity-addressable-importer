@@ -15,15 +15,6 @@ public class AddressableImporter : AssetPostprocessor
 {
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
-        foreach (var assetPath in importedAssets)
-        {
-            Debug.Log("imported : " + assetPath);
-        }
-        foreach (var assetPath in movedAssets)
-        {
-            Debug.Log("moved : " + assetPath);
-            
-        }
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
