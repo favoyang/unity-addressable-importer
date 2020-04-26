@@ -15,6 +15,15 @@ public class AddressableImporter : AssetPostprocessor
 {
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
+        foreach (var assetPath in importedAssets)
+        {
+            Debug.Log("imported : " + assetPath);
+        }
+        foreach (var assetPath in movedAssets)
+        {
+            Debug.Log("moved : " + assetPath);
+            
+        }
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
@@ -30,22 +39,13 @@ public class AddressableImporter : AssetPostprocessor
             return;
 
         var dirty = false;
+        
+        // Apply import rules.
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
         foreach (var importedAsset in importedAssets)
         {
             if (prefabStage == null || prefabStage.prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
-
-            // Remove group if empty.
-            if (importSettings.removeEmtpyGroups && importedAsset.Contains("/AssetGroups/"))
-            {
-                var group = AssetDatabase.LoadAssetAtPath<AddressableAssetGroup>(importedAsset);
-                if (group == null || group.IsDefaultGroup()|| group.entries.Count >= 1 || !settings.groups.Contains(group))
-                    continue;
-                
-                settings.RemoveGroup(group);
-                dirty = true;
-            }
         }
 
         for (var i = 0; i < movedAssets.Length; i++)
@@ -54,6 +54,17 @@ public class AddressableImporter : AssetPostprocessor
             var movedFromAssetPath = movedFromAssetPaths[i];
             if (prefabStage == null || prefabStage.prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
+        }
+        
+        // Remove empty groups.
+        if (importSettings.removeEmtpyGroups)
+        {
+            var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
+            for (var i = 0; i < emptyGroups.Length; i++)
+            {
+                settings.RemoveGroup(emptyGroups[i]);
+                dirty = true;
+            }
         }
 
         if (dirty)
