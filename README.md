@@ -11,7 +11,7 @@
   </a>
 </p>
 
-A simple rule based addressable asset importer. The importer marks assets as addressable, by applying to files having a path matching the rule pattern.
+A simple rule-based addressable asset importer. The importer marks assets as addressable, by applying to files having a path matching the rule pattern.
 
 Table of Contents
 
