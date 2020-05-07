@@ -6,8 +6,8 @@ Table of Contents
 - [Rule Examples](#rule-examples)
 - [Group Replacement](#group-replacement)
 - [Address Replacement](#address-replacement)
-- [Notice for moved or re-imported assets](#notice-for-moved-or-re-imported-assets)
-- [Quick assets import](#quick-assets-import)
+- [Label Replacement](#label-replacement)
+- [Quick assets (re)import](#quick-assets-reimport)
 - [About prefab mode](#about-prefab-mode)
 
 ## Setup the Importer
@@ -16,7 +16,7 @@ You should create a single AddressableImportSettings file located at `Assets/Add
 
 ![AddressableImportSettings Create](AddressableImportSettings-Create.png)
 
-Once the settings file selected, you can edit rules in the inspector window. Then click `File > Save Project` to apply the changes.
+Once the settings file selected, you can edit rules in the inspector window. Then click the `File > Save Project` to apply the changes.
 
 ![AddressableImportSettings Inspector](AddressableImportSettings-Insepctor.png)
 
@@ -30,7 +30,7 @@ Once the settings file selected, you can edit rules in the inspector window. The
 - `Label Mode`, defines if labels will be added or replaced.
 - `Label Refs`, the labels to add.
 - `Address Simplified`, simplify address to filename without extension.
-- `Address Replacement`, leaves blank to use asset path as address. For dynamic address see [Address Replacement](#address-replacement).
+- `Address Replacement`, leaves blank to use the asset path as address. For dynamic address see [Address Replacement](#address-replacement).
 
 ## Rule Examples
 
@@ -43,7 +43,7 @@ Once the settings file selected, you can edit rules in the inspector window. The
 
 ## Group Replacement
 
-Dynamic group is supported by replacing `${name}` with extracted value from asset path, via the use of regex capture groups. Named capture groups can be referred to in `Group Name` via `${group}`. If groups are not named, they can be referred to numerically, via `$1`, `$2` and so on. For more information, refer to [Microsoft Docs - Substitutions in Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/substitutions-in-regular-expressions). This only works for match type Regex.
+The dynamic group is supported by replacing `${name}` with the extracted value from the asset path, via the use of regex capture groups. Named capture groups can be referred to in `Group Name` via `${group}`. If groups are not named, they can be referred to numerically, via `$1`, `$2`, and so on. For more information, refer to [Microsoft Docs - Substitutions in Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/substitutions-in-regular-expressions). This only works for match type Regex.
 
 For convenience, path elements can be referred via `${PATH[index]}`. This works for all match types.
 
@@ -65,20 +65,23 @@ Similar to [Group Replacement](#group-replacement), address replacement is also 
 | `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(?<asset>.*)\.png` | `${category}-${asset}`            | cat-cat01        |
 | `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(?<asset>.*)\.png` | `${PATH[0]}:${category}-${asset}` | Assets:cat-cat01 |
 
-## Notice for moved or re-imported assets
-- The importer always overrides existing labels if `LabelMode = Replace`.
-- The importer always overrides existing address if
-  - The address looks like a path (starts with `Assets/`).
-  - `Address Simplified` is ticked.
-  - `Address Replacement` is in use.
-  - In another word, if you intent to manually change the address later, leave `Address Simplified` unticked, `Address Replacement` blank, and do not use `Assets/` prefix for the customized address name.
+The importer always overrides existing address if
+- The address looks like a path (starts with `Assets/`).
+- `Address Simplified` is ticked.
+- `Address Replacement` is in use.
 
-## Quick assets import
+In another word, if you are intending to manually change the address later, leave `Address Simplified` unticked, `Address Replacement` blank, and do not use `Assets/` prefix for the customized address name.
 
-The importer will apply your rules whenever an asset being imported, moved or deleted. However you may want to apply new or modified rules to existing assets. To quickly apply importer rules, select target folder(s) in project view, right click to open the context menu, and click `AddressablesImporter: Check Folder(s)`. The action is more efficient than reimport asset(s).
+## Label Replacement
+
+The importer always overrides existing labels if `LabelMode = Replace`.
+
+## Quick assets (re)import
+
+The importer should apply the rules whenever an asset being imported, moved, or deleted. However, if you modified rules or want to apply rules to existing assets, you need to manually apply the rules. To quickly apply the rules, select target folder(s) in the project view, right-click to open the context menu, and then click `AddressablesImporter: Check Folder(s)`. The action is more efficient than force reimport assets.
 
 ![AddressableImport Context Menu](AddressableImportSettings-ContextMenu.png)
 
 ## About prefab mode
 
-When both prefab mode (the preview scene for editing a prefab) and the auto save feature are enabled, every modification will cause the asset to be saved and trigger the importer, leads to slow response. For performance reason, the importer will ignore current editing asset.
+When both prefab mode (the preview scene for editing a prefab) and the autosave feature are enabled, every modification will cause the asset to be saved and trigger the importer, leads to slow response. For performance reasons, the importer will ignore the current editing asset.

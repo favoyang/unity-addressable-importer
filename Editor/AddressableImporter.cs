@@ -26,40 +26,40 @@ public class AddressableImporter : AssetPostprocessor
             Debug.LogWarningFormat("[AddressableImporter] import settings file not found.\nPlease go to Assets/AddressableAssetsData folder, right click in the project window and choose 'Create > Addressable Assets > Import Settings'.");
             return;
         }
-        else if (importSettings.rules == null || importSettings.rules.Count == 0)
+        if (importSettings.rules == null || importSettings.rules.Count == 0)
             return;
-        var entriesAdded = new List<AddressableAssetEntry>();
+
+        var dirty = false;
+        
+        // Apply import rules.
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
-        foreach (string assetPath in importedAssets)
+        foreach (var importedAsset in importedAssets)
         {
-            // Ignore current editing prefab asset.
-            if (prefabStage != null && prefabStage.prefabAssetPath == assetPath)
-                continue;
-            foreach (var rule in importSettings.rules)
-            {
-                if (rule.Match(assetPath))
-                {
-                    var entry = CreateOrUpdateAddressableAssetEntry(settings, importSettings, rule, assetPath);
-                    if (entry != null)
-                    {
-                        entriesAdded.Add(entry);
-                        if (rule.HasLabel)
-                            Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1} and labels {2}", assetPath, entry.address, string.Join(", ", entry.labels));
-                        else
-                            Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1}", assetPath, entry.address);
-                    }
-                }
-            }
+            if (prefabStage == null || prefabStage.prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
+                dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
         }
-        if (entriesAdded.Count > 0)
+
+        for (var i = 0; i < movedAssets.Length; i++)
         {
-            settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entriesAdded, true);
-            AssetDatabase.SaveAssets();
+            var movedAsset = movedAssets[i];
+            var movedFromAssetPath = movedFromAssetPaths[i];
+            if (prefabStage == null || prefabStage.prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
+                dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
         }
+        
+        // Remove empty groups.
         if (importSettings.removeEmtpyGroups)
         {
-            settings.groups.RemoveAll(_ => _.entries.Count == 0 && !_.IsDefaultGroup());
+            var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
+            for (var i = 0; i < emptyGroups.Length; i++)
+            {
+                settings.RemoveGroup(emptyGroups[i]);
+                dirty = true;
+            }
         }
+
+        if (dirty)
+            AssetDatabase.SaveAssets();
     }
 
     static AddressableAssetGroup CreateAssetGroup<SchemaType>(AddressableAssetSettings settings, string groupName)
@@ -67,6 +67,45 @@ public class AddressableImporter : AssetPostprocessor
         return settings.CreateGroup(groupName, false, false, false, new List<AddressableAssetGroupSchema> { settings.DefaultGroup.Schemas[0] }, typeof(SchemaType));
     }
 
+    static bool ApplyImportRule(
+        string assetPath,
+        string movedFromAssetPath,
+        AddressableAssetSettings settings,
+        AddressableImportSettings importSettings)
+    {
+        var dirty = false;
+        if (TryGetMatchedRule(assetPath, importSettings, out var matchedRule))
+        {
+            // Apply the matched rule.
+            var entry = CreateOrUpdateAddressableAssetEntry(settings, importSettings, matchedRule, assetPath);
+            if (entry != null)
+            {
+                if (matchedRule.HasLabel)
+                    Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1} and labels {2}", assetPath, entry.address, string.Join(", ", entry.labels));
+                else
+                    Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1}", assetPath, entry.address);
+            }
+
+            dirty = true;
+        }
+        else
+        {
+            // If assetPath doesn't match any of the rules, try to remove the entry.
+            // But only if movedFromAssetPath has the matched rule, because the importer should not remove any unmanaged entries.
+            if (!string.IsNullOrEmpty(movedFromAssetPath) && TryGetMatchedRule(movedFromAssetPath, importSettings, out matchedRule))
+            {
+                var guid = AssetDatabase.AssetPathToGUID(assetPath);
+                if (settings.RemoveAssetEntry(guid))
+                {
+                    dirty = true;
+                    Debug.LogFormat("[AddressableImporter] Entry removed for {0}", assetPath);
+                }
+            }
+        }
+
+        return dirty;
+    }
+    
     static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(
         AddressableAssetSettings settings,
         AddressableImportSettings importSettings,
@@ -121,6 +160,23 @@ public class AddressableImporter : AssetPostprocessor
             }
         }
         return entry;
+    }
+
+    static bool TryGetMatchedRule(
+        string assetPath,
+        AddressableImportSettings importSettings,
+        out AddressableImportRule rule)
+    {
+        foreach (var r in importSettings.rules)
+        {
+            if (!r.Match(assetPath))
+                continue;
+            rule = r;
+            return true;
+        }
+
+        rule = null;
+        return false;
     }
 
     /// <summary>
@@ -181,8 +237,8 @@ public class AddressableImporter : AssetPostprocessor
             }
             if (filesToImport.Count > 0)
             {
-                Debug.Log($"AddressablesImporter: reimport {filesToImport.Count} assets...");
-                OnPostprocessAllAssets(filesToImport.ToArray(), null, null, null);
+                Debug.Log($"AddressablesImporter: Found {filesToImport.Count} assets...");
+                OnPostprocessAllAssets(filesToImport.ToArray(), new string[0], new string[0], new string[0]);
             }
             else
             {

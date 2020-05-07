@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.4...v0.6.0) (2020-04-26)
+
+
+### Features
+
+* handle moved assets (close: [#20](https://github.com/favoyang/unity-addressable-importer/issues/20)) ([a902a21](https://github.com/favoyang/unity-addressable-importer/commit/a902a216dc51c55a81c103fa0edb9ff290a4dcfb))
+
 ## [0.5.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.3...v0.5.4) (2020-04-13)
 
 
