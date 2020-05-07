@@ -30,7 +30,7 @@ public class AddressableImporter : AssetPostprocessor
             return;
 
         var dirty = false;
-        
+
         // Apply import rules.
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
         foreach (var importedAsset in importedAssets)
@@ -46,7 +46,7 @@ public class AddressableImporter : AssetPostprocessor
             if (prefabStage == null || prefabStage.prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
         }
-        
+
         // Remove empty groups.
         if (importSettings.removeEmtpyGroups)
         {
@@ -105,7 +105,7 @@ public class AddressableImporter : AssetPostprocessor
 
         return dirty;
     }
-    
+
     static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(
         AddressableAssetSettings settings,
         AddressableImportSettings importSettings,
@@ -214,7 +214,7 @@ public class AddressableImporter : AssetPostprocessor
     public class FolderImporter
     {
         /// <summary>
-        /// Remporter folders.
+        /// Reimporter folders.
         /// </summary>
         /// <param name="settings">Reference to the <see cref="AddressableAssetSettings"/></param>
         public static void ReimportFolders(IEnumerable<String> assetPaths)
