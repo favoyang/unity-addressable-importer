@@ -82,6 +82,13 @@ The importer should apply the rules whenever an asset being imported, moved, or 
 
 ![AddressableImport Context Menu](AddressableImportSettings-ContextMenu.png)
 
+You can also use `ReimportFolders` API to process any folders in code. e.g. re-import all asset folders in a build script. The API requires an array of asset paths. An asset path is a string starts with "Assets".
+
+```
+// Example: process the whole "Assets" folder
+AddressableImporter.FolderImporter.ReimportFolders(new string[] { "Assets" });
+```
+
 ## About prefab mode
 
 When both prefab mode (the preview scene for editing a prefab) and the autosave feature are enabled, every modification will cause the asset to be saved and trigger the importer, leads to slow response. For performance reasons, the importer will ignore the current editing asset.
