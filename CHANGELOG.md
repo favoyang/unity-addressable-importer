@@ -1,3 +1,10 @@
+# [0.7.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.6.0...v0.7.0) (2020-05-07)
+
+
+### Features
+
+* re-import API (close: [#21](https://github.com/favoyang/unity-addressable-importer/issues/21)) ([8b00747](https://github.com/favoyang/unity-addressable-importer/commit/8b00747c83b97eae9a06fc824bd7a2a3ad764b19))
+
 # [0.6.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.4...v0.6.0) (2020-04-26)
 
 
