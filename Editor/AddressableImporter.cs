@@ -30,7 +30,7 @@ public class AddressableImporter : AssetPostprocessor
             return;
 
         var dirty = false;
-        
+
         // Apply import rules.
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
         foreach (var importedAsset in importedAssets)
@@ -46,7 +46,7 @@ public class AddressableImporter : AssetPostprocessor
             if (prefabStage == null || prefabStage.prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
         }
-        
+
         // Remove empty groups.
         if (importSettings.removeEmtpyGroups)
         {
@@ -105,7 +105,7 @@ public class AddressableImporter : AssetPostprocessor
 
         return dirty;
     }
-    
+
     static AddressableAssetEntry CreateOrUpdateAddressableAssetEntry(
         AddressableAssetSettings settings,
         AddressableImportSettings importSettings,
@@ -213,21 +213,21 @@ public class AddressableImporter : AssetPostprocessor
     /// </summary>
     public class FolderImporter
     {
-        [MenuItem("Assets/AddressablesImporter: Check Folder(s)")]
-        private static void CheckFolders()
+        /// <summary>
+        /// Reimporter folders.
+        /// </summary>
+        /// <param name="settings">Reference to the <see cref="AddressableAssetSettings"/></param>
+        public static void ReimportFolders(IEnumerable<String> assetPaths)
         {
             HashSet<string> filesToImport = new HashSet<string>();
-            // Folders comes up as Object.
-            foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
+            foreach (var assetPath in assetPaths)
             {
-                var assetPath = AssetDatabase.GetAssetPath(obj);
-                // Other assets may appear as Object, so a Directory Check filters directories from folders.
                 if (Directory.Exists(assetPath))
                 {
                     var filesToAdd = Directory.GetFiles(assetPath, "*", SearchOption.AllDirectories);
                     foreach (var file in filesToAdd)
                     {
-                        // If Directory.GetFiles accepted Regular Expressions, we could filter the metas before iterating.
+                        // Filter out meta and DS_Store files.
                         if (!file.EndsWith(".meta") && !file.EndsWith(".DS_Store"))
                         {
                             filesToImport.Add(file.Replace('\\', '/'));
@@ -235,7 +235,6 @@ public class AddressableImporter : AssetPostprocessor
                     }
                 }
             }
-
             if (filesToImport.Count > 0)
             {
                 Debug.Log($"AddressablesImporter: Found {filesToImport.Count} assets...");
@@ -247,9 +246,29 @@ public class AddressableImporter : AssetPostprocessor
             }
         }
 
+        /// <summary>
+        /// Allows assets within the selected folder to be checked agains the Addressable Importer rules.
+        /// </summary>
+        [MenuItem("Assets/AddressablesImporter: Check Folder(s)")]
+        private static void CheckFoldersFromSelection()
+        {
+            List<string> assetPaths = new List<string>();
+            // Folders comes up as Object.
+            foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
+            {
+                var assetPath = AssetDatabase.GetAssetPath(obj);
+                // Other assets may appear as Object, so a Directory Check filters directories from folders.
+                if (Directory.Exists(assetPath))
+                {
+                    assetPaths.Add(assetPath);
+                }
+            }
+            ReimportFolders(assetPaths);
+        }
+
         // Note that we pass the same path, and also pass "true" to the second argument.
         [MenuItem("Assets/AddressablesImporter: Check Folder(s)", true)]
-        private static bool ValidateCheckFolders()
+        private static bool ValidateCheckFoldersFromSelection()
         {
             foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
             {
