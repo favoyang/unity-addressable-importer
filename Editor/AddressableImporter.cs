@@ -49,7 +49,7 @@ public class AddressableImporter : AssetPostprocessor
 
         // Avoid running the deletion step if we're importing addressables data - the addressables configuration
         // can be in an incorrect state at this point causing groups that actually have entries to be deleted.
-        if (importedAssets.Any(x => x.StartsWith("Assets/AddressableAssetsData")))
+        if (!importedAssets.Any(x => x.StartsWith("Assets/AddressableAssetsData")))
         {
             // Remove empty groups.
             if (importSettings.removeEmtpyGroups)
