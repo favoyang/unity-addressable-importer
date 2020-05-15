@@ -14,7 +14,7 @@ using UnityEditor.Experimental.SceneManagement;
 public class AddressableImporter : AssetPostprocessor
 {
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
-    {        
+    {
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
