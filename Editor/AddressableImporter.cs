@@ -14,7 +14,7 @@ using UnityEditor.Experimental.SceneManagement;
 public class AddressableImporter : AssetPostprocessor
 {
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
-    {
+    {        
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
@@ -47,14 +47,19 @@ public class AddressableImporter : AssetPostprocessor
                 dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
         }
 
-        // Remove empty groups.
-        if (importSettings.removeEmtpyGroups)
+        // Avoid running the deletion step if we're importing addressables data - the addressables configuration
+        // can be in an incorrect state at this point causing groups that actually have entries to be deleted.
+        if (importedAssets.Any(x => x.StartsWith("Assets/AddressableAssetsData")))
         {
-            var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
-            for (var i = 0; i < emptyGroups.Length; i++)
+            // Remove empty groups.
+            if (importSettings.removeEmtpyGroups)
             {
-                settings.RemoveGroup(emptyGroups[i]);
-                dirty = true;
+                var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
+                for (var i = 0; i < emptyGroups.Length; i++)
+                {
+                    settings.RemoveGroup(emptyGroups[i]);
+                    dirty = true;
+                }
             }
         }
 
