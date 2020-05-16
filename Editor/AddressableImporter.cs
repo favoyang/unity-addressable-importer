@@ -70,7 +70,7 @@ public class AddressableImporter : AssetPostprocessor
         }
 
         // Remove empty groups.
-        if (importSettings.removeEmtpyGroups)
+        if (importSettings.removeEmptyGroups)
         {
             var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
             for (var i = 0; i < emptyGroups.Length; i++)
