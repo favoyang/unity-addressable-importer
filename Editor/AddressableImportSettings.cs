@@ -19,6 +19,13 @@ public class AddressableImportSettings : ScriptableObject
     [Tooltip("Rules for managing imported assets.")]
     public List<AddressableImportRule> rules;
 
+
+    [ButtonMethod]
+    private void ResetPassCount()
+    {
+        AddressableImporter.pass = 0;
+    }
+
     [ButtonMethod]
     private void Save()
     {

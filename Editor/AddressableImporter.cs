@@ -13,8 +13,12 @@ using UnityEditor.Experimental.SceneManagement;
 
 public class AddressableImporter : AssetPostprocessor
 {
+    public static int pass = 0;
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
+        pass++;
+        int localpass = pass;
+        Debug.LogFormat("[pass {0}] start", localpass);
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
@@ -28,6 +32,11 @@ public class AddressableImporter : AssetPostprocessor
         }
         if (importSettings.rules == null || importSettings.rules.Count == 0)
             return;
+
+        foreach (var importedAsset in importedAssets)
+        {
+            Debug.LogFormat("[pass {0}] importedAsset: {1}", localpass, importedAsset);
+        }
 
         var dirty = false;
 
@@ -53,13 +62,17 @@ public class AddressableImporter : AssetPostprocessor
             var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
             for (var i = 0; i < emptyGroups.Length; i++)
             {
+                Debug.LogFormat("[pass {0}] remove group: {1}", localpass, emptyGroups[i].Name);
                 settings.RemoveGroup(emptyGroups[i]);
                 dirty = true;
             }
         }
 
-        if (dirty)
+        if (dirty) {
+            Debug.LogFormat("[pass {0}] AssetDatabase.SaveAssets", localpass);
             AssetDatabase.SaveAssets();
+        }
+        Debug.LogFormat("[pass {0}] end", localpass);
     }
 
     static AddressableAssetGroup CreateAssetGroup<SchemaType>(AddressableAssetSettings settings, string groupName)
