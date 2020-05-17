@@ -61,7 +61,7 @@ public class AddressableImporter : AssetPostprocessor
             Debug.LogFormat("[pass {0}] deletedAsset: {1}", localpass, deletedAsset);
             if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule)) {
                 var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
-                if (string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
+                if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
                 {
                     dirty = true;
                     Debug.LogFormat("[AddressableImporter] Entry removed for {0}", deletedAsset);
