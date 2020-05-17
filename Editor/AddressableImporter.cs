@@ -16,6 +16,13 @@ public class AddressableImporter : AssetPostprocessor
     public static int pass = 0;
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
+        // Skip if all imported and deleted assets are addressables configurations.
+        var isConfigurationPass =
+            (importedAssets.Length > 0 && importedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
+            (deletedAssets.Length > 0 && deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData")));
+        if (isConfigurationPass) {
+            return;
+        }
         pass++;
         int localpass = pass;
         Debug.LogFormat("[pass {0}] start", localpass);
