@@ -219,30 +219,39 @@ public class AddressableImporter : AssetPostprocessor
         /// <param name="settings">Reference to the <see cref="AddressableAssetSettings"/></param>
         public static void ReimportFolders(IEnumerable<String> assetPaths)
         {
-            HashSet<string> filesToImport = new HashSet<string>();
+            HashSet<string> pathsToImport = new HashSet<string>();
             foreach (var assetPath in assetPaths)
             {
                 if (Directory.Exists(assetPath))
                 {
+                    // Add the folder itself.
+                    pathsToImport.Add(assetPath.Replace('\\', '/'));
+                    // Add sub-folders.
+                    var dirsToAdd = Directory.GetDirectories(assetPath, "*", SearchOption.AllDirectories);
+                    foreach (var dir in dirsToAdd)
+                    {
+                        // Filter out .dirname and dirname~, those are invisible to Unity.
+                        if (!dir.StartsWith(".") && !dir.EndsWith("~"))
+                        {
+                            pathsToImport.Add(dir.Replace('\\', '/'));
+                        }
+                    }
+                    // Add files.
                     var filesToAdd = Directory.GetFiles(assetPath, "*", SearchOption.AllDirectories);
                     foreach (var file in filesToAdd)
                     {
                         // Filter out meta and DS_Store files.
                         if (!file.EndsWith(".meta") && !file.EndsWith(".DS_Store"))
                         {
-                            filesToImport.Add(file.Replace('\\', '/'));
+                            pathsToImport.Add(file.Replace('\\', '/'));
                         }
                     }
                 }
             }
-            if (filesToImport.Count > 0)
+            if (pathsToImport.Count > 0)
             {
-                Debug.Log($"AddressablesImporter: Found {filesToImport.Count} assets...");
-                OnPostprocessAllAssets(filesToImport.ToArray(), new string[0], new string[0], new string[0]);
-            }
-            else
-            {
-                Debug.Log($"AddressablesImporter: No files to reimport");
+                Debug.Log($"AddressablesImporter: Found {pathsToImport.Count} asset paths...");
+                OnPostprocessAllAssets(pathsToImport.ToArray(), new string[0], new string[0], new string[0]);
             }
         }
 
