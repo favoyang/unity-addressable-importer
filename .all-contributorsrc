@@ -58,6 +58,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "eAi",
+      "name": "Edwin Lyons",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/123872?v=4",
+      "profile": "http://www.fireboltgames.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
