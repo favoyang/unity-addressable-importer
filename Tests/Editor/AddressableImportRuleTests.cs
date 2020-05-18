@@ -58,14 +58,30 @@ namespace UnityAddressableImporter.Tests
             rule.path = " ";
             rule.groupName = "somegroup";
             Assert.IsNull(rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
-            // Test empy groupName
+            // Test empty groupName
             rule.matchType = AddressableImportRuleMatchType.Wildcard;
-            rule.path = @"Assets/Sprites/*/*.png";
+            rule.path = "Assets/Sprites/*/*.png";
             rule.groupName = "";
             Assert.IsNull(rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
             rule.path = "Assets/Sprites/*/*.png";
             rule.groupName = " ";
             Assert.IsNull(rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
+            // Test empty spaces in groupName
+            rule.matchType = AddressableImportRuleMatchType.Wildcard;
+            rule.path = "Assets/Sprites/*/*.png";
+            rule.groupName = " group-a";
+            Assert.AreEqual("group-a", rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
+            rule.groupName = "group-a ";
+            Assert.AreEqual("group-a", rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
+            rule.groupName = " group-a ";
+            Assert.AreEqual("group-a", rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
+            // Test splash in groupName
+            rule.matchType = AddressableImportRuleMatchType.Wildcard;
+            rule.path = "Assets/Sprites/*/*.png";
+            rule.groupName = "group/a";
+            Assert.AreEqual("group-a", rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
+            rule.groupName = @"group\a ";
+            Assert.AreEqual("group-a", rule.ParseGroupReplacement("Assets/Sprites/cat/cat.png"));
             // Test static groupName
             rule.matchType = AddressableImportRuleMatchType.Wildcard;
             rule.path = "Assets/Sprites/*/*.png";

@@ -57,6 +57,15 @@ public class AddressableImportRule
     public string groupName;
 
     /// <summary>
+    /// Cleaned group name.
+    /// </summary>
+    string CleanedGroupName {
+        get {
+            return groupName.Trim().Replace('/', '-').Replace('\\', '-');
+        }
+    }
+
+    /// <summary>
     /// Defines if labels will be added or replaced.
     /// </summary>
     public LabelWriteMode LabelMode;
@@ -134,7 +143,7 @@ public class AddressableImportRule
         if (string.IsNullOrWhiteSpace(path) || string.IsNullOrWhiteSpace(groupName))
             return null;
         // Parse path elements.
-        var replacement = AddressableImportRegex.ParsePath(assetPath, groupName);
+        var replacement = AddressableImportRegex.ParsePath(assetPath, CleanedGroupName);
         // Parse this.path regex.
         if (matchType == AddressableImportRuleMatchType.Regex) {
             string pathRegex = path;
