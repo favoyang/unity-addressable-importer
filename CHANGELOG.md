@@ -1,3 +1,10 @@
+## [0.7.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.1...v0.7.2) (2020-05-18)
+
+
+### Bug Fixes
+
+* clean group name internally (close: [#27](https://github.com/favoyang/unity-addressable-importer/issues/27)) ([f99b399](https://github.com/favoyang/unity-addressable-importer/commit/f99b399be3d5a6b543734f53a4c4760d45ec30c1))
+
 ## [0.7.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.0...v0.7.1) (2020-05-17)
 
 
