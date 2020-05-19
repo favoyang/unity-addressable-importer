@@ -15,6 +15,13 @@ public class AddressableImporter : AssetPostprocessor
 {
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
+        // Skip if all imported and deleted assets are addressables configurations.
+        var isConfigurationPass =
+            (importedAssets.Length > 0 && importedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
+            (deletedAssets.Length > 0 && deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData")));
+        if (isConfigurationPass) {
+            return;
+        }
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
@@ -47,19 +54,21 @@ public class AddressableImporter : AssetPostprocessor
                 dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
         }
 
-        // Remove empty groups.
-        if (importSettings.removeEmtpyGroups)
+        foreach (var deletedAsset in deletedAssets)
         {
-            var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
-            for (var i = 0; i < emptyGroups.Length; i++)
-            {
-                settings.RemoveGroup(emptyGroups[i]);
-                dirty = true;
+            if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule)) {
+                var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
+                if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
+                {
+                    dirty = true;
+                    Debug.LogFormat("[AddressableImporter] Entry removed for {0}", deletedAsset);
+                }
             }
         }
 
-        if (dirty)
+        if (dirty) {
             AssetDatabase.SaveAssets();
+        }
     }
 
     static AddressableAssetGroup CreateAssetGroup<SchemaType>(AddressableAssetSettings settings, string groupName)
