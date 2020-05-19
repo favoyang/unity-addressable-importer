@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
 using System.Collections.Generic;
+using System.Linq;
 using UnityAddressableImporter.Helper;
 
 
@@ -13,18 +16,8 @@ public class AddressableImportSettings : ScriptableObject
     [Tooltip("Creates a group if the specified group doesn't exist.")]
     public bool allowGroupCreation = false;
 
-    [Tooltip("Removes groups without addressables except the default group.")]
-    public bool removeEmptyGroups = false;
-
     [Tooltip("Rules for managing imported assets.")]
     public List<AddressableImportRule> rules;
-
-
-    [ButtonMethod]
-    private void ResetPassCount()
-    {
-        AddressableImporter.pass = 0;
-    }
 
     [ButtonMethod]
     private void Save()
@@ -36,6 +29,27 @@ public class AddressableImportSettings : ScriptableObject
     private void Documentation()
     {
         Application.OpenURL("https://github.com/favoyang/unity-addressable-importer/blob/master/Documentation~/AddressableImporter.md");
+    }
+
+    [ButtonMethod]
+    private void CleanEmptyGroup()
+    {
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            return;
+        }
+        var dirty = false;
+        var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
+        for (var i = 0; i < emptyGroups.Length; i++)
+        {
+            dirty = true;
+            settings.RemoveGroup(emptyGroups[i]);
+        }
+        if (dirty)
+        {
+            AssetDatabase.SaveAssets();
+        }
     }
 
     public static AddressableImportSettings Instance

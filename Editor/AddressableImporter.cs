@@ -13,7 +13,6 @@ using UnityEditor.Experimental.SceneManagement;
 
 public class AddressableImporter : AssetPostprocessor
 {
-    public static int pass = 0;
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
         // Skip if all imported and deleted assets are addressables configurations.
@@ -23,9 +22,6 @@ public class AddressableImporter : AssetPostprocessor
         if (isConfigurationPass) {
             return;
         }
-        pass++;
-        int localpass = pass;
-        Debug.LogFormat("[pass {0}] start", localpass);
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
@@ -39,11 +35,6 @@ public class AddressableImporter : AssetPostprocessor
         }
         if (importSettings.rules == null || importSettings.rules.Count == 0)
             return;
-
-        foreach (var importedAsset in importedAssets)
-        {
-            Debug.LogFormat("[pass {0}] importedAsset: {1}", localpass, importedAsset);
-        }
 
         var dirty = false;
 
@@ -65,7 +56,6 @@ public class AddressableImporter : AssetPostprocessor
 
         foreach (var deletedAsset in deletedAssets)
         {
-            Debug.LogFormat("[pass {0}] deletedAsset: {1}", localpass, deletedAsset);
             if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule)) {
                 var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
                 if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
@@ -76,24 +66,9 @@ public class AddressableImporter : AssetPostprocessor
             }
         }
 
-        // Remove empty groups.
-        if (importSettings.removeEmptyGroups)
-        {
-            var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
-            for (var i = 0; i < emptyGroups.Length; i++)
-            {
-                Debug.LogFormat("[pass {0}] remove group: {1}", localpass, emptyGroups[i].Name);
-                settings.RemoveGroup(emptyGroups[i]);
-                dirty = true;
-            }
-        }
-
         if (dirty) {
-            Debug.LogFormat("[pass {0}] AssetDatabase.SaveAssets", localpass);
             AssetDatabase.SaveAssets();
-            dirty = false;
         }
-        Debug.LogFormat("[pass {0}] end", localpass);
     }
 
     static AddressableAssetGroup CreateAssetGroup<SchemaType>(AddressableAssetSettings settings, string groupName)
