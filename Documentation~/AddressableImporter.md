@@ -7,8 +7,8 @@ Table of Contents
 - [Group Replacement](#group-replacement)
 - [Address Replacement](#address-replacement)
 - [Label Replacement](#label-replacement)
-- [Quick assets (re)import](#quick-assets-reimport)
-- [About prefab mode](#about-prefab-mode)
+- [Quick Assets Re-import](#quick-assets-re-import)
+- [About Prefab Mode](#about-prefab-mode)
 
 ## Setup the Importer
 
@@ -36,10 +36,27 @@ Once the settings file selected, you can edit rules in the inspector window. The
 
 | Type     | Example                                                                         |
 |----------|---------------------------------------------------------------------------------|
-| Wildcard | `Asset/Sprites/Icons`                                                           |
+| Wildcard | `Asset/Sprites/Icons/*`                                                         |
 | Wildcard | `Asset/Sprites/Level??/*.asset`                                                 |
 | Regex    | `^Assets/Models/.*\.fbx`                                                        |
 | Regex    | `Assets/Weapons/(?<prefix>(?<category>[^/]+)/(.*/)*)(?<asset>.*_Data.*\.asset)` |
+
+Because directory itself can be an address entry as well. You need to design your rules with caution to avoid including both folder and files at the same time.
+
+For example,
+
+```
+Assets/
+  t1/
+    1.txt
+```
+
+| Rule Path         | Rule Type | Results             | Comments |
+|-------------------|-----------|---------------------|----------|
+| `Assets/t1`       | Wildcard  | `t1` and `t1/1.txt` | bad      |
+| `Assets/t1/*.txt` | Wildcard  | `t1/1.txt`          | good     |
+| `^Assets/t1$`     | Regex     | `t1`                | good     |
+| `^Assets/t1/.*`   | Regex     | `t1/1.txt`          | good     |
 
 ## Group Replacement
 
@@ -47,7 +64,7 @@ The dynamic group is supported by replacing `${name}` with the extracted value f
 
 For convenience, path elements can be referred via `${PATH[index]}`. This works for all match types.
 
-| Asset Path               | Path                                          | Group Name               | Result         |
+| Asset Path               | Rule Path                                          | Group Name               | Result         |
 |--------------------------|-----------------------------------------------|--------------------------|----------------|
 | `Assets/Sprites/cat.png` | `Assets/Sprites/*.png`                        | `${PATH[1]}`             | Sprites        |
 | `Assets/Sprites/cat.png` | `Assets/Sprites/*.png`                        | `${PATH[-1]}`            | Sprites        |
@@ -60,7 +77,7 @@ For convenience, path elements can be referred via `${PATH[index]}`. This works 
 
 Similar to [Group Replacement](#group-replacement), address replacement is also supported.
 
-| Asset Path             | Path                                          | Address Replacement               | Result           |
+| Asset Path             | Rule Path                                     | Address Replacement               | Result           |
 |------------------------|-----------------------------------------------|-----------------------------------|------------------|
 | `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(?<asset>.*)\.png` | `${category}-${asset}`            | cat-cat01        |
 | `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(?<asset>.*)\.png` | `${PATH[0]}:${category}-${asset}` | Assets:cat-cat01 |
@@ -76,7 +93,7 @@ In another word, if you are intending to manually change the address later, leav
 
 The importer always overrides existing labels if `LabelMode = Replace`.
 
-## Quick assets (re)import
+## Quick Assets Re-import
 
 The importer should apply the rules whenever an asset being imported, moved, or deleted. However, if you modified rules or want to apply rules to existing assets, you need to manually apply the rules. To quickly apply the rules, select target folder(s) in the project view, right-click to open the context menu, and then click `AddressablesImporter: Check Folder(s)`. The action is more efficient than force reimport assets.
 
@@ -89,6 +106,6 @@ You can also use `ReimportFolders` API to process any folders in code. e.g. re-i
 AddressableImporter.FolderImporter.ReimportFolders(new string[] { "Assets" });
 ```
 
-## About prefab mode
+## About Prefab Mode
 
 When both prefab mode (the preview scene for editing a prefab) and the autosave feature are enabled, every modification will cause the asset to be saved and trigger the importer, leads to slow response. For performance reasons, the importer will ignore the current editing asset.

@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.0...v0.7.1) (2020-05-17)
+
+
+### Bug Fixes
+
+* check folder(s) should treat folder as import entry as well (close: [#26](https://github.com/favoyang/unity-addressable-importer/issues/26)). ([18923eb](https://github.com/favoyang/unity-addressable-importer/commit/18923eb3ca4e5e33eb28eaa620fdc0a63258b495))
+
 # [0.7.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.6.0...v0.7.0) (2020-05-07)
 
 
