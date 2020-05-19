@@ -1,3 +1,10 @@
+## [0.7.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.2...v0.7.3) (2020-05-19)
+
+
+### Bug Fixes
+
+* change remove-empty-group feature to a manual operation ([#30](https://github.com/favoyang/unity-addressable-importer/issues/30)) ([1e6ec04](https://github.com/favoyang/unity-addressable-importer/commit/1e6ec04cf4b69755c359bc2ae7a45fa6d7d96910))
+
 ## [0.7.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.1...v0.7.2) (2020-05-18)
 
 
