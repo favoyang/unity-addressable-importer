@@ -17,6 +17,9 @@ public class AddressableImportSettings : ScriptableObject
     public bool allowGroupCreation = false;
 
     [Tooltip("Rules for managing imported assets.")]
+    #if ODIN_INSPECTOR
+    [Sirenix.OdinInspector.ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true)]
+    #endif
     public List<AddressableImportRule> rules;
 
     [ButtonMethod]
