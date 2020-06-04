@@ -43,7 +43,7 @@ public class AddressableImportRule
     /// </summary>
     [Tooltip("The assets in this path will be processed.")]
     #if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FolderPath]
+    [Sirenix.OdinInspector.FolderPath(RequireExistingPath = false,UseBackslashes = false)]
     #endif
     public string path;
 
