@@ -18,7 +18,7 @@ public class AddressableImportSettings : ScriptableObject
 
     [Tooltip("Rules for managing imported assets.")]
     #if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true)]
+    [Sirenix.OdinInspector.ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true,HideRemoveButton = false)]
     #endif
     public List<AddressableImportRule> rules;
 

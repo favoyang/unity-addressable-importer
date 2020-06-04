@@ -45,27 +45,18 @@ public class AddressableImportRule
     #if ODIN_INSPECTOR
     [Sirenix.OdinInspector.FilePath]
     #endif
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public string path;
 
     /// <summary>
     /// Method used to parse the Path.
     /// </summary>
     [Tooltip("The path parsing method.")]
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public AddressableImportRuleMatchType matchType;
 
     /// <summary>
     /// The group the asset will be added.
     /// </summary>
     [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public string groupName;
 
     /// <summary>
@@ -80,36 +71,24 @@ public class AddressableImportRule
     /// <summary>
     /// Defines if labels will be added or replaced.
     /// </summary>
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public LabelWriteMode LabelMode;
 
     /// <summary>
     /// Label reference list.
     /// </summary>
     [Tooltip("The list of labels to be added to the Addressable Asset")]
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public List<AssetLabelReference> labelRefs;
 
     /// <summary>
     /// Group template to use. Default Group settings will be used if empty.
     /// </summary>
     [Tooltip("Group template that will be applied to the Addressable Group. Leave none to use the Default Group's settings.")]
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public AddressableAssetGroupTemplate groupTemplate = null;
 
     /// <summary>
     /// Controls wether group template will be applied only on group creation, or also to already created groups.
     /// </summary>
     [Tooltip("Defines if the group template will only be applied to new groups, or will also overwrite existing groups settings.")]
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public GroupTemplateApplicationMode groupTemplateApplicationMode = GroupTemplateApplicationMode.ApplyOnGroupCreationOnly;
 
     /// <summary>
@@ -117,9 +96,6 @@ public class AddressableImportRule
     /// </summary>
     [Tooltip("Simplify address to filename without extension.")]
     [Label("Address Simplified")]
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public bool simplified;
 
     /// <summary>
@@ -127,9 +103,6 @@ public class AddressableImportRule
     /// </summary>
     [Tooltip("Replacement address string for regex matches.")]
     [ConditionalField("matchType", AddressableImportRuleMatchType.Regex, "simplified", false)]
-#if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.FoldoutGroup(nameof(AddressableImportRule))]
-#endif
     public string addressReplacement;
 
     public bool HasLabel
