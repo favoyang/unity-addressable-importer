@@ -1,3 +1,45 @@
+## [0.7.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.2...v0.7.3) (2020-05-19)
+
+
+### Bug Fixes
+
+* change remove-empty-group feature to a manual operation ([#30](https://github.com/favoyang/unity-addressable-importer/issues/30)) ([1e6ec04](https://github.com/favoyang/unity-addressable-importer/commit/1e6ec04cf4b69755c359bc2ae7a45fa6d7d96910))
+
+## [0.7.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.1...v0.7.2) (2020-05-18)
+
+
+### Bug Fixes
+
+* clean group name internally (close: [#27](https://github.com/favoyang/unity-addressable-importer/issues/27)) ([f99b399](https://github.com/favoyang/unity-addressable-importer/commit/f99b399be3d5a6b543734f53a4c4760d45ec30c1))
+
+## [0.7.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.0...v0.7.1) (2020-05-17)
+
+
+### Bug Fixes
+
+* check folder(s) should treat folder as import entry as well (close: [#26](https://github.com/favoyang/unity-addressable-importer/issues/26)). ([18923eb](https://github.com/favoyang/unity-addressable-importer/commit/18923eb3ca4e5e33eb28eaa620fdc0a63258b495))
+
+# [0.7.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.6.0...v0.7.0) (2020-05-07)
+
+
+### Features
+
+* re-import API (close: [#21](https://github.com/favoyang/unity-addressable-importer/issues/21)) ([8b00747](https://github.com/favoyang/unity-addressable-importer/commit/8b00747c83b97eae9a06fc824bd7a2a3ad764b19))
+
+# [0.6.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.4...v0.6.0) (2020-04-26)
+
+
+### Features
+
+* handle moved assets (close: [#20](https://github.com/favoyang/unity-addressable-importer/issues/20)) ([a902a21](https://github.com/favoyang/unity-addressable-importer/commit/a902a216dc51c55a81c103fa0edb9ff290a4dcfb))
+
+## [0.5.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.3...v0.5.4) (2020-04-13)
+
+
+### Bug Fixes
+
+* avoid applying rules to current editing prefab asset (close: [#19](https://github.com/favoyang/unity-addressable-importer/issues/19)) ([9c4df8b](https://github.com/favoyang/unity-addressable-importer/commit/9c4df8b25ddbf36fa78c99bd58bb072d5ef31779))
+
 ## [0.5.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.5.2...v0.5.3) (2020-04-04)
 
 

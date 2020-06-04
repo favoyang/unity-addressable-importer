@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
 using System.Collections.Generic;
+using System.Linq;
 using UnityAddressableImporter.Helper;
 
 
-[CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressables/Import Settings", order = 50)]
+[CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressable Assets/Import Settings", order = 50)]
 public class AddressableImportSettings : ScriptableObject
 {
     public const string kDefaultConfigObjectName = "addressableimportsettings";
@@ -12,9 +15,6 @@ public class AddressableImportSettings : ScriptableObject
 
     [Tooltip("Creates a group if the specified group doesn't exist.")]
     public bool allowGroupCreation = false;
-
-    [Tooltip("Removes groups without addressables except the default group.")]
-    public bool removeEmtpyGroups = false;
 
     [Tooltip("Rules for managing imported assets.")]
     public List<AddressableImportRule> rules;
@@ -29,6 +29,27 @@ public class AddressableImportSettings : ScriptableObject
     private void Documentation()
     {
         Application.OpenURL("https://github.com/favoyang/unity-addressable-importer/blob/master/Documentation~/AddressableImporter.md");
+    }
+
+    [ButtonMethod]
+    private void CleanEmptyGroup()
+    {
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            return;
+        }
+        var dirty = false;
+        var emptyGroups = settings.groups.Where(x => x.entries.Count == 0 && !x.IsDefaultGroup()).ToArray();
+        for (var i = 0; i < emptyGroups.Length; i++)
+        {
+            dirty = true;
+            settings.RemoveGroup(emptyGroups[i]);
+        }
+        if (dirty)
+        {
+            AssetDatabase.SaveAssets();
+        }
     }
 
     public static AddressableImportSettings Instance

@@ -49,6 +49,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Haruma-K",
+      "name": "Haruki Yano",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/47441314?v=4",
+      "profile": "https://light11.hatenadiary.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "eAi",
+      "name": "Edwin Lyons",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/123872?v=4",
+      "profile": "http://www.fireboltgames.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
