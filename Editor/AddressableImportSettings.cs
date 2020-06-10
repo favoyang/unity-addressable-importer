@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
-using UnityEditor.AddressableAssets.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using UnityAddressableImporter.Helper;
@@ -17,9 +16,9 @@ public class AddressableImportSettings : ScriptableObject
     public bool allowGroupCreation = false;
 
     [Tooltip("Rules for managing imported assets.")]
-    #if ODIN_INSPECTOR
+#if ODIN_INSPECTOR
     [Sirenix.OdinInspector.ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true,HideRemoveButton = false)]
-    #endif
+#endif
     public List<AddressableImportRule> rules;
 
     [ButtonMethod]

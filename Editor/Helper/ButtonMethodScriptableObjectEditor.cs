@@ -18,16 +18,16 @@ namespace UnityAddressableImporter.Helper.Internal
 	{
 		private List<MethodInfo> _methods;
 		private ScriptableObject _target;
-		private AddressablesImporterOdinInspectorDrawer _drawer;
+		private AddressablesImporterOdinHandler _drawer;
 
 		private void OnEnable()
 		{
 			_target = target as ScriptableObject;
-			_drawer = _drawer ?? new AddressablesImporterOdinInspectorDrawer();
+			_drawer = _drawer ?? new AddressablesImporterOdinHandler();
 			if (_target == null) return;
 			
 			_drawer.Initialize(target);
-			_methods = AddressablesImportMethodHandler.CollectValidMembers(_target.GetType());
+			_methods = AddressablesImporterMethodHandler.CollectValidMembers(_target.GetType());
 		}
 
 		private void OnDisable()
@@ -41,7 +41,7 @@ namespace UnityAddressableImporter.Helper.Internal
 			
 			if (_methods == null) return;
 
-			AddressablesImportMethodHandler.OnInspectorGUI(_target, _methods);
+			AddressablesImporterMethodHandler.OnInspectorGUI(_target, _methods);
 		}
 
 		private void DrawBaseEditor()
