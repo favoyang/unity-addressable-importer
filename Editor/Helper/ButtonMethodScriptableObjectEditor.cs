@@ -17,16 +17,16 @@ namespace UnityAddressableImporter.Helper.Internal
 	public class ButtonMethodScriptableObjectEditor : Editor
 	{
 		private List<MethodInfo> _methods;
-		private ScriptableObject _target;
+		private AddressableImportSettings _target;
 		private AddressablesImporterOdinHandler _drawer;
 
 		private void OnEnable()
 		{
-			_target = target as ScriptableObject;
+			_target = target as AddressableImportSettings;
 			_drawer = _drawer ?? new AddressablesImporterOdinHandler();
 			if (_target == null) return;
 			
-			_drawer.Initialize(target);
+			_drawer.Initialize(_target);
 			_methods = AddressablesImporterMethodHandler.CollectValidMembers(_target.GetType());
 		}
 
@@ -42,6 +42,8 @@ namespace UnityAddressableImporter.Helper.Internal
 			if (_methods == null) return;
 
 			AddressablesImporterMethodHandler.OnInspectorGUI(_target, _methods);
+
+			serializedObject.ApplyModifiedProperties();
 		}
 
 		private void DrawBaseEditor()
