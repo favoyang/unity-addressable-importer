@@ -14,7 +14,7 @@ namespace UnityAddressableImporter.Helper.Internal
 
 
 	[CustomEditor(typeof(AddressableImportSettings), true), CanEditMultipleObjects]
-	public class ButtonMethodScriptableObjectEditor : Editor
+	public class AddressableImportSettingsEditor : Editor
 	{
 		private List<MethodInfo> _methods;
 		private ScriptableObject _target;

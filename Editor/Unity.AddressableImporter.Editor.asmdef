@@ -2,8 +2,7 @@
     "name": "Unity.AddressableImporter.Editor",
     "references": [
         "Unity.Addressables",
-        "Unity.Addressables.Editor",
-        "Unity.AddressableImporter.Runtime"
+        "Unity.Addressables.Editor"
     ],
     "includePlatforms": [
         "Editor"
