@@ -20,81 +20,86 @@
         
         [SerializeField]
         [ListDrawerSettings(
-            CustomAddFunction = nameof(CustomAddFunction),
             HideRemoveButton = true,
+            Expanded = true,
+            CustomAddFunction = nameof(CustomAddFunction),
             OnEndListElementGUI = nameof(EndOfListItemGui),
             CustomRemoveElementFunction = nameof(CustomRemoveElementFunction),
             CustomRemoveIndexFunction = nameof(CustomRemoveIndexFunction)
         )]
-        private List<AddressableImportRule> rulesView = new List<AddressableImportRule>();
+        private List<AddressableImportRule> rules = new List<AddressableImportRule>();
 
         public void Initialize(AddressableImportSettings importSettings)
         {
             _importSettings = importSettings;
             _drawerTree     = PropertyTree.Create(this);
-            //_filteredRules  = new List<AddressableImportRule>();
+            
             _filters = new List<Func<AddressableImportRule, string, bool>>() {
                 ValidateAddressableGroupName,
                 ValidateRulePath,
                 ValidateLabelsPath,
             };
-
+            
             _drawerTree.OnPropertyValueChanged += (property, index) => EditorUtility.SetDirty(_importSettings);
         }
 
         public void Draw(string filter)
         {
-            if (_sourceChanged) {
-                _sourceChanged = false;
-                return;
-            }
-            
             FilterRules(filter);
             
-            var property = _drawerTree.GetPropertyAtPath(nameof(rulesView));
-            property.Draw();
+            _drawerTree.Draw();
 
             ApplyChanges();
-
         }
+
+        [Button]
+        public void Save() => _importSettings.Save();
         
-        public bool ValidateRule(AddressableImportRule rule,string filter)
+        [Button]
+        public void Documentation() => _importSettings.Documentation();
+        
+        [Button]
+        public void CleanEmptyGroup() => _importSettings.CleanEmptyGroup();
+        
+        #region private methods
+        
+        private bool ValidateRule(AddressableImportRule rule,string filter)
         {
             return string.IsNullOrEmpty(filter) || _filters.Any(x => x(rule,filter));
         }
 
-        public bool ValidateAddressableGroupName(AddressableImportRule rule, string filter)
+        private bool ValidateAddressableGroupName(AddressableImportRule rule, string filter)
         {
             return rule.groupName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
         
-        public bool ValidateRulePath(AddressableImportRule rule, string filter)
+        private bool ValidateRulePath(AddressableImportRule rule, string filter)
         {
             return rule.path.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
         
-        public bool ValidateLabelsPath(AddressableImportRule rule, string filter)
+        private bool ValidateLabelsPath(AddressableImportRule rule, string filter)
         {
             return rule.labels.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         private void FilterRules(string filter)
         {
-            rulesView.Clear();
+            rules = new List<AddressableImportRule>();
             var filteredRules = _importSettings.rules.
                 Where(x => ValidateRule(x, filter));
-            rulesView.AddRange(filteredRules);
+            rules.AddRange(filteredRules);
         }
 
         private void ApplyChanges()
         {
             _drawerTree.ApplyChanges();
 
-            for (var i = 0; i < rulesView.Count; i++) {
-                var rule  = rulesView[i];
+            for (var i = 0; i < rules.Count; i++) {
+                var rule  = rules[i];
                 var index = _importSettings.rules.IndexOf(rule);
                 if(index < 0) continue;
-                _importSettings.rules[i] = rulesView[i];
+                _importSettings.rules[i] = rules[i];
             }
             
         }
@@ -107,13 +112,13 @@
         
         private void CustomRemoveIndexFunction(int index)
         {
-            var removeResult = _importSettings.rules.Remove(rulesView[index]);
+            var removeResult = _importSettings.rules.Remove(rules[index]);
             _sourceChanged = true;
         }
         
         private void CustomRemoveElementFunction(AddressableImportRule item)
         {
-            var index = rulesView.IndexOf(item);
+            var index = rules.IndexOf(item);
             CustomRemoveIndexFunction(index);
         }
 
@@ -136,6 +141,8 @@
             if (_importSettings == null) return;
             EditorUtility.SetDirty(_importSettings);
         }
+        
+        #endregion
     }
 #endif
 }

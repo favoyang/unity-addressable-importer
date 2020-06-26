@@ -38,10 +38,12 @@ namespace UnityAddressableImporter.Helper.Internal
 		public override void OnInspectorGUI()
 		{
 			DrawBaseEditor();
-			
+
+#if !ODIN_INSPECTOR
 			if (_methods == null) return;
 
 			AddressablesImporterMethodHandler.OnInspectorGUI(_target, _methods);
+#endif
 
 			serializedObject.ApplyModifiedProperties();
 		}
