@@ -27,7 +27,7 @@ namespace UnityAddressableImporter.Helper.Internal
 			if (_target == null) return;
 			
 			_drawer.Initialize(target);
-			_methods = AddressablesImporterMethodHandler.CollectValidMembers(_target.GetType());
+			_methods = AddressableImporterMethodHandler.CollectValidMembers(_target.GetType());
 		}
 
 		private void OnDisable()
@@ -41,7 +41,7 @@ namespace UnityAddressableImporter.Helper.Internal
 			
 			if (_methods == null) return;
 
-			AddressablesImporterMethodHandler.OnInspectorGUI(_target, _methods);
+			AddressableImporterMethodHandler.OnInspectorGUI(_target, _methods);
 		}
 
 		private void DrawBaseEditor()

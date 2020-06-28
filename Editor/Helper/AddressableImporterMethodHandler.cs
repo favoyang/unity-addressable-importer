@@ -8,7 +8,7 @@
     using UnityEditor;
     using UnityEngine;
 
-    public static class AddressablesImporterMethodHandler
+    public static class AddressableImporterMethodHandler
     {
         public static List<MethodInfo> CollectValidMembers(Type type)
         {
