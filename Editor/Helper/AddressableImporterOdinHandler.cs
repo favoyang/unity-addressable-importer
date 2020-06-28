@@ -8,7 +8,7 @@
     using Sirenix.OdinInspector.Editor;
     using Sirenix.OdinInspector;
     
-    public class AddressablesImporterOdinHandler : IDisposable
+    public class AddressableImporterOdinHandler : IDisposable
     {
         private Object _target;
         private PropertyTree _drawer;

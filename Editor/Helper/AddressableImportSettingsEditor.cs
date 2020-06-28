@@ -18,12 +18,12 @@ namespace UnityAddressableImporter.Helper.Internal
 	{
 		private List<MethodInfo> _methods;
 		private ScriptableObject _target;
-		private AddressablesImporterOdinHandler _drawer;
+		private AddressableImporterOdinHandler _drawer;
 
 		private void OnEnable()
 		{
 			_target = target as ScriptableObject;
-			_drawer = _drawer ?? new AddressablesImporterOdinHandler();
+			_drawer = _drawer ?? new AddressableImporterOdinHandler();
 			if (_target == null) return;
 			
 			_drawer.Initialize(target);
