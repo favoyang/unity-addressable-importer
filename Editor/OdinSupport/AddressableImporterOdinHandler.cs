@@ -8,7 +8,7 @@
     using UnityEditor;
     using UnityEngine;
 
-    public class AddressablesImporterOdinHandler : IDisposable
+    public class AddressableImporterOdinHandler : IDisposable
     {
         private AddressableImportSettings _settings;
         private AddressablesImporterFilterOdinHandler _importRulesContainer;

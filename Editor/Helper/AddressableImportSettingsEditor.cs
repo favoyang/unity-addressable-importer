@@ -18,16 +18,18 @@ namespace UnityAddressableImporter.Helper.Internal
 	{
 		private List<MethodInfo> _methods;
 		private AddressableImportSettings _target;
-		private AddressablesImporterOdinHandler _drawer;
+		private AddressableImporterOdinHandler _drawer;
+		
 
 		private void OnEnable()
 		{
 			_target = target as AddressableImportSettings;
-			_drawer = _drawer ?? new AddressablesImporterOdinHandler();
+			_drawer = _drawer ?? new AddressableImporterOdinHandler();
 			if (_target == null) return;
 			
 			_drawer.Initialize(_target);
-			_methods = AddressablesImporterMethodHandler.CollectValidMembers(_target.GetType());
+			_methods = AddressableImporterMethodHandler.CollectValidMembers(_target.GetType());
+
 		}
 
 		private void OnDisable()
@@ -42,10 +44,11 @@ namespace UnityAddressableImporter.Helper.Internal
 #if !ODIN_INSPECTOR
 			if (_methods == null) return;
 
-			AddressablesImporterMethodHandler.OnInspectorGUI(_target, _methods);
+			AddressableImporterMethodHandler.OnInspectorGUI(_target, _methods);
 #endif
 
 			serializedObject.ApplyModifiedProperties();
+
 		}
 
 		private void DrawBaseEditor()
