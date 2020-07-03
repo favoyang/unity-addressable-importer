@@ -45,11 +45,15 @@
 
         public void Draw(string filter)
         {
-            FilterRules(filter);
-            
-            _drawerTree.Draw();
+            try {
+                FilterRules(filter);
+                _drawerTree.Draw();
+                ApplyChanges();
+            }
+            catch (Exception e) {
+                Debug.LogError(e);
+            }
 
-            ApplyChanges();
         }
 
         [Button]
