@@ -46,7 +46,7 @@
 
         private void DrawInspectorTree(string filter)
         {
-            _importRulesContainer?.Draw(filter);
+            _importRulesContainer?.Draw();
         }
     }
     

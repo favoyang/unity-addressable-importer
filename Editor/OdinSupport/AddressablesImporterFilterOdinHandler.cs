@@ -17,6 +17,11 @@
         private List<Func<AddressableImportRule, string, bool>> _filters;
         //private List<AddressableImportRule>                     _filteredRules;
         private bool _sourceChanged = false;
+
+        [SerializeField]
+        [HideLabel]
+        [OnValueChanged("OnFilterChanged")]
+        private string _searchFilter;
         
         [SerializeField]
         [ListDrawerSettings(
@@ -43,10 +48,10 @@
             _drawerTree.OnPropertyValueChanged += (property, index) => EditorUtility.SetDirty(_importSettings);
         }
 
-        public void Draw(string filter)
+        public void Draw()
         {
             try {
-                FilterRules(filter);
+                FilterRules(_searchFilter);
                 _drawerTree.Draw();
                 ApplyChanges();
             }
@@ -66,6 +71,11 @@
         public void CleanEmptyGroup() => _importSettings.CleanEmptyGroup();
         
         #region private methods
+
+        private void OnFilterChanged()
+        {
+            
+        }
         
         private bool ValidateRule(AddressableImportRule rule,string filter)
         {
