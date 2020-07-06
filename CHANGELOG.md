@@ -1,3 +1,10 @@
+## [0.8.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.8.0...v0.8.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* use text AddressableImporter intead of AddressablesImporter ([46ecf92](https://github.com/favoyang/unity-addressable-importer/commit/46ecf92a7fc5d74fc242ddb4b0cac873a924f91a))
+
 # [0.8.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.3...v0.8.0) (2020-07-06)
 
 
