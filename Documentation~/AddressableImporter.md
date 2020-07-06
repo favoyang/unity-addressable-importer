@@ -95,7 +95,7 @@ The importer always overrides existing labels if `LabelMode = Replace`.
 
 ## Quick Assets Re-import
 
-The importer should apply the rules whenever an asset being imported, moved, or deleted. However, if you modified rules or want to apply rules to existing assets, you need to manually apply the rules. To quickly apply the rules, select target folder(s) in the project view, right-click to open the context menu, and then click `AddressablesImporter: Check Folder(s)`. The action is more efficient than force reimport assets.
+The importer should apply the rules whenever an asset being imported, moved, or deleted. However, if you modified rules or want to apply rules to existing assets, you need to manually apply the rules. To quickly apply the rules, select target folder(s) in the project view, right-click to open the context menu, and then click `AddressableImporter: Check Folder(s)`. The action is more efficient than force reimport assets.
 
 ![AddressableImport Context Menu](AddressableImportSettings-ContextMenu.png)
 
