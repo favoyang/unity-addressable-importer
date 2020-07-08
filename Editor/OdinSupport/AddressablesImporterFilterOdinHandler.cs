@@ -30,7 +30,8 @@
             CustomAddFunction = nameof(CustomAddFunction),
             OnEndListElementGUI = nameof(EndOfListItemGui),
             CustomRemoveElementFunction = nameof(CustomRemoveElementFunction),
-            CustomRemoveIndexFunction = nameof(CustomRemoveIndexFunction)
+            CustomRemoveIndexFunction = nameof(CustomRemoveIndexFunction),
+            ShowPaging = true
         )]
         private List<AddressableImportRule> rules = new List<AddressableImportRule>();
 
@@ -113,7 +114,7 @@
                 var rule  = rules[i];
                 var index = _importSettings.rules.IndexOf(rule);
                 if(index < 0) continue;
-                _importSettings.rules[i] = rules[i];
+                _importSettings.rules[index] = rules[i];
             }
             
         }
