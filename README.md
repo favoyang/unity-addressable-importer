@@ -72,6 +72,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://light11.hatenadiary.com/"><img src="https://avatars0.githubusercontent.com/u/47441314?v=4" width="100px;" alt=""/><br /><sub><b>Haruki Yano</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=Haruma-K" title="Code">💻</a></td>
     <td align="center"><a href="http://www.fireboltgames.com"><img src="https://avatars3.githubusercontent.com/u/123872?v=4" width="100px;" alt=""/><br /><sub><b>Edwin Lyons</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=eAi" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="http://greenbuttongames.com"><img src="https://avatars1.githubusercontent.com/u/7457166?v=4" width="100px;" alt=""/><br /><sub><b>Mefodei</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=Mefodei" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
