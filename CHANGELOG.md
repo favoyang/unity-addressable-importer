@@ -1,3 +1,17 @@
+## [0.8.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.8.0...v0.8.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* use text AddressableImporter intead of AddressablesImporter ([46ecf92](https://github.com/favoyang/unity-addressable-importer/commit/46ecf92a7fc5d74fc242ddb4b0cac873a924f91a))
+
+# [0.8.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.3...v0.8.0) (2020-07-06)
+
+
+### Features
+
+* ODIN inspector support (close [#32](https://github.com/favoyang/unity-addressable-importer/issues/32), [#33](https://github.com/favoyang/unity-addressable-importer/issues/33)) ([e7bfcb8](https://github.com/favoyang/unity-addressable-importer/commit/e7bfcb880da19f5fc06a76b2ffdc2fb39e539236))
+
 ## [0.7.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.7.2...v0.7.3) (2020-05-19)
 
 

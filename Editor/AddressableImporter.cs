@@ -259,7 +259,7 @@ public class AddressableImporter : AssetPostprocessor
             }
             if (pathsToImport.Count > 0)
             {
-                Debug.Log($"AddressablesImporter: Found {pathsToImport.Count} asset paths...");
+                Debug.Log($"AddressableImporter: Found {pathsToImport.Count} asset paths...");
                 OnPostprocessAllAssets(pathsToImport.ToArray(), new string[0], new string[0], new string[0]);
             }
         }
@@ -267,7 +267,7 @@ public class AddressableImporter : AssetPostprocessor
         /// <summary>
         /// Allows assets within the selected folder to be checked agains the Addressable Importer rules.
         /// </summary>
-        [MenuItem("Assets/AddressablesImporter: Check Folder(s)")]
+        [MenuItem("Assets/AddressableImporter: Check Folder(s)")]
         private static void CheckFoldersFromSelection()
         {
             List<string> assetPaths = new List<string>();
@@ -285,7 +285,7 @@ public class AddressableImporter : AssetPostprocessor
         }
 
         // Note that we pass the same path, and also pass "true" to the second argument.
-        [MenuItem("Assets/AddressablesImporter: Check Folder(s)", true)]
+        [MenuItem("Assets/AddressableImporter: Check Folder(s)", true)]
         private static bool ValidateCheckFoldersFromSelection()
         {
             foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
