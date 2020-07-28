@@ -42,7 +42,7 @@ public class AddressableImportRule
     /// Path pattern.
     /// </summary>
     [Tooltip("The assets in this path will be processed.")]
-    public string path;
+    public string path = string.Empty;
 
     /// <summary>
     /// Method used to parse the Path.
@@ -54,7 +54,7 @@ public class AddressableImportRule
     /// The group the asset will be added.
     /// </summary>
     [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
-    public string groupName;
+    public string groupName = string.Empty;
 
     /// <summary>
     /// Cleaned group name.
@@ -100,7 +100,7 @@ public class AddressableImportRule
     /// </summary>
     [Tooltip("Replacement address string for regex matches.")]
     [ConditionalField("matchType", AddressableImportRuleMatchType.Regex, "simplified", false)]
-    public string addressReplacement;
+    public string addressReplacement = string.Empty;
 
     public bool HasLabel
     {

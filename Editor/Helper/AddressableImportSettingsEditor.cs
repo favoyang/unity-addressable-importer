@@ -17,17 +17,19 @@ namespace UnityAddressableImporter.Helper.Internal
 	public class AddressableImportSettingsEditor : Editor
 	{
 		private List<MethodInfo> _methods;
-		private ScriptableObject _target;
+		private AddressableImportSettings _target;
 		private AddressableImporterOdinHandler _drawer;
+		
 
 		private void OnEnable()
 		{
-			_target = target as ScriptableObject;
+			_target = target as AddressableImportSettings;
 			_drawer = _drawer ?? new AddressableImporterOdinHandler();
 			if (_target == null) return;
 			
-			_drawer.Initialize(target);
+			_drawer.Initialize(_target);
 			_methods = AddressableImporterMethodHandler.CollectValidMembers(_target.GetType());
+
 		}
 
 		private void OnDisable()
@@ -38,10 +40,15 @@ namespace UnityAddressableImporter.Helper.Internal
 		public override void OnInspectorGUI()
 		{
 			DrawBaseEditor();
-			
+
+#if !ODIN_INSPECTOR
 			if (_methods == null) return;
 
 			AddressableImporterMethodHandler.OnInspectorGUI(_target, _methods);
+#endif
+
+			serializedObject.ApplyModifiedProperties();
+
 		}
 
 		private void DrawBaseEditor()
