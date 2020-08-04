@@ -1,3 +1,10 @@
+## [0.9.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.0...v0.9.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* compile wrong naming bug (close [#39](https://github.com/favoyang/unity-addressable-importer/issues/39)) ([fbeef92](https://github.com/favoyang/unity-addressable-importer/commit/fbeef92c4df246cb75a020230acf60df9551b6f6))
+
 # [0.9.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.8.1...v0.9.0) (2020-07-28)
 
 
