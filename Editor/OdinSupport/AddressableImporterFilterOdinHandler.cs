@@ -10,7 +10,7 @@
     using UnityEditor;
     using UnityEngine;
 
-    public class AddressablesImporterFilterOdinHandler : ScriptableObject
+    public class AddressableImporterFilterOdinHandler : ScriptableObject
     {
         private AddressableImportSettings                       _importSettings;
         private PropertyTree                                    _drawerTree;
@@ -22,7 +22,7 @@
         [HideLabel]
         [OnValueChanged("OnFilterChanged")]
         private string _searchFilter;
-        
+
         [SerializeField]
         [ListDrawerSettings(
             HideRemoveButton = true,
@@ -39,13 +39,13 @@
         {
             _importSettings = importSettings;
             _drawerTree     = PropertyTree.Create(this);
-            
+
             _filters = new List<Func<AddressableImportRule, string, bool>>() {
                 ValidateAddressableGroupName,
                 ValidateRulePath,
                 ValidateLabelsPath,
             };
-            
+
             _drawerTree.OnPropertyValueChanged += (property, index) => EditorUtility.SetDirty(_importSettings);
         }
 
@@ -64,20 +64,20 @@
 
         [Button]
         public void Save() => _importSettings.Save();
-        
+
         [Button]
         public void Documentation() => _importSettings.Documentation();
-        
+
         [Button]
         public void CleanEmptyGroup() => _importSettings.CleanEmptyGroup();
-        
+
         #region private methods
 
         private void OnFilterChanged()
         {
-            
+
         }
-        
+
         private bool ValidateRule(AddressableImportRule rule,string filter)
         {
             return string.IsNullOrEmpty(filter) || _filters.Any(x => x(rule,filter));
@@ -87,12 +87,12 @@
         {
             return rule.groupName.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
-        
+
         private bool ValidateRulePath(AddressableImportRule rule, string filter)
         {
             return rule.path.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
-        
+
         private bool ValidateLabelsPath(AddressableImportRule rule, string filter)
         {
             return rule.labels.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
@@ -116,21 +116,21 @@
                 if(index < 0) continue;
                 _importSettings.rules[index] = rules[i];
             }
-            
+
         }
-        
+
         private void CustomAddFunction()
         {
             _importSettings.rules.Add(new AddressableImportRule());
             _sourceChanged = true;
         }
-        
+
         private void CustomRemoveIndexFunction(int index)
         {
             var removeResult = _importSettings.rules.Remove(rules[index]);
             _sourceChanged = true;
         }
-        
+
         private void CustomRemoveElementFunction(AddressableImportRule item)
         {
             var index = rules.IndexOf(item);
@@ -156,7 +156,7 @@
             if (_importSettings == null) return;
             EditorUtility.SetDirty(_importSettings);
         }
-        
+
         #endregion
     }
 #endif

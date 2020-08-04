@@ -11,10 +11,10 @@
     public class AddressableImporterOdinHandler : IDisposable
     {
         private AddressableImportSettings _settings;
-        private AddressablesImporterFilterOdinHandler _importRulesContainer;
+        private AddressableImporterFilterOdinHandler _importRulesContainer;
         private GUIContent _searchFieldLabel;
         private string _searchField;
-        
+
         public void Initialize(AddressableImportSettings target)
         {
             _settings = target;
@@ -24,7 +24,7 @@
         public void Draw()
         {
             DrawInspectorTree(_searchField);
-            
+
             EditorUtility.SetDirty(_settings);
         }
 
@@ -37,9 +37,9 @@
             }
         }
 
-        private AddressablesImporterFilterOdinHandler CreateDrawer(AddressableImportSettings settings)
+        private AddressableImporterFilterOdinHandler CreateDrawer(AddressableImportSettings settings)
         {
-            _importRulesContainer = ScriptableObject.CreateInstance<AddressablesImporterFilterOdinHandler>();
+            _importRulesContainer = ScriptableObject.CreateInstance<AddressableImporterFilterOdinHandler>();
             _importRulesContainer.Initialize(settings);
             return _importRulesContainer;
         }
@@ -49,13 +49,13 @@
             _importRulesContainer?.Draw();
         }
     }
-    
+
 #else
 
-    public class AddressablesImporterOdinHandler : IDisposable
+    public class AddressableImporterOdinHandler : IDisposable
     {
-        public void Initialize(AddressableImportSettings target) { } 
-        
+        public void Initialize(AddressableImportSettings target) { }
+
         public void Draw() { }
 
         public void Dispose() { }
