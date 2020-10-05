@@ -1,3 +1,24 @@
+## [0.9.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.1...v0.9.2) (2020-08-17)
+
+
+### Bug Fixes
+
+* constantly warn about missing settings (close: [#40](https://github.com/favoyang/unity-addressable-importer/issues/40)) ([d8d7975](https://github.com/favoyang/unity-addressable-importer/commit/d8d79750af9571097ae8e6b49abfde63cc1531fa))
+
+## [0.9.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.0...v0.9.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* compile wrong naming bug (close [#39](https://github.com/favoyang/unity-addressable-importer/issues/39)) ([fbeef92](https://github.com/favoyang/unity-addressable-importer/commit/fbeef92c4df246cb75a020230acf60df9551b6f6))
+
+# [0.9.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.8.1...v0.9.0) (2020-07-28)
+
+
+### Features
+
+* ODIN inspector search filter ([#35](https://github.com/favoyang/unity-addressable-importer/issues/35)) ([6d8022c](https://github.com/favoyang/unity-addressable-importer/commit/6d8022cfc56ef845dd540243f758d2410e82de30))
+
 ## [0.8.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.8.0...v0.8.1) (2020-07-06)
 
 

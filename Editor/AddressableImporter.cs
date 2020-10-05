@@ -25,7 +25,10 @@ public class AddressableImporter : AssetPostprocessor
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
-            Debug.LogWarningFormat("[Addressables] settings file not found.\nPlease go to Menu/Window/Asset Management/Addressables, then click 'Create Addressables Settings' button.");
+            if (!EditorApplication.isUpdating && !EditorApplication.isCompiling)
+            {
+                Debug.LogWarningFormat("[Addressables] settings file not found.\nPlease go to Menu/Window/Asset Management/Addressables, then click 'Create Addressables Settings' button.");
+            }
             return;
         }
         var importSettings = AddressableImportSettings.Instance;
