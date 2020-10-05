@@ -22,19 +22,19 @@ public class AddressableImportSettings : ScriptableObject
     public List<AddressableImportRule> rules;
 
     [ButtonMethod]
-    private void Save()
+    public void Save()
     {
         AssetDatabase.SaveAssets();
     }
 
     [ButtonMethod]
-    private void Documentation()
+    public void Documentation()
     {
         Application.OpenURL("https://github.com/favoyang/unity-addressable-importer/blob/master/Documentation~/AddressableImporter.md");
     }
 
     [ButtonMethod]
-    private void CleanEmptyGroup()
+    public void CleanEmptyGroup()
     {
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)

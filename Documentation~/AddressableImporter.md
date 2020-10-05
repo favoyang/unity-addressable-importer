@@ -9,6 +9,7 @@ Table of Contents
 - [Label Replacement](#label-replacement)
 - [Quick Assets Re-import](#quick-assets-re-import)
 - [About Prefab Mode](#about-prefab-mode)
+- [ODIN Inspector Support](#odin-inspector-support)
 
 ## Setup the Importer
 
@@ -99,7 +100,7 @@ The importer should apply the rules whenever an asset being imported, moved, or 
 
 ![AddressableImport Context Menu](AddressableImportSettings-ContextMenu.png)
 
-You can also use `ReimportFolders` API to process any folders in code. e.g. re-import all asset folders in a build script. The API requires an array of asset paths. An asset path is a string starts with "Assets".
+You can also use `ReimportFolders` API to process any folders in code. e.g. re-import all asset folders in a build script. The API requires an array of asset paths. An asset path is a string that starts with "Assets".
 
 ```
 // Example: process the whole "Assets" folder
@@ -109,3 +110,9 @@ AddressableImporter.FolderImporter.ReimportFolders(new string[] { "Assets" });
 ## About Prefab Mode
 
 When both prefab mode (the preview scene for editing a prefab) and the autosave feature are enabled, every modification will cause the asset to be saved and trigger the importer, leads to slow response. For performance reasons, the importer will ignore the current editing asset.
+
+## ODIN Inspector Support
+
+Since v0.9.0, the import supports [ODIN inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041?aid=1011lJJH) (affiliates) to optimize the user experience. ODIN is a paid tool to boost editor plugin development. The integration allows filter or order importer rules easier. The ODIN support is optional. To enable it, just install the ODIN library.
+
+However, the ODIN support may be discontinued if the importer's UX gets improved in the future.
