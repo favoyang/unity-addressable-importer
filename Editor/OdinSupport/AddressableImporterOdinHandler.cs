@@ -52,7 +52,7 @@
     
 #else
 
-    public class AddressablesImporterOdinHandler : IDisposable
+    public class AddressableImporterOdinHandler : IDisposable
     {
         public void Initialize(AddressableImportSettings target) { } 
         
