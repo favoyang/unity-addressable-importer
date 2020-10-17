@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="180" src="https://raw.githubusercontent.com/favoyang/unity-addressable-importer/master/Media/icon-512.png" alt="logo">
+  <img width="180" src="https://raw.githubusercontent.com/favoyang/unity-addressable-importer/master/Media~/icon-512.png" alt="logo">
 </p>
 <h1 align="center">Unity Addressable Importer</h1>
 <p align="center">
