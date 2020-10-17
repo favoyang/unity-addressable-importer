@@ -1,3 +1,10 @@
+## [0.9.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.2...v0.9.3) (2020-10-17)
+
+
+### Bug Fixes
+
+* move Media to Media~ to avoid generating meta files (close [#41](https://github.com/favoyang/unity-addressable-importer/issues/41)) ([ad09c0c](https://github.com/favoyang/unity-addressable-importer/commit/ad09c0ca2ee54713a9db883717945b2003e207f9))
+
 ## [0.9.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.1...v0.9.2) (2020-08-17)
 
 
