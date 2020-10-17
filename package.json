@@ -12,5 +12,6 @@
     "url": "https://github.com/favoyang"
   },
   "repository": "https://github.com/favoyang/unity-addressable-importer.git",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "tool"
 }
