@@ -1,3 +1,10 @@
+## [0.9.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.3...v0.9.4) (2020-12-18)
+
+
+### Bug Fixes
+
+* initial null exception error when ODIN is enabled (refs [#43](https://github.com/favoyang/unity-addressable-importer/issues/43)) ([f8d9bba](https://github.com/favoyang/unity-addressable-importer/commit/f8d9bbae27e2e8eec23e966a54f9372c607259a5))
+
 ## [0.9.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.2...v0.9.3) (2020-10-17)
 
 
