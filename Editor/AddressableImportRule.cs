@@ -59,8 +59,10 @@ public class AddressableImportRule
     /// <summary>
     /// Cleaned group name.
     /// </summary>
-    string CleanedGroupName {
-        get {
+    string CleanedGroupName
+    {
+        get
+        {
             return groupName.Trim().Replace('/', '-').Replace('\\', '-');
         }
     }
@@ -145,7 +147,8 @@ public class AddressableImportRule
         // Parse path elements.
         var replacement = AddressableImportRegex.ParsePath(assetPath, CleanedGroupName);
         // Parse this.path regex.
-        if (matchType == AddressableImportRuleMatchType.Regex) {
+        if (matchType == AddressableImportRuleMatchType.Regex)
+        {
             string pathRegex = path;
             replacement = Regex.Replace(assetPath, pathRegex, replacement);
         }
@@ -172,16 +175,16 @@ public class AddressableImportRule
         // If the match type is Wildcard, the pattern will match and capture the entire path string.
         string pathRegex =
             simplified
-            ? @"(?<path>.*[/\\])+(?<filename>.+?)(?<extension>\.[^.]*$|$)"
-            : (matchType == AddressableImportRuleMatchType.Wildcard
-                ? @"(.*)"
-                : path);
+                ? @"(?<path>.*[/\\])+(?<filename>.+?)(?<extension>\.[^.]*$|$)"
+                : (matchType == AddressableImportRuleMatchType.Wildcard
+                    ? @"(.*)"
+                    : path);
         replacement =
             simplified
-            ? @"${filename}"
-            : (matchType == AddressableImportRuleMatchType.Wildcard
-                ? @"$1"
-                : replacement);
+                ? @"${filename}"
+                : (matchType == AddressableImportRuleMatchType.Wildcard
+                    ? @"$1"
+                    : replacement);
         replacement = Regex.Replace(assetPath, pathRegex, replacement);
         return replacement;
     }

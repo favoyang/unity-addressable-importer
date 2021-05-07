@@ -19,7 +19,8 @@ public class AddressableImporter : AssetPostprocessor
         var isConfigurationPass =
             (importedAssets.Length > 0 && importedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
             (deletedAssets.Length > 0 && deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData")));
-        if (isConfigurationPass) {
+        if (isConfigurationPass)
+        {
             return;
         }
         var settings = AddressableAssetSettingsDefaultObject.Settings;
@@ -32,7 +33,8 @@ public class AddressableImporter : AssetPostprocessor
             return;
         }
         var importSettings = AddressableImportSettings.Instance;
-        if (importSettings == null) {
+        if (importSettings == null)
+        {
             Debug.LogWarningFormat("[AddressableImporter] import settings file not found.\nPlease go to Assets/AddressableAssetsData folder, right click in the project window and choose 'Create > Addressable Assets > Import Settings'.");
             return;
         }
@@ -59,7 +61,8 @@ public class AddressableImporter : AssetPostprocessor
 
         foreach (var deletedAsset in deletedAssets)
         {
-            if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule)) {
+            if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))
+            {
                 var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
                 if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
                 {
@@ -69,7 +72,8 @@ public class AddressableImporter : AssetPostprocessor
             }
         }
 
-        if (dirty) {
+        if (dirty)
+        {
             AssetDatabase.SaveAssets();
         }
     }

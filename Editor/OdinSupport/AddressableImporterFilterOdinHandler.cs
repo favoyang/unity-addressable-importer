@@ -1,7 +1,6 @@
 ﻿namespace UnityAddressableImporter.Editor.Helper
 {
 #if ODIN_INSPECTOR
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -38,7 +37,7 @@
         public void Initialize(AddressableImportSettings importSettings)
         {
             _importSettings = importSettings;
-            _drawerTree     = PropertyTree.Create(this);
+            _drawerTree = PropertyTree.Create(this);
 
             _filters = new List<Func<AddressableImportRule, string, bool>>() {
                 ValidateAddressableGroupName,
@@ -111,7 +110,7 @@
             _drawerTree.ApplyChanges();
 
             for (var i = 0; i < rules.Count; i++) {
-                var rule  = rules[i];
+                var rule = rules[i];
                 var index = _importSettings.rules.IndexOf(rule);
                 if(index < 0) continue;
                 _importSettings.rules[index] = rules[i];
