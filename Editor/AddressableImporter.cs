@@ -96,7 +96,7 @@ public class AddressableImporter : AssetPostprocessor
             var entry = CreateOrUpdateAddressableAssetEntry(settings, importSettings, matchedRule, assetPath);
             if (entry != null)
             {
-                if (matchedRule.HasLabel)
+                if (matchedRule.HasLabelRefs)
                     Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1} and labels {2}", assetPath, entry.address, string.Join(", ", entry.labels));
                 else
                     Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1}", assetPath, entry.address);
@@ -170,10 +170,18 @@ public class AddressableImporter : AssetPostprocessor
             // Add labels
             if (rule.LabelMode == LabelWriteMode.Replace)
                 entry.labels.Clear();
-            foreach (var label in rule.labels)
+            foreach (var label in rule.labelsRefsEnum)
             {
                 entry.labels.Add(label);
             }
+
+            foreach (var dynamicLabel in rule.dynamicLabels)
+            {
+                var label = rule.ParseReplacement(assetPath, dynamicLabel);
+                settings.AddLabel(label);
+                entry.labels.Add(label);
+            }
+
         }
         return entry;
     }
