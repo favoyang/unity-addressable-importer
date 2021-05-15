@@ -1,3 +1,10 @@
+## [0.9.7](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.6...v0.9.7) (2021-05-15)
+
+
+### Bug Fixes
+
+* null reference error since r9682904 ([777a3ca](https://github.com/favoyang/unity-addressable-importer/commit/777a3caea9b88abb42d3b73b36558f63690b911d))
+
 ## [0.9.6](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.5...v0.9.6) (2021-05-15)
 
 
