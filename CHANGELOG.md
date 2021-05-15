@@ -1,3 +1,10 @@
+## [0.9.8](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.7...v0.9.8) (2021-05-15)
+
+
+### Bug Fixes
+
+* mute ODIN UnityEngine.ExitGUIException error temporarily ([b4cb7cf](https://github.com/favoyang/unity-addressable-importer/commit/b4cb7cf28fb674e7c0b7aa63610cd11fab791cd6))
+
 ## [0.9.7](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.6...v0.9.7) (2021-05-15)
 
 
