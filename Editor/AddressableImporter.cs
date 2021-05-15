@@ -43,9 +43,14 @@ public class AddressableImporter : AssetPostprocessor
 
         // Apply import rules.
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+#if UNITY_2020_1_OR_NEWER
+        string prefabAssetPath = prefabStage.assetPath;
+#else
+		string prefabAssetPath = prefabStage.prefabAssetPath;
+#endif
         foreach (var importedAsset in importedAssets)
         {
-            if (prefabStage == null || prefabStage.prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
+            if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
         }
 
@@ -53,7 +58,7 @@ public class AddressableImporter : AssetPostprocessor
         {
             var movedAsset = movedAssets[i];
             var movedFromAssetPath = movedFromAssetPaths[i];
-            if (prefabStage == null || prefabStage.prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
+            if (prefabStage == null || prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
         }
 
