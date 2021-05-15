@@ -76,6 +76,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "gtoto007",
+      "name": "Giuseppe Toto",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6715157?v=4",
+      "profile": "http://giuseppetoto.it",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

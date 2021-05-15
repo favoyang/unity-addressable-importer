@@ -1,6 +1,7 @@
 ﻿namespace UnityAddressableImporter.Editor.Helper
 {
 #if ODIN_INSPECTOR
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -14,8 +15,6 @@
         private AddressableImportSettings                       _importSettings;
         private PropertyTree                                    _drawerTree;
         private List<Func<AddressableImportRule, string, bool>> _filters;
-        //private List<AddressableImportRule>                     _filteredRules;
-        private bool _sourceChanged = false;
         
         [ShowInInspector]
         [PropertyOrder(-1)]
@@ -45,7 +44,7 @@
         public void Initialize(AddressableImportSettings importSettings)
         {
             _importSettings = importSettings;
-            _drawerTree = PropertyTree.Create(this);
+            _drawerTree     = PropertyTree.Create(this);
 
             _filters = new List<Func<AddressableImportRule, string, bool>>() {
                 ValidateAddressableGroupName,
@@ -58,15 +57,9 @@
 
         public void Draw()
         {
-            try {
-                FilterRules(_searchFilter);
-                _drawerTree.Draw();
-                ApplyChanges();
-            }
-            catch (Exception e) {
-                Debug.LogError(e);
-            }
-
+            FilterRules(_searchFilter);
+            _drawerTree.Draw();
+            ApplyChanges();
         }
 
         [Button]
@@ -118,7 +111,7 @@
             _drawerTree.ApplyChanges();
 
             for (var i = 0; i < rules.Count; i++) {
-                var rule = rules[i];
+                var rule  = rules[i];
                 var index = _importSettings.rules.IndexOf(rule);
                 if(index < 0) continue;
                 _importSettings.rules[index] = rules[i];
@@ -129,13 +122,11 @@
         private void CustomAddFunction()
         {
             _importSettings.rules.Add(new AddressableImportRule());
-            _sourceChanged = true;
         }
 
         private void CustomRemoveIndexFunction(int index)
         {
             var removeResult = _importSettings.rules.Remove(rules[index]);
-            _sourceChanged = true;
         }
 
         private void CustomRemoveElementFunction(AddressableImportRule item)

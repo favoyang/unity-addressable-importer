@@ -1,3 +1,31 @@
+## [0.9.8](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.7...v0.9.8) (2021-05-15)
+
+
+### Bug Fixes
+
+* mute ODIN UnityEngine.ExitGUIException error temporarily ([b4cb7cf](https://github.com/favoyang/unity-addressable-importer/commit/b4cb7cf28fb674e7c0b7aa63610cd11fab791cd6))
+
+## [0.9.7](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.6...v0.9.7) (2021-05-15)
+
+
+### Bug Fixes
+
+* null reference error since r9682904 ([777a3ca](https://github.com/favoyang/unity-addressable-importer/commit/777a3caea9b88abb42d3b73b36558f63690b911d))
+
+## [0.9.6](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.5...v0.9.6) (2021-05-15)
+
+
+### Bug Fixes
+
+* CS0618 warning when access PrefabStage.assetPath ([9682904](https://github.com/favoyang/unity-addressable-importer/commit/96829041fe17ffc2b2cfec83e78e19fbbe490c35))
+
+## [0.9.5](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.4...v0.9.5) (2021-05-15)
+
+
+### Bug Fixes
+
+* AllowGroupCreation checkbox hidden when Odin is present (close [#45](https://github.com/favoyang/unity-addressable-importer/issues/45)) ([#49](https://github.com/favoyang/unity-addressable-importer/issues/49)) ([69a9cbb](https://github.com/favoyang/unity-addressable-importer/commit/69a9cbb5c913bbb2426657ce4358ba9ce5cb34c3))
+
 ## [0.9.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.3...v0.9.4) (2020-12-18)
 
 
