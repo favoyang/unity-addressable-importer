@@ -1,3 +1,10 @@
+## [0.9.6](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.5...v0.9.6) (2021-05-15)
+
+
+### Bug Fixes
+
+* CS0618 warning when access PrefabStage.assetPath ([9682904](https://github.com/favoyang/unity-addressable-importer/commit/96829041fe17ffc2b2cfec83e78e19fbbe490c35))
+
 ## [0.9.5](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.4...v0.9.5) (2021-05-15)
 
 
