@@ -1,3 +1,10 @@
+## [0.9.5](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.4...v0.9.5) (2021-05-15)
+
+
+### Bug Fixes
+
+* AllowGroupCreation checkbox hidden when Odin is present (close [#45](https://github.com/favoyang/unity-addressable-importer/issues/45)) ([#49](https://github.com/favoyang/unity-addressable-importer/issues/49)) ([69a9cbb](https://github.com/favoyang/unity-addressable-importer/commit/69a9cbb5c913bbb2426657ce4358ba9ce5cb34c3))
+
 ## [0.9.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.3...v0.9.4) (2020-12-18)
 
 
