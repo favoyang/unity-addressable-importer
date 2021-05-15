@@ -57,15 +57,9 @@
 
         public void Draw()
         {
-            try {
-                FilterRules(_searchFilter);
-                _drawerTree.Draw();
-                ApplyChanges();
-            }
-            catch (Exception e) {
-                Debug.LogError(e);
-            }
-
+            FilterRules(_searchFilter);
+            _drawerTree.Draw();
+            ApplyChanges();
         }
 
         [Button]
