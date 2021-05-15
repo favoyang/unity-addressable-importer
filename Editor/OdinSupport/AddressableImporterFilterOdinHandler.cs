@@ -49,7 +49,8 @@
             _filters = new List<Func<AddressableImportRule, string, bool>>() {
                 ValidateAddressableGroupName,
                 ValidateRulePath,
-                ValidateLabelsPath,
+                ValidateLabelRefsPath,
+                ValidateDynamicLabelsPath
             };
 
             _drawerTree.OnPropertyValueChanged += (property, index) => EditorUtility.SetDirty(_importSettings);
@@ -93,11 +94,14 @@
             return rule.path.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        private bool ValidateLabelsPath(AddressableImportRule rule, string filter)
+        private bool ValidateLabelRefsPath(AddressableImportRule rule, string filter)
         {
-            return rule.labels.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+            return rule.labelsRefsEnum.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
+        private bool ValidateDynamicLabelsPath(AddressableImportRule rule, string filter) {
+            return rule.dynamicLabels.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
         private void FilterRules(string filter)
         {
             rules = new List<AddressableImportRule>();
