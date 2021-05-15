@@ -16,7 +16,6 @@
         private PropertyTree                                    _drawerTree;
         private List<Func<AddressableImportRule, string, bool>> _filters;
         //private List<AddressableImportRule>                     _filteredRules;
-        private bool _sourceChanged = false;
         
         [ShowInInspector]
         [PropertyOrder(-1)]
@@ -130,13 +129,11 @@
         private void CustomAddFunction()
         {
             _importSettings.rules.Add(new AddressableImportRule());
-            _sourceChanged = true;
         }
 
         private void CustomRemoveIndexFunction(int index)
         {
             var removeResult = _importSettings.rules.Remove(rules[index]);
-            _sourceChanged = true;
         }
 
         private void CustomRemoveElementFunction(AddressableImportRule item)
