@@ -15,7 +15,6 @@
         private AddressableImportSettings                       _importSettings;
         private PropertyTree                                    _drawerTree;
         private List<Func<AddressableImportRule, string, bool>> _filters;
-        //private List<AddressableImportRule>                     _filteredRules;
         
         [ShowInInspector]
         [PropertyOrder(-1)]
