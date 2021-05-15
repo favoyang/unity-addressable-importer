@@ -16,6 +16,14 @@
         private List<Func<AddressableImportRule, string, bool>> _filters;
         //private List<AddressableImportRule>                     _filteredRules;
         private bool _sourceChanged = false;
+        
+        [ShowInInspector]
+        [PropertyOrder(-1)]
+        private bool AllowGroupCreation
+        {
+            set => _importSettings.allowGroupCreation = value;
+            get => _importSettings.allowGroupCreation;
+        }
 
         [SerializeField]
         [HideLabel]
