@@ -44,9 +44,9 @@ public class AddressableImporter : AssetPostprocessor
         // Apply import rules.
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
 #if UNITY_2020_1_OR_NEWER
-        string prefabAssetPath = prefabStage.assetPath;
+        string prefabAssetPath = prefabStage != null ? prefabStage.assetPath : null;
 #else
-		string prefabAssetPath = prefabStage.prefabAssetPath;
+        string prefabAssetPath = prefabStage != null ? prefabStage.prefabAssetPath : null;
 #endif
         foreach (var importedAsset in importedAssets)
         {
