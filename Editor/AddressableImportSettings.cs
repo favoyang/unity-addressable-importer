@@ -19,7 +19,7 @@ public class AddressableImportSettings : ScriptableObject
 #if ODIN_INSPECTOR
     [Sirenix.OdinInspector.ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true,HideRemoveButton = false)]
 #endif
-    public List<AddressableImportRule> rules;
+    public List<AddressableImportRule> rules = new List<AddressableImportRule>();
 
     [ButtonMethod]
     public void Save()

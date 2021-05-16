@@ -15,8 +15,14 @@
         private AddressableImportSettings                       _importSettings;
         private PropertyTree                                    _drawerTree;
         private List<Func<AddressableImportRule, string, bool>> _filters;
-        //private List<AddressableImportRule>                     _filteredRules;
-        private bool _sourceChanged = false;
+        
+        [ShowInInspector]
+        [PropertyOrder(-1)]
+        private bool AllowGroupCreation
+        {
+            set => _importSettings.allowGroupCreation = value;
+            get => _importSettings.allowGroupCreation;
+        }
 
         [SerializeField]
         [HideLabel]
@@ -43,7 +49,8 @@
             _filters = new List<Func<AddressableImportRule, string, bool>>() {
                 ValidateAddressableGroupName,
                 ValidateRulePath,
-                ValidateLabelsPath,
+                ValidateLabelRefsPath,
+                ValidateDynamicLabelsPath
             };
 
             _drawerTree.OnPropertyValueChanged += (property, index) => EditorUtility.SetDirty(_importSettings);
@@ -51,15 +58,9 @@
 
         public void Draw()
         {
-            try {
-                FilterRules(_searchFilter);
-                _drawerTree.Draw();
-                ApplyChanges();
-            }
-            catch (Exception e) {
-                Debug.LogError(e);
-            }
-
+            FilterRules(_searchFilter);
+            _drawerTree.Draw();
+            ApplyChanges();
         }
 
         [Button]
@@ -93,11 +94,14 @@
             return rule.path.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        private bool ValidateLabelsPath(AddressableImportRule rule, string filter)
+        private bool ValidateLabelRefsPath(AddressableImportRule rule, string filter)
         {
-            return rule.labels.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+            return rule.labelsRefsEnum.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
+        private bool ValidateDynamicLabelsPath(AddressableImportRule rule, string filter) {
+            return rule.dynamicLabels.Any(x => x.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
         private void FilterRules(string filter)
         {
             rules = new List<AddressableImportRule>();
@@ -122,13 +126,11 @@
         private void CustomAddFunction()
         {
             _importSettings.rules.Add(new AddressableImportRule());
-            _sourceChanged = true;
         }
 
         private void CustomRemoveIndexFunction(int index)
         {
             var removeResult = _importSettings.rules.Remove(rules[index]);
-            _sourceChanged = true;
         }
 
         private void CustomRemoveElementFunction(AddressableImportRule item)

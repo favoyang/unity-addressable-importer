@@ -1,3 +1,52 @@
+# [0.10.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.8...v0.10.0) (2021-05-16)
+
+
+### Features
+
+* dynamic labels (close: [#47](https://github.com/favoyang/unity-addressable-importer/issues/47)) ([#48](https://github.com/favoyang/unity-addressable-importer/issues/48)) ([66f1e34](https://github.com/favoyang/unity-addressable-importer/commit/66f1e34b40d5a90b56a2e84f82e6aa383acb834d)), closes [#45](https://github.com/favoyang/unity-addressable-importer/issues/45)
+
+## [0.9.8](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.7...v0.9.8) (2021-05-15)
+
+
+### Bug Fixes
+
+* mute ODIN UnityEngine.ExitGUIException error temporarily ([b4cb7cf](https://github.com/favoyang/unity-addressable-importer/commit/b4cb7cf28fb674e7c0b7aa63610cd11fab791cd6))
+
+## [0.9.7](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.6...v0.9.7) (2021-05-15)
+
+
+### Bug Fixes
+
+* null reference error since r9682904 ([777a3ca](https://github.com/favoyang/unity-addressable-importer/commit/777a3caea9b88abb42d3b73b36558f63690b911d))
+
+## [0.9.6](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.5...v0.9.6) (2021-05-15)
+
+
+### Bug Fixes
+
+* CS0618 warning when access PrefabStage.assetPath ([9682904](https://github.com/favoyang/unity-addressable-importer/commit/96829041fe17ffc2b2cfec83e78e19fbbe490c35))
+
+## [0.9.5](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.4...v0.9.5) (2021-05-15)
+
+
+### Bug Fixes
+
+* AllowGroupCreation checkbox hidden when Odin is present (close [#45](https://github.com/favoyang/unity-addressable-importer/issues/45)) ([#49](https://github.com/favoyang/unity-addressable-importer/issues/49)) ([69a9cbb](https://github.com/favoyang/unity-addressable-importer/commit/69a9cbb5c913bbb2426657ce4358ba9ce5cb34c3))
+
+## [0.9.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.3...v0.9.4) (2020-12-18)
+
+
+### Bug Fixes
+
+* initial null exception error when ODIN is enabled (refs [#43](https://github.com/favoyang/unity-addressable-importer/issues/43)) ([f8d9bba](https://github.com/favoyang/unity-addressable-importer/commit/f8d9bbae27e2e8eec23e966a54f9372c607259a5))
+
+## [0.9.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.2...v0.9.3) (2020-10-17)
+
+
+### Bug Fixes
+
+* move Media to Media~ to avoid generating meta files (close [#41](https://github.com/favoyang/unity-addressable-importer/issues/41)) ([ad09c0c](https://github.com/favoyang/unity-addressable-importer/commit/ad09c0ca2ee54713a9db883717945b2003e207f9))
+
 ## [0.9.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.1...v0.9.2) (2020-08-17)
 
 
