@@ -3,7 +3,6 @@ using UnityEditor.AddressableAssets.Settings;
 using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UniModules.UniGame.CoreModules.UniGame.AddressablesImporter.Editor;
 using UnityAddressableImporter.Helper;
 
 #if ODIN_INSPECTOR
