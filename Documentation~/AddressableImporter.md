@@ -29,7 +29,8 @@ Once the settings file selected, you can edit rules in the inspector window. The
   - Regex.
 - `Group Name`, leaves blank for the default group. For dynamic group see [Group Replacement](#group-replacement).
 - `Label Mode`, defines if labels will be added or replaced.
-- `Label Refs`, the labels to add.
+- `Label Refs`, The list static labels (already existing in your project) to be added to the Addressable Asset.
+- `Dynamic Labels`,The list of dynamic labels to be added to the Addressable Asset. If a label doesn't exist, then it will be create in your unity project.
 - `Address Simplified`, simplify address to filename without extension.
 - `Address Replacement`, leaves blank to use the asset path as address. For dynamic address see [Address Replacement](#address-replacement).
 
@@ -91,7 +92,21 @@ The importer always overrides existing address if
 In another word, if you are intending to manually change the address later, leave `Address Simplified` unticked, `Address Replacement` blank, and do not use `Assets/` prefix for the customized address name.
 
 ## Label Replacement
+You can add a label to your addressable asset.
 
+You can choose between:
+-  `Label Refs`: use a static label already created in Unity project 
+- `Dynamic Labels`: you can automatically create label in your Unity project and add it to your addressable asset.
+  You can use the same rules to create a dynamic name group explained in [Group Replacement](#group-replacement). 
+  
+| Asset Path             | Rule Path                                     | Label Replacement               | Result           |
+|------------------------|-----------------------------------------------|-----------------------------------|------------------|
+| `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(.*)\.png` | `${category}`            | cat        |
+  
+  
+  For an interactive example you can watch this video: https://youtu.be/r5bCKY6TvP0
+  
+  
 The importer always overrides existing labels if `LabelMode = Replace`.
 
 ## Quick Assets Re-import
