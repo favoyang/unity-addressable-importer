@@ -86,7 +86,7 @@
         {
             if (string.IsNullOrEmpty(camelCaseString)) return camelCaseString;
 
-            string camelCase   = Regex.Replace(Regex.Replace(camelCaseString, @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"), @"(\p{Ll})(\P{Ll})", "$1 $2");
+            string camelCase = Regex.Replace(Regex.Replace(camelCaseString, @"(\P{Ll})(\P{Ll}\p{Ll})", "$1 $2"), @"(\p{Ll})(\P{Ll})", "$1 $2");
             string firstLetter = camelCase.Substring(0, 1).ToUpper();
 
             if (camelCaseString.Length > 1)

@@ -19,7 +19,8 @@ public class AddressableImporter : AssetPostprocessor
         var isConfigurationPass =
             (importedAssets.Length > 0 && importedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
             (deletedAssets.Length > 0 && deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData")));
-        if (isConfigurationPass) {
+        if (isConfigurationPass)
+        {
             return;
         }
         var settings = AddressableAssetSettingsDefaultObject.Settings;
@@ -32,7 +33,8 @@ public class AddressableImporter : AssetPostprocessor
             return;
         }
         var importSettings = AddressableImportSettings.Instance;
-        if (importSettings == null) {
+        if (importSettings == null)
+        {
             Debug.LogWarningFormat("[AddressableImporter] import settings file not found.\nPlease go to Assets/AddressableAssetsData folder, right click in the project window and choose 'Create > Addressable Assets > Import Settings'.");
             return;
         }
@@ -64,7 +66,8 @@ public class AddressableImporter : AssetPostprocessor
 
         foreach (var deletedAsset in deletedAssets)
         {
-            if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule)) {
+            if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))
+            {
                 var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
                 if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
                 {
@@ -74,7 +77,8 @@ public class AddressableImporter : AssetPostprocessor
             }
         }
 
-        if (dirty) {
+        if (dirty)
+        {
             AssetDatabase.SaveAssets();
         }
     }
@@ -97,7 +101,7 @@ public class AddressableImporter : AssetPostprocessor
             var entry = CreateOrUpdateAddressableAssetEntry(settings, importSettings, matchedRule, assetPath);
             if (entry != null)
             {
-                if (matchedRule.HasLabel)
+                if (matchedRule.HasLabelRefs)
                     Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1} and labels {2}", assetPath, entry.address, string.Join(", ", entry.labels));
                 else
                     Debug.LogFormat("[AddressableImporter] Entry created/updated for {0} with address {1}", assetPath, entry.address);
@@ -171,10 +175,18 @@ public class AddressableImporter : AssetPostprocessor
             // Add labels
             if (rule.LabelMode == LabelWriteMode.Replace)
                 entry.labels.Clear();
-            foreach (var label in rule.labels)
+            foreach (var label in rule.labelsRefsEnum)
             {
                 entry.labels.Add(label);
             }
+
+            foreach (var dynamicLabel in rule.dynamicLabels)
+            {
+                var label = rule.ParseReplacement(assetPath, dynamicLabel);
+                settings.AddLabel(label);
+                entry.labels.Add(label);
+            }
+
         }
         return entry;
     }
