@@ -1,3 +1,10 @@
+# [0.10.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.8...v0.10.0) (2021-05-16)
+
+
+### Features
+
+* dynamic labels (close: [#47](https://github.com/favoyang/unity-addressable-importer/issues/47)) ([#48](https://github.com/favoyang/unity-addressable-importer/issues/48)) ([66f1e34](https://github.com/favoyang/unity-addressable-importer/commit/66f1e34b40d5a90b56a2e84f82e6aa383acb834d)), closes [#45](https://github.com/favoyang/unity-addressable-importer/issues/45)
+
 ## [0.9.8](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.7...v0.9.8) (2021-05-15)
 
 
