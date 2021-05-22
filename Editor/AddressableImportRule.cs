@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityAddressableImporter.Helper;
+
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 
 public enum AddressableImportRuleMatchType
 {
@@ -35,9 +38,14 @@ public enum GroupTemplateApplicationMode
     AlwaysOverwriteGroupSettings
 }
 
+
+
 [System.Serializable]
 public class AddressableImportRule
+    : ISearchFilterable
 {
+    #region inspector
+    
     /// <summary>
     /// Path pattern.
     /// </summary>
@@ -97,6 +105,13 @@ public class AddressableImportRule
     [ConditionalField("matchType", AddressableImportRuleMatchType.Regex, "simplified", false)]
     public string addressReplacement = string.Empty;
 
+    #endregion
+    
+    
+    private AddressableImportFilter _filter = new AddressableImportFilter();
+    public AddressableImportFilter Filter => _filter ?? new AddressableImportFilter();
+
+    
     public bool HasLabelRefs
     {
         get
@@ -105,6 +120,16 @@ public class AddressableImportRule
         }
     }
 
+    /// <summary>
+    /// check current rule for matching with filter pattern
+    /// </summary>
+    /// <param name="searchString">filter string</param>
+    /// <returns>filter result</returns>
+    public bool IsMatch(string searchString)
+    {
+        return string.IsNullOrEmpty(searchString) || Filter.IsMatch(this,searchString);
+    }
+    
     /// <summary>
     /// Returns True if given assetPath matched with the rule.
     /// </summary>
@@ -277,4 +302,5 @@ public class AddressableImportRule
             return finalPath;
         }
     }
+
 }

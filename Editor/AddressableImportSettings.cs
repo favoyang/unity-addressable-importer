@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityAddressableImporter.Helper;
 
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
 
 [CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressable Assets/Import Settings", order = 50)]
 public class AddressableImportSettings : ScriptableObject
@@ -17,7 +20,8 @@ public class AddressableImportSettings : ScriptableObject
 
     [Tooltip("Rules for managing imported assets.")]
 #if ODIN_INSPECTOR
-    [Sirenix.OdinInspector.ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true,HideRemoveButton = false)]
+    [ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true,HideRemoveButton = false)]
+    [Searchable(FilterOptions = SearchFilterOptions.ISearchFilterableInterface)]
 #endif
     public List<AddressableImportRule> rules = new List<AddressableImportRule>();
 
