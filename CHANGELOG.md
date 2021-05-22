@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.10.0...v0.11.0) (2021-05-22)
+
+
+### Features
+
+* Odin v3 support ([#53](https://github.com/favoyang/unity-addressable-importer/issues/53)) ([29dd7bf](https://github.com/favoyang/unity-addressable-importer/commit/29dd7bfb075dc152c3335f9b224ddbf8b18fe65a))
+
 # [0.10.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.9.8...v0.10.0) (2021-05-16)
 
 

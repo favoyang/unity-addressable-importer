@@ -1,7 +1,7 @@
 {
   "name": "com.littlebigfun.addressable-importer",
   "displayName": "Unity Addressable Importer",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "unity": "2018.3",
   "description": "A simple rule based addressable asset importer.",
   "dependencies": {
