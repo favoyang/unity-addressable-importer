@@ -130,6 +130,14 @@ namespace UnityAddressableImporter.Helper
         private ValueResolver<string> _groupNameResolver;
 #endif
 
+        private static readonly GUIStyle FOLDOUT_STYLE_BOLD;
+
+        static FoldoutColorGroupAttributeDrawer()
+        {
+            FOLDOUT_STYLE_BOLD = new GUIStyle(SirenixGUIStyles.Foldout);
+            FOLDOUT_STYLE_BOLD.fontStyle = FontStyle.Bold;
+        }
+
         private LocalPersistentContext<bool> _isExpanded;
 
         protected override void Initialize()
@@ -186,12 +194,9 @@ namespace UnityAddressableImporter.Helper
             if (colored && coloredAll)
                 GUIHelper.PopColor();
 
-            GUIStyle labelStyle = null;
 
-            if (Attribute.BoldLabel)
-                labelStyle = EditorStyles.boldLabel;
-
-            _isExpanded.Value = SirenixEditorGUI.Foldout(_isExpanded.Value, headerLabel, labelStyle);
+            var foldoutStyle = Attribute.BoldLabel ? FOLDOUT_STYLE_BOLD : SirenixGUIStyles.Foldout;
+            _isExpanded.Value = SirenixEditorGUI.Foldout(_isExpanded.Value, headerLabel, foldoutStyle);
 
             SirenixEditorGUI.EndBoxHeader();
 
