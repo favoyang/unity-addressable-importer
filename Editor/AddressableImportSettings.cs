@@ -18,6 +18,7 @@ public class AddressableImportSettings : ScriptableObject
     [Tooltip("Creates a group if the specified group doesn't exist.")]
     public bool allowGroupCreation = false;
 
+    [Space]
     [Tooltip("Rules for managing imported assets.")]
 #if ODIN_INSPECTOR
     [ListDrawerSettings(HideAddButton = false,Expanded = false,DraggableItems = true,HideRemoveButton = false)]

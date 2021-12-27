@@ -23,7 +23,7 @@ namespace UnityAddressableImporter.Helper
     }
 }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR && !ODIN_INSPECTOR
 namespace UnityAddressableImporter.Helper.Internal
 {
     [CustomPropertyDrawer(typeof(LabelAttribute))]

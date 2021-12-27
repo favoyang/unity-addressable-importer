@@ -45,12 +45,12 @@ public class AddressableImportRule
     : ISearchFilterable
 {
     #region inspector
-    
+
     /// <summary>
-    /// Path pattern.
+    /// The group the asset will be added.
     /// </summary>
-    [Tooltip("The assets in this path will be processed.")]
-    public string path = string.Empty;
+    [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
+    public string groupName = string.Empty;
 
     /// <summary>
     /// Method used to parse the Path.
@@ -59,10 +59,10 @@ public class AddressableImportRule
     public AddressableImportRuleMatchType matchType;
 
     /// <summary>
-    /// The group the asset will be added.
+    /// Path pattern.
     /// </summary>
-    [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
-    public string groupName = string.Empty;
+    [Tooltip("The assets in this path will be processed.")]
+    public string path = string.Empty;
 
 
     /// <summary>
@@ -106,12 +106,12 @@ public class AddressableImportRule
     public string addressReplacement = string.Empty;
 
     #endregion
-    
-    
+
+
     private AddressableImportFilter _filter = new AddressableImportFilter();
     public AddressableImportFilter Filter => _filter ?? new AddressableImportFilter();
 
-    
+
     public bool HasLabelRefs
     {
         get
@@ -129,7 +129,7 @@ public class AddressableImportRule
     {
         return string.IsNullOrEmpty(searchString) || Filter.IsMatch(this,searchString);
     }
-    
+
     /// <summary>
     /// Returns True if given assetPath matched with the rule.
     /// </summary>
