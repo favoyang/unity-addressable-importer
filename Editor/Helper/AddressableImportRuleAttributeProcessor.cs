@@ -88,7 +88,6 @@ namespace UnityAddressableImporter.Helper
                     break;
 
                 case PROP_ADDRESS_REPLACEMENT:
-                    ProcessRuleGroup(attributes);
                     ProcessTitleGroup(attributes, TITLE_ADDRESS, "Replacement");
                     break;
             }
