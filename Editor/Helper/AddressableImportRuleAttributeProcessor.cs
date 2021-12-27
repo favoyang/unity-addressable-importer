@@ -30,7 +30,7 @@ namespace UnityAddressableImporter.Helper
         private const string RULE_FOLDOUT = "Rule";
         private static readonly string RULE_FOLDOUT_LABEL = $"@{PROP_GROUP_NAME}";
 
-        private static readonly string TITLE_PATH = $"{RULE_FOLDOUT}/Path";
+        private static readonly string TITLE_PATH = $"{RULE_FOLDOUT}/Asset Path";
         private static readonly string TITLE_TEMPLATE = $"{RULE_FOLDOUT}/Group Template";
         private static readonly string TITLE_ADDRESS = $"{RULE_FOLDOUT}/Address";
 
