@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.0...v0.11.1) (2021-12-29)
+
+
+### Bug Fixes
+
+* change namespace of PrefabStageUtility in Unity 2021.2 ([#61](https://github.com/favoyang/unity-addressable-importer/issues/61)) ([e287dc9](https://github.com/favoyang/unity-addressable-importer/commit/e287dc91c51109cf7ed3056c82580b0e5c1a020b))
+
 # [0.11.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.10.0...v0.11.0) (2021-05-22)
 
 
