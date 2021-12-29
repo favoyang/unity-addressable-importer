@@ -75,6 +75,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://greenbuttongames.com"><img src="https://avatars1.githubusercontent.com/u/7457166?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mefodei</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=Mefodei" title="Code">💻</a></td>
     <td align="center"><a href="http://giuseppetoto.it"><img src="https://avatars.githubusercontent.com/u/6715157?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Giuseppe Toto</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=gtoto007" title="Code">💻</a></td>
+    <td align="center"><a href="https://laicasaane.xyz"><img src="https://avatars.githubusercontent.com/u/1594982?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Laicasaane</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=laicasaane" title="Code">💻</a></td>
   </tr>
 </table>
 
