@@ -180,18 +180,24 @@ public class AddressableImporter : AssetPostprocessor
             // Add labels
             if (rule.LabelMode == LabelWriteMode.Replace)
                 entry.labels.Clear();
-            foreach (var label in rule.labelsRefsEnum)
+
+            if (rule.labelsRefsEnum != null)
             {
-                entry.labels.Add(label);
+                foreach (var label in rule.labelsRefsEnum)
+                {
+                    entry.labels.Add(label);
+                }
             }
 
-            foreach (var dynamicLabel in rule.dynamicLabels)
+            if (rule.dynamicLabels != null)
             {
-                var label = rule.ParseReplacement(assetPath, dynamicLabel);
-                settings.AddLabel(label);
-                entry.labels.Add(label);
+                foreach (var dynamicLabel in rule.dynamicLabels)
+                {
+                    var label = rule.ParseReplacement(assetPath, dynamicLabel);
+                    settings.AddLabel(label);
+                    entry.labels.Add(label);
+                }
             }
-
         }
         return entry;
     }
