@@ -1,3 +1,10 @@
+## [0.11.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.1...v0.11.2) (2022-01-06)
+
+
+### Bug Fixes
+
+* prevent null exception when access label fields in the rule ([#63](https://github.com/favoyang/unity-addressable-importer/issues/63)) ([cebf133](https://github.com/favoyang/unity-addressable-importer/commit/cebf133eaddae52abcd7f84a048f370ec059ead6))
+
 ## [0.11.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.0...v0.11.1) (2021-12-29)
 
 
