@@ -47,37 +47,24 @@ public class AddressableImportRule
     #region inspector
 
     /// <summary>
-    /// The group the asset will be added.
-    /// </summary>
-    [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
-    public string groupName = string.Empty;
-
-    /// <summary>
-    /// Method used to parse the Path.
-    /// </summary>
-    [Tooltip("The path parsing method.")]
-    public AddressableImportRuleMatchType matchType;
-
-    /// <summary>
     /// Path pattern.
     /// </summary>
     [Tooltip("The assets in this path will be processed.")]
     public string path = string.Empty;
 
+    /// <summary>
+    /// Method used to parse the Path.
+    /// </summary>
+    [Tooltip("The path parsing method.")]
+    [IndentField(1)]
+    public AddressableImportRuleMatchType matchType;
 
     /// <summary>
-    /// Defines if labels will be added or replaced.
+    /// The group the asset will be added.
     /// </summary>
-    public LabelWriteMode LabelMode;
-
-    /// <summary>
-    /// Label reference list.
-    /// </summary>
-    [Tooltip("The list of addressable labels (already existing in your project) to be added to the Addressable Asset")]
-    public List<AssetLabelReference> labelRefs;
-
-    [Tooltip("The list of dynamic labels to be added to the Addressable Asset. If an addressable label doesn't exist, then it will be create in your unity project")]
-    public List<string> dynamicLabels;
+    [Tooltip("The group name in which the Addressable will be added. Leave blank for the default group.")]
+    [Space]
+    public string groupName = string.Empty;
 
     /// <summary>
     /// Group template to use. Default Group settings will be used if empty.
@@ -89,13 +76,29 @@ public class AddressableImportRule
     /// Controls wether group template will be applied only on group creation, or also to already created groups.
     /// </summary>
     [Tooltip("Defines if the group template will only be applied to new groups, or will also overwrite existing groups settings.")]
+    [Label("Application Mode"), IndentField(1)]
     public GroupTemplateApplicationMode groupTemplateApplicationMode = GroupTemplateApplicationMode.ApplyOnGroupCreationOnly;
+
+    /// <summary>
+    /// Label reference list.
+    /// </summary>
+    [Tooltip("The list of addressable labels (already existing in your project) to be added to the Addressable Asset")]
+    [Space]
+    public List<AssetLabelReference> labelRefs;
+
+    [Tooltip("The list of dynamic labels to be added to the Addressable Asset. If an addressable label doesn't exist, then it will be create in your unity project")]
+    public List<string> dynamicLabels;
+
+    /// <summary>
+    /// Defines if labels will be added or replaced.
+    /// </summary>
+    public LabelWriteMode LabelMode;
 
     /// <summary>
     /// Simplify address.
     /// </summary>
     [Tooltip("Simplify address to filename without extension.")]
-    [Label("Address Simplified")]
+    [Label("Address Simplified"), Space]
     public bool simplified;
 
     /// <summary>
