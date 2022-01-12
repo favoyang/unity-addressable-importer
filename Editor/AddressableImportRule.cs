@@ -76,7 +76,7 @@ public class AddressableImportRule
     /// Controls wether group template will be applied only on group creation, or also to already created groups.
     /// </summary>
     [Tooltip("Defines if the group template will only be applied to new groups, or will also overwrite existing groups settings.")]
-    [Label("Application Mode"), IndentField(1)]
+    [IndentLabel("Application Mode", 1)]
     public GroupTemplateApplicationMode groupTemplateApplicationMode = GroupTemplateApplicationMode.ApplyOnGroupCreationOnly;
 
     /// <summary>
