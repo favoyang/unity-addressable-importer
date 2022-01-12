@@ -22,6 +22,12 @@ namespace UnityAddressableImporter.Helper
         private const string RULE_FOLDOUT = "Rule";
         private static readonly string RULE_FOLDOUT_LABEL = $"@{PROP_PATH}";
 
+        private const string ADDRESSABLE_IMPORT_RULE_MATCH_TYPE = nameof(AddressableImportRuleMatchType);
+        private const string WILDCARD = nameof(AddressableImportRuleMatchType.Wildcard);
+        private static readonly string ADDRESS_REPLACEMENT_HIDE_IF =
+            $"@this.{PROP_MATCH_TYPE} == {ADDRESSABLE_IMPORT_RULE_MATCH_TYPE}.{WILDCARD} ||" +
+            $"this.{PROP_SIMPLIFIED} == true";
+
         private static readonly Color RULE_COLOR = Color.green;
         private static readonly FoldoutColorMode RULE_COLOR_MODE = FoldoutColorMode.OnExpanded;
         private static readonly FoldoutColorSelector RULE_COLOR_SELECTOR = FoldoutColorSelector.Header;
@@ -61,7 +67,7 @@ namespace UnityAddressableImporter.Helper
                     break;
 
                 case PROP_ADDRESS_REPLACEMENT:
-                    attributes.Add(new HideIfAttribute(PROP_MATCH_TYPE, AddressableImportRuleMatchType.Wildcard));
+                    attributes.Add(new HideIfAttribute(ADDRESS_REPLACEMENT_HIDE_IF));
                     break;
             }
         }
