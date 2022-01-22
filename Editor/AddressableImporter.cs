@@ -37,13 +37,16 @@ public class AddressableImporter : AssetPostprocessor
             }
             return;
         }
-        var importSettings = AddressableImportSettings.Instance;
-        if (importSettings == null)
+        var importSettingsInstances = AddressableImportSettings.Instances;
+        if (importSettingsInstances == null)
         {
-            Debug.LogWarningFormat("[AddressableImporter] import settings file not found.\nPlease go to Assets/AddressableAssetsData folder, right click in the project window and choose 'Create > Addressable Assets > Import Settings'.");
+            Debug.LogWarningFormat("[AddressableImporter] import settings file not found.\nPlease, right click in the project window and choose 'Create > Addressable Assets > Import Settings'.");
             return;
         }
-        if (importSettings.rules == null || importSettings.rules.Count == 0)
+
+        var hasRules = importSettingsInstances.Any(s => s.rules.Count > 0);
+
+        if (!hasRules)
             return;
 
         var dirty = false;
@@ -57,27 +60,38 @@ public class AddressableImporter : AssetPostprocessor
 #endif
         foreach (var importedAsset in importedAssets)
         {
-            if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
-                dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
+            foreach (var importSettings in importSettingsInstances)
+            {
+                if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
+                    dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
+            }
+            
         }
 
         for (var i = 0; i < movedAssets.Length; i++)
         {
             var movedAsset = movedAssets[i];
             var movedFromAssetPath = movedFromAssetPaths[i];
-            if (prefabStage == null || prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
-                dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
+            
+            foreach (var importSettings in importSettingsInstances)
+            {
+                if (prefabStage == null || prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
+                    dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
+            }
         }
 
         foreach (var deletedAsset in deletedAssets)
         {
-            if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))
+            foreach (var importSettings in importSettingsInstances)
             {
-                var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
-                if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
+                if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))
                 {
-                    dirty = true;
-                    Debug.LogFormat("[AddressableImporter] Entry removed for {0}", deletedAsset);
+                    var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
+                    if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
+                    {
+                        dirty = true;
+                        Debug.LogFormat("[AddressableImporter] Entry removed for {0}", deletedAsset);
+                    }
                 }
             }
         }

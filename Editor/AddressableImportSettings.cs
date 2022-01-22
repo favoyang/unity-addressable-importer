@@ -12,9 +12,10 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressable Assets/Import Settings", order = 50)]
 public class AddressableImportSettings : ScriptableObject
 {
-    public const string kDefaultConfigObjectName = "addressableimportsettings";
-    public const string kDefaultPath = "Assets/AddressableAssetsData/AddressableImportSettings.asset";
-
+    [Tooltip("Toggle rules enabled state")]
+    [SerializeField]
+    private bool rulesEnabled = true;
+    
     [Tooltip("Creates a group if the specified group doesn't exist.")]
     public bool allowGroupCreation = false;
 
@@ -58,19 +59,15 @@ public class AddressableImportSettings : ScriptableObject
         }
     }
 
-    public static AddressableImportSettings Instance
+    public static AddressableImportSettings[] Instances
     {
         get
         {
-            AddressableImportSettings so;
-            // Try to locate settings via EditorBuildSettings.
-            if (EditorBuildSettings.TryGetConfigObject(kDefaultConfigObjectName, out so))
-                return so;
-            // Try to locate settings via path.
-            so = AssetDatabase.LoadAssetAtPath<AddressableImportSettings>(kDefaultPath);
-            if (so != null)
-                EditorBuildSettings.AddConfigObject(kDefaultConfigObjectName, so, true);
-            return so;
+            return AssetDatabase.FindAssets($"t:{nameof(AddressableImportSettings)}")
+                .Select(guid =>
+                    AssetDatabase.LoadAssetAtPath<AddressableImportSettings>(AssetDatabase.GUIDToAssetPath(guid)))
+                .Where(settings => settings.rulesEnabled)
+                .ToArray();
         }
     }
 }
