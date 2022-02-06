@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEditor.AddressableAssets;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityAddressableImporter.Helper;
 
@@ -10,10 +9,10 @@ using UnityAddressableImporter.Helper;
 using Sirenix.OdinInspector;
 #endif
 
-// [CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressable Assets/Import Settings", order = 50)]
+[CreateAssetMenu(fileName = "AddressableImportSettings", menuName = "Addressables/Import Settings", order = 50)]
 public class AddressableImportSettings : ScriptableObject
 {
-    public const string kDefaultConfigObjectName = "addressableimportsettings";
+    public const string kConfigObjectName = "addressableimportsettings";
     public const string kDefaultPath = "Assets/AddressableAssetsData/AddressableImportSettings.asset";
 
     [Tooltip("Creates a group if the specified group doesn't exist.")]
@@ -64,49 +63,25 @@ public class AddressableImportSettings : ScriptableObject
         get
         {
             AddressableImportSettings so;
-            // Try to locate settings via EditorBuildSettings.
-            if (EditorBuildSettings.TryGetConfigObject(kDefaultConfigObjectName, out so))
+            // Try to locate settings from EditorBuildSettings
+            if (EditorBuildSettings.TryGetConfigObject(kConfigObjectName, out so))
                 return so;
-            // Try to locate settings via path.
+            // Try to locate settings from default path
             so = AssetDatabase.LoadAssetAtPath<AddressableImportSettings>(kDefaultPath);
             if (so != null) {
-                EditorBuildSettings.AddConfigObject(kDefaultConfigObjectName, so, true);
+                EditorBuildSettings.AddConfigObject(kConfigObjectName, so, true);
+                return so;
             }
-            else {
-                var path = AssetDatabase.FindAssets("t: AddressableImportSettings");
-                if (path.Length == 0) {
-                    return so;
-                }
+            // Try to locate settings from AssetDatabase
+            var path = AssetDatabase.FindAssets($"t:{nameof(AddressableImportSettings)}");
+            if (path.Length > 0) {
                 var assetPath = AssetDatabase.GUIDToAssetPath(path[0]);
                 so = AssetDatabase.LoadAssetAtPath<AddressableImportSettings>(assetPath);
-                EditorBuildSettings.AddConfigObject(assetPath, so, true);
+                EditorBuildSettings.AddConfigObject(kConfigObjectName, so, true);
+                return so;
             }
-            return so;
+            return null;
         }
     }
 
-    [MenuItem("Assets/Create/Addressable Assets/Import Settings", priority = 50)]
-    public static void CreateAddressableImportAsset() {
-        const string defaultAssetName = "AddressableImportSettings";
-        // Find if asset already exist
-        var tryLoadExist = AssetDatabase.FindAssets("t: AddressableImportSettings");
-        var exist = tryLoadExist.Length > 0;
-        if (exist) {
-            var path = AssetDatabase.GUIDToAssetPath(tryLoadExist[0]);
-            var instance = AssetDatabase.LoadAssetAtPath<AddressableImportSettings>(path);
-            Debug.Log($"AddressableImportSettings already existed at path: {path}", instance);
-            return;
-        }
-
-        var newInstance = CreateInstance<AddressableImportSettings>();
-        newInstance.name = defaultAssetName;
-        if (!Directory.Exists(kDefaultPath)) {
-            Directory.CreateDirectory(kDefaultPath);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-        }
-        AssetDatabase.CreateAsset(newInstance, kDefaultPath);
-        EditorUtility.SetDirty(newInstance);
-        AssetDatabase.SaveAssets();
-    }
 }

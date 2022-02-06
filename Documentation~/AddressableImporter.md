@@ -13,7 +13,7 @@ Table of Contents
 
 ## Setup the Importer
 
-You should create a single AddressableImportSettings file located at `Assets/AddressableAssetsData/AddressableImportSettings.asset`. To create it, go to `Assets/AddressableAssetsData` folder, right click in your project window and choose `Create > Addressable Assets > Import Settings`.
+You should create a single AddressableImportSettings file located at `Assets/AddressableAssetsData/AddressableImportSettings.asset`. To create it, go to `Assets/AddressableAssetsData` folder, right click in your project window and choose `Create > Addressables > Import Settings`.
 
 ![AddressableImportSettings Create](AddressableImportSettings-Create.png)
 
@@ -95,18 +95,18 @@ In another word, if you are intending to manually change the address later, leav
 You can add a label to your addressable asset.
 
 You can choose between:
--  `Label Refs`: use a static label already created in Unity project 
+-  `Label Refs`: use a static label already created in Unity project
 - `Dynamic Labels`: you can automatically create label in your Unity project and add it to your addressable asset.
-  You can use the same rules to create a dynamic name group explained in [Group Replacement](#group-replacement). 
-  
+  You can use the same rules to create a dynamic name group explained in [Group Replacement](#group-replacement).
+
 | Asset Path             | Rule Path                                     | Label Replacement               | Result           |
 |------------------------|-----------------------------------------------|-----------------------------------|------------------|
 | `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(.*)\.png` | `${category}`            | cat        |
-  
-  
+
+
   For an interactive example you can watch this video: https://youtu.be/r5bCKY6TvP0
-  
-  
+
+
 The importer always overrides existing labels if `LabelMode = Replace`.
 
 ## Quick Assets Re-import
@@ -141,5 +141,3 @@ error CS0246: The type or namespace name 'ISearchFilterable' could not be found 
 ```
 
 Notice that the Odin support may be moved to an additional plugin or discontinued if the importer's UX gets improved in the future.
-
-
