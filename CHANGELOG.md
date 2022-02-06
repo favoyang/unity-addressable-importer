@@ -1,3 +1,10 @@
+## [0.11.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.2...v0.11.3) (2022-02-06)
+
+
+### Bug Fixes
+
+* allow load import settings file independent to the default location ([#64](https://github.com/favoyang/unity-addressable-importer/issues/64), [#68](https://github.com/favoyang/unity-addressable-importer/issues/68)) ([8004b5c](https://github.com/favoyang/unity-addressable-importer/commit/8004b5ccb8299307001bb8cbe14ce2925d84167d))
+
 ## [0.11.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.1...v0.11.2) (2022-01-06)
 
 
