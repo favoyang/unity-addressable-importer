@@ -103,6 +103,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "fantasyz",
+      "name": "Nick Mok",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3223242?v=4",
+      "profile": "https://github.com/fantasyz",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
