@@ -1,3 +1,10 @@
+## [0.11.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.3...v0.11.4) (2022-03-31)
+
+
+### Bug Fixes
+
+* folder ends with '~' should be ignored [#72](https://github.com/favoyang/unity-addressable-importer/issues/72) ([491c169](https://github.com/favoyang/unity-addressable-importer/commit/491c169cc079094bf9a2dd21bd10a6844500fceb))
+
 ## [0.11.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.2...v0.11.3) (2022-02-06)
 
 
