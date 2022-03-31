@@ -57,6 +57,8 @@ public class AddressableImporter : AssetPostprocessor
 #endif
         foreach (var importedAsset in importedAssets)
         {
+            if (IsAssetIgnored(importedAsset))
+                continue;
             if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
         }
@@ -64,6 +66,8 @@ public class AddressableImporter : AssetPostprocessor
         for (var i = 0; i < movedAssets.Length; i++)
         {
             var movedAsset = movedAssets[i];
+            if (IsAssetIgnored(movedAsset))
+                continue;
             var movedFromAssetPath = movedFromAssetPaths[i];
             if (prefabStage == null || prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
                 dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
@@ -71,6 +75,8 @@ public class AddressableImporter : AssetPostprocessor
 
         foreach (var deletedAsset in deletedAssets)
         {
+            if (IsAssetIgnored(deletedAsset))
+                continue;
             if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))
             {
                 var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
@@ -86,6 +92,11 @@ public class AddressableImporter : AssetPostprocessor
         {
             AssetDatabase.SaveAssets();
         }
+    }
+
+    static bool IsAssetIgnored(string assetPath)
+    {
+        return assetPath.EndsWith(".meta") || assetPath.EndsWith(".DS_Store") || assetPath.EndsWith("~");
     }
 
     static AddressableAssetGroup CreateAssetGroup<SchemaType>(AddressableAssetSettings settings, string groupName)
@@ -281,7 +292,7 @@ public class AddressableImporter : AssetPostprocessor
                     foreach (var file in filesToAdd)
                     {
                         // Filter out meta and DS_Store files.
-                        if (!file.EndsWith(".meta") && !file.EndsWith(".DS_Store"))
+                        if (!IsAssetIgnored(file))
                         {
                             pathsToImport.Add(file.Replace('\\', '/'));
                         }
