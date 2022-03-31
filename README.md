@@ -77,6 +77,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://giuseppetoto.it"><img src="https://avatars.githubusercontent.com/u/6715157?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Giuseppe Toto</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=gtoto007" title="Code">💻</a></td>
     <td align="center"><a href="https://laicasaane.xyz"><img src="https://avatars.githubusercontent.com/u/1594982?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Laicasaane</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=laicasaane" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/JVinceW"><img src="https://avatars.githubusercontent.com/u/11038182?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JVince</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=JVinceW" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/fantasyz"><img src="https://avatars.githubusercontent.com/u/3223242?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick Mok</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/issues?q=author%3Afantasyz" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
