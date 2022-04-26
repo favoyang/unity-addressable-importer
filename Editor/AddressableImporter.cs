@@ -16,8 +16,23 @@ using UnityEditor.SceneManagement;
 using UnityEditor.Experimental.SceneManagement;
 #endif
 
+[InitializeOnLoad]
 public class AddressableImporter : AssetPostprocessor
 {
+    // The selection active object
+    static UnityEngine.Object selectionActiveObject = null;
+
+    static AddressableImporter()
+    {
+        Selection.selectionChanged += OnSelectionChanged;
+
+    }
+
+    static void OnSelectionChanged()
+    {
+        selectionActiveObject = Selection.activeObject;
+    }
+
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
     {
         // Skip if all imported and deleted assets are addressables configurations.
@@ -46,8 +61,9 @@ public class AddressableImporter : AssetPostprocessor
         if (importSettings.rules == null || importSettings.rules.Count == 0)
             return;
 
+        // Cache the selection active object
+        var cachedSelectionActiveObject = selectionActiveObject;
         var dirty = false;
-
         // Apply import rules.
         var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
 #if UNITY_2020_1_OR_NEWER
@@ -91,6 +107,9 @@ public class AddressableImporter : AssetPostprocessor
         if (dirty)
         {
             AssetDatabase.SaveAssets();
+            // Restore the cached selection active object to avoid the current selection being set to null by
+            // saving changed Addressable groups (#71).
+            Selection.activeObject = cachedSelectionActiveObject;
         }
     }
 
