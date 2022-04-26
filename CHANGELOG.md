@@ -1,3 +1,10 @@
+## [0.11.5](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.4...v0.11.5) (2022-04-26)
+
+
+### Bug Fixes
+
+* avoid the selection.activeObject being reset to null when editing an addressable prefab [#71](https://github.com/favoyang/unity-addressable-importer/issues/71) ([e745f92](https://github.com/favoyang/unity-addressable-importer/commit/e745f92af10a843c4aca8bf8f8641fb001229be6))
+
 ## [0.11.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.3...v0.11.4) (2022-03-31)
 
 
