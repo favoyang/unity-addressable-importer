@@ -36,20 +36,24 @@ openupm add com.littlebigfun.addressable-importer
 
 Open *Packages/manifest.json* with your favorite text editor. Add the following line to the dependencies block.
 
+```json
     {
         "dependencies": {
             "com.littlebigfun.addressable-importer": "https://github.com/favoyang/unity-addressable-importer.git"
         }
     }
+```
 
 Notice: Unity Package Manager records the current commit to a lock entry of the *manifest.json*. To update to the latest version, change the hash value manually or remove the lock entry to resolve the package.
 
+```json
     "lock": {
       "com.littlebigfun.addressable-importer": {
         "revision": "master",
         "hash": "..."
       }
     }
+```
 
 ## How to Use
 
