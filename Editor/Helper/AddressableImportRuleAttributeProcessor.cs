@@ -53,12 +53,7 @@ namespace UnityAddressableImporter.Helper
 
             switch (member.Name)
             {
-                case PROP_MATCH_TYPE:
-                    attributes.Add(new IndentAttribute());
-                    break;
-
                 case PROP_APPLICATION_MODE:
-                    attributes.Add(new IndentAttribute());
                     attributes.Add(new LabelTextAttribute("Application Mode"));
                     break;
 
