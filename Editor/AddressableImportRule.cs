@@ -56,7 +56,6 @@ public class AddressableImportRule
     /// Method used to parse the Path.
     /// </summary>
     [Tooltip("The path parsing method.")]
-    [IndentField(1)]
     public AddressableImportRuleMatchType matchType;
 
     /// <summary>
@@ -76,7 +75,7 @@ public class AddressableImportRule
     /// Controls wether group template will be applied only on group creation, or also to already created groups.
     /// </summary>
     [Tooltip("Defines if the group template will only be applied to new groups, or will also overwrite existing groups settings.")]
-    [IndentLabel("Application Mode", 1)]
+    [Label("Application Mode")]
     public GroupTemplateApplicationMode groupTemplateApplicationMode = GroupTemplateApplicationMode.ApplyOnGroupCreationOnly;
 
     /// <summary>
