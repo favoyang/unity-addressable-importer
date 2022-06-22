@@ -1,3 +1,10 @@
+# [0.12.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.5...v0.12.0) (2022-06-22)
+
+
+### Features
+
+* improve the inspector for AddressableImportSettings ([#60](https://github.com/favoyang/unity-addressable-importer/issues/60)) ([84fb2fa](https://github.com/favoyang/unity-addressable-importer/commit/84fb2fa88bbdde5e32a9f3b1913b88e5cbef5087))
+
 ## [0.11.5](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.4...v0.11.5) (2022-04-26)
 
 
