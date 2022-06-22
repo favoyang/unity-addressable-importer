@@ -1,10 +1,10 @@
-/// <summary>
+﻿/// <summary>
 /// LabelAttribute,
 /// modified from https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Scripts/Editor/PropertyDrawers/LabelPropertyDrawer.cs
 /// </summary>
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -12,13 +12,16 @@ using UnityEditor;
 namespace UnityAddressableImporter.Helper
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class LabelAttribute : PropertyAttribute
+    public class IndentLabelAttribute : PropertyAttribute
     {
         public string Label { get; private set; }
 
-        public LabelAttribute(string label)
+        public int Level { get; private set; }
+
+        public IndentLabelAttribute(string label, int level)
         {
-            this.Label = label;
+            Label = label;
+            Level = Mathf.Max(level, 0);
         }
     }
 }
@@ -26,20 +29,22 @@ namespace UnityAddressableImporter.Helper
 #if UNITY_EDITOR && !ODIN_INSPECTOR
 namespace UnityAddressableImporter.Helper.Internal
 {
-    [CustomPropertyDrawer(typeof(LabelAttribute))]
-    public class LabelAttributeDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(IndentLabelAttribute))]
+    public class IndentLabelAttributeDrawer : PropertyDrawer
     {
-        private LabelAttribute Attribute
+        private IndentLabelAttribute Attribute
         {
-            get { return _attribute ?? (_attribute = attribute as LabelAttribute); }
+            get { return _attribute ?? (_attribute = attribute as IndentLabelAttribute); }
         }
 
-        private LabelAttribute _attribute;
+        private IndentLabelAttribute _attribute;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var guiContent = new GUIContent(Attribute.Label);
+            EditorGUI.indentLevel += Attribute.Level;
             EditorGUI.PropertyField(position, property, guiContent, true);
+            EditorGUI.indentLevel -= Attribute.Level;
         }
     }
 }
