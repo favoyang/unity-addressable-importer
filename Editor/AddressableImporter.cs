@@ -208,8 +208,12 @@ public class AddressableImporter : AssetPostprocessor
             rule.groupTemplate.ApplyToAddressableAssetGroup(group);
         }
 
+
+        // CreateOrMoveEntry is very slow, so don't move anything if the group is already the correct one
         var guid = AssetDatabase.AssetPathToGUID(assetPath);
-        var entry = settings.CreateOrMoveEntry(guid, group);
+        var entry = settings.FindAssetEntry(guid);
+        if (entry == null || entry.parentGroup != group)
+            entry = settings.CreateOrMoveEntry(guid, group);
 
         if (entry != null)
         {
