@@ -71,12 +71,27 @@ public class AddressableImporter : AssetPostprocessor
 #else
         string prefabAssetPath = prefabStage != null ? prefabStage.prefabAssetPath : null;
 #endif
-        foreach (var importedAsset in importedAssets)
+        try
         {
-            if (IsAssetIgnored(importedAsset))
-                continue;
-            if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
-                dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
+            for (var i = 0; i < importedAssets.Length; i++)
+            {
+                var importedAsset = importedAssets[i];
+
+                if (IsAssetIgnored(importedAsset))
+                    continue;
+
+                if (EditorUtility.DisplayCancelableProgressBar(
+                    "Processing addressable import settings", $"[{i}/{importedAssets.Length}] {importedAsset}",
+                    (float) i / importedAssets.Length))
+                    break;
+
+                if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
+                    dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
+            }
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
         }
 
         for (var i = 0; i < movedAssets.Length; i++)
