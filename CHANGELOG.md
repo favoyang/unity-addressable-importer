@@ -1,3 +1,10 @@
+# [0.13.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.12.0...v0.13.0) (2022-09-18)
+
+
+### Features
+
+* improve UX and some optimization ([#75](https://github.com/favoyang/unity-addressable-importer/issues/75)) ([aee0e94](https://github.com/favoyang/unity-addressable-importer/commit/aee0e94da40dddba88aba46610b090649345647c))
+
 # [0.12.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.5...v0.12.0) (2022-06-22)
 
 
