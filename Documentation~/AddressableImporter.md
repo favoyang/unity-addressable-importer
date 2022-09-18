@@ -9,7 +9,8 @@ Table of Contents
 - [Label Replacement](#label-replacement)
 - [Quick Assets Re-import](#quick-assets-re-import)
 - [About Prefab Mode](#about-prefab-mode)
-- [ODIN Inspector Support](#odin-inspector-support)
+- [Odin Inspector Support](#odin-inspector-support)
+- [Contributor Notice](#contributor-notice)
 
 ## Setup the Importer
 
@@ -66,7 +67,7 @@ The dynamic group is supported by replacing `${name}` with the extracted value f
 
 For convenience, path elements can be referred via `${PATH[index]}`. This works for all match types.
 
-| Asset Path               | Rule Path                                          | Group Name               | Result         |
+| Asset Path               | Rule Path                                     | Group Name               | Result         |
 |--------------------------|-----------------------------------------------|--------------------------|----------------|
 | `Assets/Sprites/cat.png` | `Assets/Sprites/*.png`                        | `${PATH[1]}`             | Sprites        |
 | `Assets/Sprites/cat.png` | `Assets/Sprites/*.png`                        | `${PATH[-1]}`            | Sprites        |
@@ -99,9 +100,9 @@ You can choose between:
 - `Dynamic Labels`: you can automatically create label in your Unity project and add it to your addressable asset.
   You can use the same rules to create a dynamic name group explained in [Group Replacement](#group-replacement).
 
-| Asset Path             | Rule Path                                     | Label Replacement               | Result           |
-|------------------------|-----------------------------------------------|-----------------------------------|------------------|
-| `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(.*)\.png` | `${category}`            | cat        |
+| Asset Path             | Rule Path                             | Label Replacement | Result |
+|------------------------|---------------------------------------|-------------------|--------|
+| `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(.*)\.png` | `${category}`     | cat    |
 
 
   For an interactive example you can watch this video: https://youtu.be/r5bCKY6TvP0
@@ -141,3 +142,11 @@ error CS0246: The type or namespace name 'ISearchFilterable' could not be found 
 ```
 
 Notice that the Odin support may be moved to an additional plugin or discontinued if the importer's UX gets improved in the future.
+
+## Contributor Notice
+
+To enable unit tests for this package, add the package name `com.littlebigfun.addressable-importer` into the `testables` fields of `Packages/manifest.json`.
+
+```
+"testables": ["com.littlebigfun.addressable-importer"]
+```
