@@ -342,7 +342,7 @@ public class AddressableImporter : AssetPostprocessor
                 Debug.Log($"AddressableImporter: Found {pathsToImport.Count} asset paths...");
 
                 if (!EditorUtility.DisplayDialog("Process files?",
-                                                 $"About to process {pathsToImport.Count} files, is that OK?",
+                                                 $"About to process {pathsToImport.Count} files and folders, is that OK?",
                                                  "Yes", "No"))
                     return;
 
