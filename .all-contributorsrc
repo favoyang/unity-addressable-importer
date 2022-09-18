@@ -121,6 +121,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "vaartis",
+      "name": "vaartis",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14316128?v=4",
+      "profile": "https://kotobank.ch/~vaartis",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
