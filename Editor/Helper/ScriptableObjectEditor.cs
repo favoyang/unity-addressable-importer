@@ -1,6 +1,5 @@
 /// <summary>
-/// ButtonMethodAttribute,
-/// modified from https://github.com/Deadcows/MyBox/blob/master/Attributes/ButtonMethodAttribute.cs
+/// ScriptableObjectEditor
 /// </summary>
 namespace UnityAddressableImporter.Helper.Internal
 {

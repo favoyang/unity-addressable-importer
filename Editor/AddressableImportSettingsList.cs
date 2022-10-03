@@ -11,26 +11,27 @@ public class AddressableImportSettingsList : ScriptableObject
     public const string kDefaultPath = "Assets/AddressableAssetsData/AddressableImportSettingsList.asset";
     public List<AddressableImportSettings> SettingList;
     public List<AddressableImportSettings> EnabledSettingsList => SettingList.Where((s) => s?.rulesEnabled == true).ToList();
-    
+
     public static AddressableImportSettingsList Instance
     {
         get
         {
             AddressableImportSettingsList so;
 
-            // Try to locate settings from EditorBuildSettings
-            if (EditorBuildSettings.TryGetConfigObject(kConfigObjectName, out so))
+            // Try to locate settings list from EditorBuildSettings
+            EditorBuildSettings.TryGetConfigObject(kConfigObjectName, out so);
+            if (so != null)
             {
                 return so;
             }
-            // Try to locate settings from default path
+            // Try to locate settings list from the default path
             so = AssetDatabase.LoadAssetAtPath<AddressableImportSettingsList>(kDefaultPath);
             if (so != null)
             {
                 EditorBuildSettings.AddConfigObject(kConfigObjectName, so, true);
                 return so;
             }
-            // Try to locate settings from AssetDatabase
+            // Try to locate settings list from AssetDatabase
             var guidList = AssetDatabase.FindAssets($"t:{nameof(AddressableImportSettingsList)}");
             if (guidList.Length > 0)
             {
@@ -40,7 +41,7 @@ public class AddressableImportSettingsList : ScriptableObject
                 return so;
             }
 
-            // If AddressableImportSettingsList doesn't exist but AddressableImportSettings exists. create automatically.
+            // If AddressableImportSettingsList doesn't exist but AddressableImportSettings exists, create the list.
             var importSettingsGuidList = AssetDatabase.FindAssets($"t:{nameof(AddressableImportSettings)}");
             if (importSettingsGuidList.Length > 0)
             {
@@ -49,7 +50,7 @@ public class AddressableImportSettingsList : ScriptableObject
                 asset.SettingList = settingList;
                 var path = Path.Combine(Path.GetDirectoryName(AssetDatabase.GUIDToAssetPath(importSettingsGuidList[0])),
                                         nameof(AddressableImportSettingsList) + ".asset");
-                Debug.LogFormat("AddressableImportSettingsList doesn't exist. so it is created automatically. path : {0}", path);
+                Debug.LogFormat("Created AddressableImportSettingsList at path: {0}", path);
                 AssetDatabase.CreateAsset(asset, path);
                 AssetDatabase.SaveAssets();
                 so = asset;
@@ -77,7 +78,7 @@ public class AddressableImportSettingsList : ScriptableObject
     }
 
     [ButtonMethod]
-    public void Reset()
+    public void RebuildSettingsList()
     {
         var importSettingsGuidList = AssetDatabase.FindAssets($"t:{nameof(AddressableImportSettings)}");
         SettingList = importSettingsGuidList.Select((guid) => AssetDatabase.LoadAssetAtPath<AddressableImportSettings>(AssetDatabase.GUIDToAssetPath(guid))).ToList();
