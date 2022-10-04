@@ -1,3 +1,10 @@
+## [0.14.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.14.0...v0.14.1) (2022-10-04)
+
+
+### Bug Fixes
+
+* improve multiple settings support (b703d5f, d41ac3f) ([8182504](https://github.com/favoyang/unity-addressable-importer/commit/8182504906f6043ebd0a509c753085e579e2d408))
+
 # [0.14.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.13.0...v0.14.0) (2022-10-04)
 
 
