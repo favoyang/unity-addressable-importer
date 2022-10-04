@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.13.0...v0.14.0) (2022-10-04)
+
+
+### Features
+
+* add multiple AddressableImportSettings support ([#77](https://github.com/favoyang/unity-addressable-importer/issues/77)) ([5d63d14](https://github.com/favoyang/unity-addressable-importer/commit/5d63d14a2d31819595a6a25ebf92bb5726f61942))
+
 # [0.13.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.12.0...v0.13.0) (2022-09-18)
 
 
