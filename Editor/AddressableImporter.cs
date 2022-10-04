@@ -126,7 +126,7 @@ public class AddressableImporter : AssetPostprocessor
         {
             if (IsAssetIgnored(deletedAsset))
                 continue;
-            
+
             foreach (var importSettings in hasRuleSettingsList)
             {
                 if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))

@@ -1,6 +1,5 @@
 /// <summary>
-/// ButtonMethodAttribute,
-/// modified from https://github.com/Deadcows/MyBox/blob/master/Attributes/ButtonMethodAttribute.cs
+/// AddressableImportSettingsListEditor
 /// </summary>
 namespace UnityAddressableImporter.Helper.Internal
 {

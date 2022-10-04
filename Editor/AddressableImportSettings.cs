@@ -61,14 +61,14 @@ public class AddressableImportSettings : ScriptableObject
     }
 
     /// <summary>
-    /// Create AddressableImportSettings and Add it to AddressableImportSettingsList
+    /// Create AddressableImportSettings and add it to AddressableImportSettingsList
     /// </summary>
     [MenuItem("Assets/Create/Addressables/Import Settings", false, 50)]
     public static void CreateAsset()
     {
         string directoryPath = "Assets/";
         string fileName = "AddressableImportSettings.asset";
-        
+
         foreach(var obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
         {
             var assetPath = AssetDatabase.GetAssetPath(obj);
@@ -81,6 +81,7 @@ public class AddressableImportSettings : ScriptableObject
         AddressableImportSettings settings = ScriptableObject.CreateInstance<AddressableImportSettings>();
         var filePath = AssetDatabase.GenerateUniqueAssetPath(Path.Combine(directoryPath, fileName));
         AssetDatabase.CreateAsset(settings, filePath);
+        Debug.LogFormat("Created AddressableImportSettings at path: {0}", filePath);
 
         if (!AddressableImportSettingsList.Instance.SettingList.Contains(settings))
         {
