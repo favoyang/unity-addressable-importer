@@ -52,14 +52,25 @@ public class AddressableImporter : AssetPostprocessor
             }
             return;
         }
-        var importSettings = AddressableImportSettings.Instance;
-        if (importSettings == null)
+        var importSettingsList = AddressableImportSettingsList.Instance;
+        if (importSettingsList == null)
         {
             Debug.LogWarningFormat("[AddressableImporter] import settings file not found.\nPlease go to Assets/AddressableAssetsData folder, right click in the project window and choose 'Create > Addressables > Import Settings'.");
             return;
         }
-        if (importSettings.rules == null || importSettings.rules.Count == 0)
+
+        var hasRuleSettingsList = importSettingsList.EnabledSettingsList.Where(s => s.rules.Count > 0).ToList();
+        var hasRules = hasRuleSettingsList.Count != 0;
+
+        if (!hasRules)
+        {
+            // if AddressableImportSettings is Deleted, Remove missing ImportSettings
+            if (importSettingsList.RemoveMissingImportSettings())
+            {
+                AssetDatabase.SaveAssets();
+            }
             return;
+        }
 
         // Cache the selection active object
         var cachedSelectionActiveObject = selectionActiveObject;
@@ -85,8 +96,11 @@ public class AddressableImporter : AssetPostprocessor
                     (float) i / importedAssets.Length))
                     break;
 
-                if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
-                    dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
+                foreach (var importSettings in hasRuleSettingsList)
+                {
+                    if (prefabStage == null || prefabAssetPath != importedAsset) // Ignore current editing prefab asset.
+                        dirty |= ApplyImportRule(importedAsset, null, settings, importSettings);
+                }
             }
         }
         finally
@@ -100,24 +114,35 @@ public class AddressableImporter : AssetPostprocessor
             if (IsAssetIgnored(movedAsset))
                 continue;
             var movedFromAssetPath = movedFromAssetPaths[i];
-            if (prefabStage == null || prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
-                dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
+
+            foreach (var importSettings in hasRuleSettingsList)
+            {
+                if (prefabStage == null || prefabAssetPath != movedAsset) // Ignore current editing prefab asset.
+                    dirty |= ApplyImportRule(movedAsset, movedFromAssetPath, settings, importSettings);
+            }
         }
 
         foreach (var deletedAsset in deletedAssets)
         {
             if (IsAssetIgnored(deletedAsset))
                 continue;
-            if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))
+            
+            foreach (var importSettings in hasRuleSettingsList)
             {
-                var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
-                if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
+                if (TryGetMatchedRule(deletedAsset, importSettings, out var matchedRule))
                 {
-                    dirty = true;
-                    Debug.LogFormat("[AddressableImporter] Entry removed for {0}", deletedAsset);
+                    var guid = AssetDatabase.AssetPathToGUID(deletedAsset);
+                    if (!string.IsNullOrEmpty(guid) && settings.RemoveAssetEntry(guid))
+                    {
+                        dirty = true;
+                        Debug.LogFormat("[AddressableImporter] Entry removed for {0}", deletedAsset);
+                    }
                 }
             }
         }
+
+        // if AddressableImportSettings is Deleted, Remove missing ImportSettings
+        dirty |= importSettingsList.RemoveMissingImportSettings();
 
         if (dirty)
         {
