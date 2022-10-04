@@ -88,6 +88,6 @@ public class AddressableImportSettingsList : ScriptableObject
     [ButtonMethod]
     public void Documentation()
     {
-        Application.OpenURL("https://github.com/favoyang/unity-addressable-importer/blob/master/Documentation~/AddressableImporter.md");
+        Application.OpenURL("https://github.com/favoyang/unity-addressable-importer/blob/master/Documentation~/AddressableImporter.md#multiple-addressableimportsettings-support");
     }
 }
