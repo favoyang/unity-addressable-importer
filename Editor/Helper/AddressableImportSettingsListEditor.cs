@@ -1,7 +1,7 @@
 /// <summary>
 /// AddressableImportSettingsListEditor
 /// </summary>
-namespace UnityAddressableImporter.Helper.Internal
+namespace UnityAddressableImporter.Helper
 {
     using System.Collections.Generic;
     using System.Reflection;

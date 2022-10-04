@@ -24,7 +24,7 @@ namespace UnityAddressableImporter.Helper
 }
 
 #if UNITY_EDITOR && !ODIN_INSPECTOR
-namespace UnityAddressableImporter.Helper.Internal
+namespace UnityAddressableImporter.Helper
 {
     [CustomPropertyDrawer(typeof(LabelAttribute))]
     public class LabelAttributeDrawer : PropertyDrawer
