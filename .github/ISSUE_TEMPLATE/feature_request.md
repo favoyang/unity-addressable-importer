@@ -8,13 +8,6 @@ about: Suggest an idea for this project
 
 #### Feature category
 
-- [ ] Website: improve the way to browse or discover packages.
-- [ ] Pipelines: improve the way to publish or manage a package.
-- [ ] Registry: improve the registry server.
-- [ ] Unity Editor: improve how OpenUPM works with the Unity Editor.
-- [ ] Documentation
-- [ ] Others
-
 - [ ] Importer: improve the importer behaviours or UI.
 - [ ] ODIN: improve the Odin integration.
 - [ ] Documentation
