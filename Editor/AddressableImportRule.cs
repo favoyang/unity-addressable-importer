@@ -71,9 +71,6 @@ public class AddressableImportRule
     [Tooltip("Group template that will be applied to the Addressable Group. Leave none to use the Default Group's settings.")]
     public AddressableAssetGroupTemplate groupTemplate = null;
 
-    [Tooltip("Force add the schema from groupTemplate into import target group if target group not contain the schema inside the template")]
-    public bool forceAddSchemaFromTemplate = false;
-
     /// <summary>
     /// Controls wether group template will be applied only on group creation, or also to already created groups.
     /// </summary>
