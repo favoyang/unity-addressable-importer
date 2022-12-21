@@ -1,5 +1,5 @@
 /// <summary>
-/// AddressableImportSettingsEditor
+/// AddressableImportSettingsListEditor
 /// </summary>
 namespace UnityAddressableImporter.Helper
 {
@@ -12,8 +12,8 @@ namespace UnityAddressableImporter.Helper
     using Sirenix.OdinInspector.Editor;
 #endif
 
-    [CustomEditor(typeof(AddressableImportSettings), true), CanEditMultipleObjects]
-    public class AddressableImportSettingsEditor : ScriptableObjectEditor<AddressableImportSettings>
+    [CustomEditor(typeof(AddressableImportSettingsList), true), CanEditMultipleObjects]
+    public class AddressableImportSettingsListEditor : ScriptableObjectEditor<AddressableImportSettingsList>
     {
 
     }

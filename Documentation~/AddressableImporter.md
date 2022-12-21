@@ -9,15 +9,21 @@ Table of Contents
 - [Label Replacement](#label-replacement)
 - [Quick Assets Re-import](#quick-assets-re-import)
 - [About Prefab Mode](#about-prefab-mode)
-- [ODIN Inspector Support](#odin-inspector-support)
+- [Multiple AddressableImportSettings Support](#multiple-addressableimportsettings-support)
+- [Odin Inspector Support](#odin-inspector-support)
+- [Contributor Notice](#contributor-notice)
 
 ## Setup the Importer
 
-You should create a single AddressableImportSettings file located at `Assets/AddressableAssetsData/AddressableImportSettings.asset`. To create it, go to `Assets/AddressableAssetsData` folder, right click in your project window and choose `Create > Addressable Assets > Import Settings`.
+Make sure you have run the Unity Addressables's [Create Addressables Settings](https://docs.unity3d.com/Packages/com.unity.addressables@1.20/manual/AddressableAssetsGettingStarted.html) command to create a folder called `AddressableAssetsData`, in which it stores settings files and other assets for the Addressables system.
+
+Then go to `Assets/AddressableAssetsData` folder, right click in your project window and run the `Create > Addressables > Import Settings` command to create an AddressableImportSettings file at `AddressableImportSettings.asset`, and an AddressableImportSettingsList file at `AddressableImportSettingsList.asset`.
 
 ![AddressableImportSettings Create](AddressableImportSettings-Create.png)
 
-Once the settings file selected, you can edit rules in the inspector window. Then click the `File > Save Project` to apply the changes.
+AddressableImportSettings is the place to add/edit import rules. You can have more than one AddressableImportSettings and get them organized in a single AddressableImportSettingsList. But for projects at a smaller scale, one AddressableImportSettings is good enough.
+
+Once the settings file selected, you can edit rules in the inspector window. Then click the `Save` button to apply the changes.
 
 ![AddressableImportSettings Inspector](AddressableImportSettings-Insepctor.png)
 
@@ -66,7 +72,7 @@ The dynamic group is supported by replacing `${name}` with the extracted value f
 
 For convenience, path elements can be referred via `${PATH[index]}`. This works for all match types.
 
-| Asset Path               | Rule Path                                          | Group Name               | Result         |
+| Asset Path               | Rule Path                                     | Group Name               | Result         |
 |--------------------------|-----------------------------------------------|--------------------------|----------------|
 | `Assets/Sprites/cat.png` | `Assets/Sprites/*.png`                        | `${PATH[1]}`             | Sprites        |
 | `Assets/Sprites/cat.png` | `Assets/Sprites/*.png`                        | `${PATH[-1]}`            | Sprites        |
@@ -95,18 +101,18 @@ In another word, if you are intending to manually change the address later, leav
 You can add a label to your addressable asset.
 
 You can choose between:
--  `Label Refs`: use a static label already created in Unity project 
+-  `Label Refs`: use a static label already created in Unity project
 - `Dynamic Labels`: you can automatically create label in your Unity project and add it to your addressable asset.
-  You can use the same rules to create a dynamic name group explained in [Group Replacement](#group-replacement). 
-  
-| Asset Path             | Rule Path                                     | Label Replacement               | Result           |
-|------------------------|-----------------------------------------------|-----------------------------------|------------------|
-| `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(.*)\.png` | `${category}`            | cat        |
-  
-  
+  You can use the same rules to create a dynamic name group explained in [Group Replacement](#group-replacement).
+
+| Asset Path             | Rule Path                             | Label Replacement | Result |
+|------------------------|---------------------------------------|-------------------|--------|
+| `Assets/cat/cat01.png` | `Assets/(?<category>[^/]+)/(.*)\.png` | `${category}`     | cat    |
+
+
   For an interactive example you can watch this video: https://youtu.be/r5bCKY6TvP0
-  
-  
+
+
 The importer always overrides existing labels if `LabelMode = Replace`.
 
 ## Quick Assets Re-import
@@ -126,6 +132,16 @@ AddressableImporter.FolderImporter.ReimportFolders(new string[] { "Assets" });
 
 When both prefab mode (the preview scene for editing a prefab) and the autosave feature are enabled, every modification will cause the asset to be saved and trigger the importer, leads to slow response. For performance reasons, the importer will ignore the current editing asset.
 
+## Multiple AddressableImportSettings Support
+
+Multiple AddressableImportSettings are supported to help projects at a larger scale get better organized. The ordering of multiple AddressableImportSettings is prioritized by a single AddressableImportSettingsList.
+
+The newly created AddressableImportSettings will be added to the AddressableImportSettingsList automatically. The copied AddressableImportSettings requires to be linked manually, or click the `Rebuild Settings List` button to load all AddressableImportSettings files in the project.
+
+![Multiple Settings](MultipleSettings.png)
+
+An AddressableImportSettings can be toggled by its `Rules Enabled` field, a useful feature to help you test multiple AddressableImportSettings.
+
 ## Odin Inspector Support
 
 Since v0.9.0, the importer supports [Odin inspector](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041?aid=1011lJJH) (affiliates) to optimize the user experience. Odin is a paid tool to boost editor plugin development. The integration allows filter or order importer rules easier. The Odin support is optional. To enable it, just install the Odin library.
@@ -140,6 +156,10 @@ If you no longer use Odin, please remove the flags above, otherwise Unity will r
 error CS0246: The type or namespace name 'ISearchFilterable' could not be found (are you missing a using directive or an assembly reference?)
 ```
 
-Notice that the Odin support may be moved to an additional plugin or discontinued if the importer's UX gets improved in the future.
+## Contributor Notice
 
+To enable unit tests for this package, add the package name `com.littlebigfun.addressable-importer` into the `testables` fields of `Packages/manifest.json`.
 
+```
+"testables": ["com.littlebigfun.addressable-importer"]
+```

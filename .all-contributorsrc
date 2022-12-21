@@ -94,6 +94,60 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "JVinceW",
+      "name": "JVince",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11038182?v=4",
+      "profile": "https://github.com/JVinceW",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "fantasyz",
+      "name": "Nick Mok",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3223242?v=4",
+      "profile": "https://github.com/fantasyz",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "KarolGu",
+      "name": "KarolGu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81965750?v=4",
+      "profile": "https://github.com/KarolGu",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "vaartis",
+      "name": "vaartis",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14316128?v=4",
+      "profile": "https://kotobank.ch/~vaartis",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "teck124",
+      "name": "Takumi Katsuraya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21362117?v=4",
+      "profile": "https://github.com/teck124",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ese9",
+      "name": "Roman Novikov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38282199?v=4",
+      "profile": "https://github.com/ese9",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

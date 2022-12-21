@@ -136,7 +136,7 @@ namespace UnityAddressableImporter.Helper
     }
 }
 #if UNITY_EDITOR
-namespace UnityAddressableImporter.Helper.Internal
+namespace UnityAddressableImporter.Helper
 {
     [CustomPropertyDrawer(typeof(ConditionalFieldAttribute))]
     public class ConditionalFieldAttributeDrawer : PropertyDrawer

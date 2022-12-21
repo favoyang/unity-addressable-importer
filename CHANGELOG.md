@@ -1,3 +1,52 @@
+## [0.14.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.14.0...v0.14.1) (2022-10-04)
+
+
+### Bug Fixes
+
+* improve multiple settings support (b703d5f, d41ac3f) ([8182504](https://github.com/favoyang/unity-addressable-importer/commit/8182504906f6043ebd0a509c753085e579e2d408))
+
+# [0.14.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.13.0...v0.14.0) (2022-10-04)
+
+
+### Features
+
+* add multiple AddressableImportSettings support ([#77](https://github.com/favoyang/unity-addressable-importer/issues/77)) ([5d63d14](https://github.com/favoyang/unity-addressable-importer/commit/5d63d14a2d31819595a6a25ebf92bb5726f61942))
+
+# [0.13.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.12.0...v0.13.0) (2022-09-18)
+
+
+### Features
+
+* improve UX and some optimization ([#75](https://github.com/favoyang/unity-addressable-importer/issues/75)) ([aee0e94](https://github.com/favoyang/unity-addressable-importer/commit/aee0e94da40dddba88aba46610b090649345647c))
+
+# [0.12.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.5...v0.12.0) (2022-06-22)
+
+
+### Features
+
+* improve the inspector for AddressableImportSettings ([#60](https://github.com/favoyang/unity-addressable-importer/issues/60)) ([84fb2fa](https://github.com/favoyang/unity-addressable-importer/commit/84fb2fa88bbdde5e32a9f3b1913b88e5cbef5087))
+
+## [0.11.5](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.4...v0.11.5) (2022-04-26)
+
+
+### Bug Fixes
+
+* avoid the selection.activeObject being reset to null when editing an addressable prefab [#71](https://github.com/favoyang/unity-addressable-importer/issues/71) ([e745f92](https://github.com/favoyang/unity-addressable-importer/commit/e745f92af10a843c4aca8bf8f8641fb001229be6))
+
+## [0.11.4](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.3...v0.11.4) (2022-03-31)
+
+
+### Bug Fixes
+
+* folder ends with '~' should be ignored [#72](https://github.com/favoyang/unity-addressable-importer/issues/72) ([491c169](https://github.com/favoyang/unity-addressable-importer/commit/491c169cc079094bf9a2dd21bd10a6844500fceb))
+
+## [0.11.3](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.2...v0.11.3) (2022-02-06)
+
+
+### Bug Fixes
+
+* allow load import settings file independent to the default location ([#64](https://github.com/favoyang/unity-addressable-importer/issues/64), [#68](https://github.com/favoyang/unity-addressable-importer/issues/68)) ([8004b5c](https://github.com/favoyang/unity-addressable-importer/commit/8004b5ccb8299307001bb8cbe14ce2925d84167d))
+
 ## [0.11.2](https://github.com/favoyang/unity-addressable-importer/compare/v0.11.1...v0.11.2) (2022-01-06)
 
 

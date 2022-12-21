@@ -1,4 +1,4 @@
-﻿namespace UnityAddressableImporter.Helper.Internal
+﻿namespace UnityAddressableImporter.Helper
 {
     using System;
     using System.Collections.Generic;
