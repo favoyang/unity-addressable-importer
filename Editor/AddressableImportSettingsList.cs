@@ -11,6 +11,7 @@ public class AddressableImportSettingsList : ScriptableObject
     public const string kDefaultPath = "Assets/AddressableAssetsData/AddressableImportSettingsList.asset";
     public List<AddressableImportSettings> SettingList;
     public List<AddressableImportSettings> EnabledSettingsList => SettingList.Where((s) => s?.rulesEnabled == true).ToList();
+    public bool ShowImportProgressBar = true;
 
     public static AddressableImportSettingsList Instance
     {
