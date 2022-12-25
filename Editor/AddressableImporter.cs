@@ -91,7 +91,7 @@ public class AddressableImporter : AssetPostprocessor
                 if (IsAssetIgnored(importedAsset))
                     continue;
 
-                if (EditorUtility.DisplayCancelableProgressBar(
+                if (importSettingsList.ShowImportProgressBar && EditorUtility.DisplayCancelableProgressBar(
                     "Processing addressable import settings", $"[{i}/{importedAssets.Length}] {importedAsset}",
                     (float) i / importedAssets.Length))
                     break;
