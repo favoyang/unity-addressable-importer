@@ -230,6 +230,10 @@ public class AddressableImporter : AssetPostprocessor
         // Set group settings from template if necessary
         if (rule.groupTemplate != null && (newGroup || rule.groupTemplateApplicationMode ==
                 GroupTemplateApplicationMode.AlwaysOverwriteGroupSettings)) {
+            // Due to ApplyToAddressableAssetGroup only applies schema values for the group to the schema
+            // values found in the source template, all schema objects of the source template should be
+            // manually added to the target group before run the ApplyToAddressableAssetGroup function. 
+            // See more in https://github.com/favoyang/unity-addressable-importer/pull/65
             var templateSchema = rule.groupTemplate.SchemaObjects;
             foreach (var schema in templateSchema.Where(schema => !group.HasSchema(schema.GetType())))
             {
