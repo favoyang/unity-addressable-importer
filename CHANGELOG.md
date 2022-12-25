@@ -1,3 +1,10 @@
+# [0.16.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.15.0...v0.16.0) (2022-12-25)
+
+
+### Features
+
+* added a setting to disable the progress bar on import. ([#80](https://github.com/favoyang/unity-addressable-importer/issues/80)) ([5b4dff0](https://github.com/favoyang/unity-addressable-importer/commit/5b4dff0c5b0798ee944177183ecd41fbe421d4f0))
+
 # [0.15.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.14.1...v0.15.0) (2022-12-25)
 
 
