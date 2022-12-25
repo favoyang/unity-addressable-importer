@@ -228,8 +228,13 @@ public class AddressableImporter : AssetPostprocessor
         }
 
         // Set group settings from template if necessary
-        if (rule.groupTemplate != null && (newGroup || rule.groupTemplateApplicationMode == GroupTemplateApplicationMode.AlwaysOverwriteGroupSettings))
-        {
+        if (rule.groupTemplate != null && (newGroup || rule.groupTemplateApplicationMode ==
+                GroupTemplateApplicationMode.AlwaysOverwriteGroupSettings)) {
+            var templateSchema = rule.groupTemplate.SchemaObjects;
+            foreach (var schema in templateSchema.Where(schema => !group.HasSchema(schema.GetType())))
+            {
+                group.AddSchema(schema.GetType());
+            }
             rule.groupTemplate.ApplyToAddressableAssetGroup(group);
         }
 
