@@ -89,11 +89,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center"><a href="https://github.com/teck124"><img src="https://avatars.githubusercontent.com/u/21362117?v=4?s=100" width="100px;" alt="Takumi Katsuraya"/><br /><sub><b>Takumi Katsuraya</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=teck124" title="Code">💻</a></td>
       <td align="center"><a href="https://github.com/ese9"><img src="https://avatars.githubusercontent.com/u/38282199?v=4?s=100" width="100px;" alt="Roman Novikov"/><br /><sub><b>Roman Novikov</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=ese9" title="Code">💻</a></td>
+      <td align="center"><a href="http://blog.uzutaka.com"><img src="https://avatars.githubusercontent.com/u/525643?v=4?s=100" width="100px;" alt="Takanori Uzuka"/><br /><sub><b>Takanori Uzuka</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=takanori" title="Code">💻</a></td>
     </tr>
   </tbody>
-  <tfoot>
-    
-  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->
