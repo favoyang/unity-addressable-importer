@@ -1,3 +1,10 @@
+# [0.15.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.14.1...v0.15.0) (2022-12-25)
+
+
+### Features
+
+* force add schema from template to rule target group ([#65](https://github.com/favoyang/unity-addressable-importer/issues/65)) ([d553499](https://github.com/favoyang/unity-addressable-importer/commit/d5534997c1bda62f2290c7678f7b30e17e4a1d37))
+
 ## [0.14.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.14.0...v0.14.1) (2022-10-04)
 
 
