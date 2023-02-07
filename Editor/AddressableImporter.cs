@@ -340,7 +340,7 @@ public class AddressableImporter : AssetPostprocessor
         /// Reimporter folders.
         /// </summary>
         /// <param name="settings">Reference to the <see cref="AddressableAssetSettings"/></param>
-        public static void ReimportFolders(IEnumerable<String> assetPaths)
+        public static void ReimportFolders(IEnumerable<String> assetPaths, bool showConfirmDialog = true)
         {
             HashSet<string> pathsToImport = new HashSet<string>();
             foreach (var assetPath in assetPaths)
@@ -375,7 +375,8 @@ public class AddressableImporter : AssetPostprocessor
             {
                 Debug.Log($"AddressableImporter: Found {pathsToImport.Count} asset paths...");
 
-                if (!EditorUtility.DisplayDialog("Process files?",
+                if (showConfirmDialog &&
+                    !EditorUtility.DisplayDialog("Process files?",
                                                  $"About to process {pathsToImport.Count} files and folders, is that OK?",
                                                  "Yes", "No"))
                     return;
