@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/favoyang/unity-addressable-importer/compare/v0.16.0...v0.16.1) (2023-02-08)
+
+
+### Bug Fixes
+
+* ReimportFolders API adds option to skip the reimport confirm dialog ([#84](https://github.com/favoyang/unity-addressable-importer/issues/84)) ([5ebbcd8](https://github.com/favoyang/unity-addressable-importer/commit/5ebbcd8a48232ad3282c1f5589d8aaa5e5dffc46))
+
 # [0.16.0](https://github.com/favoyang/unity-addressable-importer/compare/v0.15.0...v0.16.0) (2022-12-25)
 
 
