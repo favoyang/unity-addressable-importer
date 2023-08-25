@@ -37,8 +37,8 @@ public class AddressableImporter : AssetPostprocessor
     {
         // Skip if all imported and deleted assets are addressables configurations.
         var isConfigurationPass =
-            (importedAssets.Length > 0 && importedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
-            (deletedAssets.Length > 0 && deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData")));
+            (importedAssets.Length == 0 || importedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
+            (deletedAssets.Length == 0 || deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData")));
         if (isConfigurationPass)
         {
             return;
@@ -277,8 +277,11 @@ public class AddressableImporter : AssetPostprocessor
                 foreach (var dynamicLabel in rule.dynamicLabels)
                 {
                     var label = rule.ParseReplacement(assetPath, dynamicLabel);
-                    settings.AddLabel(label);
-                    entry.labels.Add(label);
+                    if (!string.IsNullOrEmpty(label))
+                    {
+                        settings.AddLabel(label);
+                        entry.labels.Add(label);
+                    }
                 }
             }
         }
@@ -363,10 +366,14 @@ public class AddressableImporter : AssetPostprocessor
                     var filesToAdd = Directory.GetFiles(assetPath, "*", SearchOption.AllDirectories);
                     foreach (var file in filesToAdd)
                     {
+                        var filePath = file.Replace('\\', '/');
+                        if (filePath.Contains("~/"))
+                            continue;
+
                         // Filter out meta and DS_Store files.
-                        if (!IsAssetIgnored(file))
+                        if (!IsAssetIgnored(filePath))
                         {
-                            pathsToImport.Add(file.Replace('\\', '/'));
+                            pathsToImport.Add(filePath);
                         }
                     }
                 }
