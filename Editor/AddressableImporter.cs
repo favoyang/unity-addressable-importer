@@ -38,7 +38,9 @@ public class AddressableImporter : AssetPostprocessor
         // Skip if all imported and deleted assets are addressables configurations.
         var isConfigurationPass =
             (importedAssets.Length == 0 || importedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
-            (deletedAssets.Length == 0 || deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData")));
+            (deletedAssets.Length == 0 || deletedAssets.All(x => x.StartsWith("Assets/AddressableAssetsData"))) &&
+            movedAssets.Length == 0 && movedFromAssetPaths.Length == 0;
+
         if (isConfigurationPass)
         {
             return;
@@ -93,7 +95,7 @@ public class AddressableImporter : AssetPostprocessor
 
                 if (importSettingsList.ShowImportProgressBar && EditorUtility.DisplayCancelableProgressBar(
                     "Processing addressable import settings", $"[{i}/{importedAssets.Length}] {importedAsset}",
-                    (float) i / importedAssets.Length))
+                    (float)i / importedAssets.Length))
                     break;
 
                 foreach (var importSettings in hasRuleSettingsList)
@@ -229,7 +231,8 @@ public class AddressableImporter : AssetPostprocessor
 
         // Set group settings from template if necessary
         if (rule.groupTemplate != null && (newGroup || rule.groupTemplateApplicationMode ==
-                GroupTemplateApplicationMode.AlwaysOverwriteGroupSettings)) {
+                GroupTemplateApplicationMode.AlwaysOverwriteGroupSettings))
+        {
             // Due to ApplyToAddressableAssetGroup only applies schema values for the group to the schema
             // values found in the source template, all schema objects of the source template should be
             // manually added to the target group before run the ApplyToAddressableAssetGroup function. 
@@ -360,20 +363,17 @@ public class AddressableImporter : AssetPostprocessor
                         if (!dir.StartsWith(".") && !dir.EndsWith("~"))
                         {
                             pathsToImport.Add(dir.Replace('\\', '/'));
-                        }
-                    }
-                    // Add files.
-                    var filesToAdd = Directory.GetFiles(assetPath, "*", SearchOption.AllDirectories);
-                    foreach (var file in filesToAdd)
-                    {
-                        var filePath = file.Replace('\\', '/');
-                        if (filePath.Contains("~/"))
-                            continue;
 
-                        // Filter out meta and DS_Store files.
-                        if (!IsAssetIgnored(filePath))
-                        {
-                            pathsToImport.Add(filePath);
+                            // Add files.
+                            var filesToAdd = Directory.GetFiles(dir, "*", SearchOption.TopDirectoryOnly);
+                            foreach (var file in filesToAdd)
+                            {
+                                // Filter out meta and DS_Store files.
+                                if (!IsAssetIgnored(file))
+                                {
+                                    pathsToImport.Add(file.Replace('\\', '/'));
+                                }
+                            }
                         }
                     }
                 }
