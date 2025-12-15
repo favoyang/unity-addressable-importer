@@ -92,6 +92,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="http://blog.uzutaka.com"><img src="https://avatars.githubusercontent.com/u/525643?v=4?s=100" width="100px;" alt="Takanori Uzuka"/><br /><sub><b>Takanori Uzuka</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=takanori" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/vanifatovvlad"><img src="https://avatars.githubusercontent.com/u/26966368?v=4?s=100" width="100px;" alt="VladV"/><br /><sub><b>VladV</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=vanifatovvlad" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Brian-Jiang"><img src="https://avatars.githubusercontent.com/u/35553805?v=4?s=100" width="100px;" alt="Brian"/><br /><sub><b>Brian</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/commits?author=Brian-Jiang" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rlintott"><img src="https://avatars.githubusercontent.com/u/50784910?v=4?s=100" width="100px;" alt="Ryan"/><br /><sub><b>Ryan</b></sub></a><br /><a href="https://github.com/favoyang/unity-addressable-importer/issues?q=author%3Arlintott" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
