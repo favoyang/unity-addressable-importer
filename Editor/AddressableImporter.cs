@@ -262,13 +262,19 @@ public class AddressableImporter : AssetPostprocessor
 
             // Add labels
             if (rule.LabelMode == LabelWriteMode.Replace)
-                entry.labels.Clear();
+            {
+                var currentLabels = entry.labels.ToArray();
+                foreach (var label in currentLabels)
+                {
+                    entry.SetLabel(label, false);
+                }
+            }
 
             if (rule.labelsRefsEnum != null)
             {
                 foreach (var label in rule.labelsRefsEnum)
                 {
-                    entry.labels.Add(label);
+                    entry.SetLabel(label, true);
                 }
             }
 
@@ -277,8 +283,7 @@ public class AddressableImporter : AssetPostprocessor
                 foreach (var dynamicLabel in rule.dynamicLabels)
                 {
                     var label = rule.ParseReplacement(assetPath, dynamicLabel);
-                    settings.AddLabel(label);
-                    entry.labels.Add(label);
+                    entry.SetLabel(label, true, true);
                 }
             }
         }
