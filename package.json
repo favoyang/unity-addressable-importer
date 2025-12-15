@@ -3,9 +3,9 @@
   "displayName": "Unity Addressable Importer",
   "version": "0.16.2",
   "unity": "2018.3",
-  "description": "A simple rule based addressable asset importer.",
+  "description": "A simple rule-based addressable asset importer.",
   "dependencies": {
-    "com.unity.addressables": "1.1.5"
+    "com.unity.addressables": "1.19.19"
   },
   "author": {
     "name": "Favo Yang",
