@@ -166,6 +166,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Brian-Jiang",
+      "name": "Brian",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35553805?v=4",
+      "profile": "https://github.com/Brian-Jiang",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -174,5 +183,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }
