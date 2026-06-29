@@ -246,7 +246,11 @@ public class AddressableImporter : AssetPostprocessor
         // CreateOrMoveEntry is very slow, so don't move anything if the group is already the correct one
         var guid = AssetDatabase.AssetPathToGUID(assetPath);
         var entry = settings.FindAssetEntry(guid);
-        if (entry == null || entry.parentGroup != group)
+        // When manually removing an entry from the Addressables Groups window,
+        // it may remain in settings' GUID→Entry map but be removed from the group's entries list
+        // (a "zombie entry"). Check that the entry is actually present in the group before skipping CreateOrMoveEntry.
+        var isInGroup = entry != null && entry.parentGroup != null && entry.parentGroup.entries.Contains(entry);
+        if (entry == null || entry.parentGroup != group || !isInGroup)
             entry = settings.CreateOrMoveEntry(guid, group);
 
         if (entry != null)
